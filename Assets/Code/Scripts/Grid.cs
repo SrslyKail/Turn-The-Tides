@@ -2,20 +2,47 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
 using System.Runtime.CompilerServices;
+using Unity.VersionControl.Git;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class Grid : MonoBehaviour
 {
-    public int xSize, ySize;
+    public int xSize, ySize, zSize;
     private Vector3[] vertices;
     private Mesh mesh;
 
     private void Awake()
     {
-        Generate();
+        StartCoroutine(Generate());
     }
 
-    private void Generate()
+    private IEnumerator Generate()
+    {
+        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+        mesh.name = "Procedural Cube";
+        WaitForSeconds wait = new WaitForSeconds(0.05f);
+
+        //A cube has 8 corners
+        int cornerVertices = 8;
+
+        int edgeVertices = (xSize + ySize + zSize - 3) * 4;
+        int faceVertices = (
+            (xSize - 1) * (ySize - 1) +
+            (xSize - 1) * (zSize - 1) +
+            (ySize - 1) * (zSize - 1)
+            ) * 2;
+
+        vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
+
+        int v = 0;
+        for (int x = 0; x <= xSize; x++)
+        {
+            vertices[v++] = new Vector3(x, 0, 0);
+            yield return wait;
+        }
+    }
+
+    private void Generate_Grid()
     {
         WaitForSeconds wait = new WaitForSeconds(0f);
         mesh = new Mesh();
