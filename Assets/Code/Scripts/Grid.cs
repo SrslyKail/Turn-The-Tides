@@ -12,10 +12,10 @@ public class Grid : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(Generate());
+        Generate();
     }
 
-    private IEnumerator Generate()
+    private void Generate()
     {
         WaitForSeconds wait = new WaitForSeconds(0f);
         mesh = new Mesh();
@@ -34,7 +34,6 @@ public class Grid : MonoBehaviour
             for(int x = 0; x <= xSize; x++, i++)
             {
                 vertices[i] = new Vector3(x, y);
-                yield return wait;
             }
         }
         mesh.vertices = vertices;
