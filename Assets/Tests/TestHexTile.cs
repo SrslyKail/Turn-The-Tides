@@ -6,6 +6,10 @@ using UnityEngine.TestTools;
 public class TestHexTile
 {
 
+    /// <summary>
+    /// Test that we can get the elevation from a hex tile
+    /// important because this data is used by other systems.
+    /// </summary>
     [TestCase]
     public void TestHexTileGetElevation()
     {
@@ -15,6 +19,10 @@ public class TestHexTile
 
     }
 
+    /// <summary>
+    /// Test that we can get the terrain type from a hex tile
+    /// important because this data is used by other systems.
+    /// </summary>
     [TestCase]
     public void TestHexTileGetTerrain()
     {
@@ -25,6 +33,11 @@ public class TestHexTile
 
     }
 
+
+    /// <summary>
+    /// Test that flooding a hex tile causes the attributes to change correctly
+    /// and the effect propagates to adjacent tiles.
+    /// </summary>
     [TestCase]
     public void TestHexTileFlood()
     {
@@ -33,6 +46,10 @@ public class TestHexTile
 
     }
 
+    /// <summary>
+    /// Test that draining a hex tile causes the attributes to change correctly
+    /// and the effect propagates to adjacent tiles.
+    /// </summary>
     [TestCase]
     public void TestHexTileDrain()
     {
@@ -40,15 +57,5 @@ public class TestHexTile
         // A tile that has water should have the water elevation reduced by 1
         // A tile that has 0 water after draining should change its type to Barren
 
-    }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator TestHexTileWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
     }
 }

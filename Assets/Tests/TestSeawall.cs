@@ -5,7 +5,9 @@ using UnityEngine.TestTools;
 
 public class TestSeawall
 {
-    // A Test behaves as an ordinary method
+    /// <summary>
+    /// Test that building a seawall before the water level rises will block the tile from flooding
+    /// </summary>
     [Test]
     public void TestBuildBeforeWaterRise()
     {
@@ -23,6 +25,9 @@ public class TestSeawall
 
     }
 
+    /// <summary>
+    /// Test that building a seawall after water rises has no impact on the water level on either side of the seawall
+    /// </summary>
     [Test]
     public void TestBuildAfterWaterRise()
     {

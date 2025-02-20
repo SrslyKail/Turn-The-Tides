@@ -11,6 +11,9 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class TestLandPlaceable
 {
 
+    /// <summary>
+    /// Test that placing a landPlaceable on land works.
+    /// </summary>
     [Test]
     public void TestPlaceOnLand()
     {
@@ -23,12 +26,19 @@ public class TestLandPlaceable
 
     }
 
+    /// <summary>
+    /// Test that placing a landPlaceable on water doesnt work.
+    /// </summary>
     [Test]
     public void TestPlaceOnWater()
     {
         //An exception should be raised
     }
 
+    /// <summary>
+    /// Test that placing a landPlaceable on an invalid type of tile doesnt work.
+    /// E.g. placing a farm on a barren tile.
+    /// </summary>
     [Test]
     public void TestPlaceOnInvalidTile()
     {
@@ -36,6 +46,10 @@ public class TestLandPlaceable
         //An exception should be raised
     }
 
+
+    /// <summary>
+    /// Test that increasing the power level of a landPlaceable causes the expected results.
+    /// </summary>
     [Test]
     public void TestIncreasePowerLevel()
     {
@@ -47,6 +61,9 @@ public class TestLandPlaceable
 
     }
 
+    /// <summary>
+    /// Test that decreasing the power level of a landPlaceable causes the expected results.
+    /// </summary>
     [Test]
     public void TestDecreasePowerLevel()
     {
