@@ -24,22 +24,59 @@ public class Grid : MonoBehaviour
 
         //A cube has 8 corners
         int cornerVertices = 8;
-
         int edgeVertices = (xSize + ySize + zSize - 3) * 4;
         int faceVertices = (
             (xSize - 1) * (ySize - 1) +
             (xSize - 1) * (zSize - 1) +
-            (ySize - 1) * (zSize - 1)
-            ) * 2;
+            (ySize - 1) * (zSize - 1)) * 2;
 
         vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
 
         int v = 0;
-        for (int x = 0; x <= xSize; x++)
+        for (int y = 0; y <= ySize; y++)
         {
-            vertices[v++] = new Vector3(x, 0, 0);
-            yield return wait;
+            for (int x = 0; x <= xSize; x++)
+            {
+                vertices[v++] = new Vector3(x, y, 0);
+                yield return wait;
+            }
+            for (int z = 1; z <= zSize; z++)
+            {
+                vertices[v++] = new Vector3(xSize, y, z);
+                yield return wait;
+            }
+            for (int x = xSize - 1; x >= 0; x--)
+            {
+                vertices[v++] = new Vector3(x, y, zSize);
+                yield return wait;
+            }
+            for (int z = zSize - 1; z > 0; z--)
+            {
+                vertices[v++] = new Vector3(0, y, z);
+                yield return wait;
+            }
         }
+
+        //fill the inside
+        for (int z = 1; z < zSize; z++)
+        {
+            //Fill the top
+            for (int x = 1; x < xSize; x++)
+            {
+                vertices[v++] = new Vector3(x, ySize, z);
+                yield return wait;
+            }
+        }
+
+        for (int z = 1; z < zSize; z++)
+        {
+            for (int x = 1; x < xSize; x++)
+            {
+                vertices[v++] = new Vector3(x, 0, z);
+                yield return wait;
+            }
+        }
+
     }
 
     private void Generate_Grid()
