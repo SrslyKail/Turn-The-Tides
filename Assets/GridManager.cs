@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
@@ -29,39 +30,6 @@ public class GridManager : MonoBehaviour
     private void OnValidate()
     {
         SmartDestroy();
-        //Debug.LogWarning($"Currently have {this.transform.childCount} children");
-        //for (int i = this.transform.childCount; i > 0; --i)
-        //{
-        //    //DestroyImmediate(this.transform.GetChild(0).gameObject);
-        //    SmartDestroy(this.transform.GetChild(0).gameObject);
-        //}
-        
-
-        //Debug.LogWarning($"After delete loop: {this.transform.childCount} children");
-
-        ////foreach (GameObject item in tiles)
-        ////{
-        ////    //DestroyImmediate(item);
-        ////    SmartDestroy(item);
-        ////}
-
-        //tiles = new GameObject[width * height];
-
-        //float tileWidth = prefabs[0].GetComponent<MeshRenderer>().bounds.size.x;
-        //for (int y = 0; y < height; y++)
-        //{
-        //    for (int x = 0; x < width; x++)
-        //    {
-        //        GameObject newTile = Instantiate(
-        //            prefabs[UnityEngine.Random.Range(0, prefabs.Length)],
-        //            new Vector3(x * tileWidth, 0, y * tileWidth), 
-        //            Quaternion.identity);
-        //        newTile.transform.SetParent(this.transform);
-        //        tiles[x + y] = newTile;
-        //    }
-        //}
-
-
     }
 
     public void SmartDestroy()
@@ -73,19 +41,30 @@ public class GridManager : MonoBehaviour
             {
                 DestroyImmediate(this.transform.GetChild(0).gameObject);
             }
-
-            float tileWidth = prefabs[0].GetComponent<MeshRenderer>().bounds.size.x;
-            for (int y = 0; y < column_length; y++)
-            {
-                for (int x = 0; x < row_length; x++)
-                {
-                    GameObject newTile = Instantiate(
-                        prefabs[UnityEngine.Random.Range(0, prefabs.Length)],
-                        new Vector3(x * tileWidth, 0, y * tileWidth),
-                        Quaternion.identity);
-                    newTile.transform.SetParent(this.transform);
-                }
-            }
+            CreateHexTileGrid();
         };
+    }
+
+    private void CreateHexTileGrid()
+    {
+
+        float tileWidth = prefabs[0].GetComponent<MeshRenderer>().bounds.size.x;
+        float tileHeight = prefabs[0].GetComponent<MeshRenderer>().bounds.size.z;
+        float widthOffset;
+        float heightOffset = (3f / 4f) * tileHeight;
+
+        for (int column = 0; column < column_length; column++)
+        {
+            widthOffset = column % 2 == 1 ? tileWidth / 2 : 0;
+            for (int row = 0; row < row_length; row++)
+            {
+                GameObject newTile = Instantiate(
+                    prefabs[UnityEngine.Random.Range(0, prefabs.Length)],
+                    new Vector3(row * tileWidth + widthOffset, 0, column * heightOffset),
+                    Quaternion.identity);
+                newTile.name = $"{row}, {column}";
+                newTile.transform.SetParent(this.transform);
+            }
+        }
     }
 }
