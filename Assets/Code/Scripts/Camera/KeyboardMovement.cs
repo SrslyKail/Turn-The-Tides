@@ -29,28 +29,27 @@ public class KeyboardMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            panMovement += Vector3.forward * panSpeed * Time.deltaTime;
+            panMovement += panSpeed * Time.deltaTime * Vector3.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            panMovement -= Vector3.forward * panSpeed * Time.deltaTime;
+            panMovement -= panSpeed * Time.deltaTime * Vector3.forward;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            panMovement += Vector3.left * panSpeed * Time.deltaTime;
+            panMovement += panSpeed * Time.deltaTime * Vector3.left;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            panMovement += Vector3.right * panSpeed * Time.deltaTime;
-            //pos.x += panSpeed * Time.deltaTime;
+            panMovement += panSpeed * Time.deltaTime * Vector3.right;
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            panMovement += Vector3.up * panSpeed * Time.deltaTime;
+            panMovement += panSpeed * Time.deltaTime * Vector3.up;
         }
         if (Input.GetKey(KeyCode.E))
         {
-            panMovement += Vector3.down * panSpeed * Time.deltaTime;
+            panMovement += panSpeed * Time.deltaTime * Vector3.down;
         }
 
         transform.Translate(panMovement, Space.World);

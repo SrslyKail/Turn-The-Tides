@@ -118,7 +118,7 @@ public class Grid : MonoBehaviour
 
     private void Generate_Grid()
     {
-        WaitForSeconds wait = new WaitForSeconds(0f);
+        WaitForSeconds wait = new(0f);
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         int pointsPerQuad = 6;
@@ -132,7 +132,7 @@ public class Grid : MonoBehaviour
 
         // i is the overall index
         // x and y for x/y coordinates of vertices
-        Vector4 tangent = new Vector4(1f, 0f, 0f, -1f);
+        Vector4 tangent = new(1f, 0f, 0f, -1f);
         for (int i = 0, y = 0; y <= ySize; y++)
         {
             for (int x = 0; x <= xSize; x++, i++)

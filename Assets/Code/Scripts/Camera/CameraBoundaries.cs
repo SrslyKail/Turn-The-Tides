@@ -12,9 +12,4 @@ public class CameraBoundaries : MonoBehaviour
     public Vector2 rotationHorizontalBounds;
     public Vector2 rotationVerticalBounds;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

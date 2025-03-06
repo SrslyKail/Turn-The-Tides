@@ -37,10 +37,9 @@ public class ObjectInteraction : MonoBehaviour
     {
         // Get the ray from the camera to the mouse
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
         // If the ray hits an object
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             // If we have already selected an object, deselect it
             if (selectedObject != null)
