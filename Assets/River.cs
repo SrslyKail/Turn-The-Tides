@@ -1,7 +1,11 @@
 ﻿
 using UnityEngine;
-
-class River : Water
+namespace TurnTheTides
 {
+    class River : Water
+    {
+
+    }
 
 }
+

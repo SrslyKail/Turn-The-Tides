@@ -1,8 +1,12 @@
 ﻿
-// CB: We can add more types as we go, I'm mostly just initializing this so we have it.
-public enum TerrainType
+namespace TurnTheTides
 {
-    Barren,
-    Water,
-    Land,
+    // CB: We can add more types as we go, I'm mostly just initializing this so we have it.
+    public enum TerrainType
+    {
+        Barren,
+        Water,
+        Land,
+    }
 }
+
