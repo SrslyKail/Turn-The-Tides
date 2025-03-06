@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using System.Drawing;
-using Unity.VisualScripting;
-using UnityEditor.UI;
+using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+
 
 namespace TurnTheTides
 {
@@ -16,7 +13,8 @@ namespace TurnTheTides
         [Range(1, 100)]
         public int row_length, column_length;
         [SerializeField]
-        GameObject[] prefabs;
+        List<GameObject> prefabs;
+        Dictionary<TerrainType, GameObject> types;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -29,28 +27,49 @@ namespace TurnTheTides
         {
 
         }
-
+        //Only runs when in the editor.
         private void OnValidate()
         {
-            SmartDestroy();
+            UnityEditor.EditorApplication.delayCall += RefreshMap;
         }
 
-        public void SmartDestroy()
+        /// <summary>
+        /// Makes a dictionary of all the terrain types and their corrosponding tiles.
+        /// I am unsure of how well this will work 
+        /// </summary>
+        private void GetTerrainTypes()
+        {
+            types = new Dictionary<TerrainType, GameObject>();
+            for (int i = 0; i < prefabs.Count; i++)
+            {
+                GameObject obj = prefabs[i];
+                obj.TryGetComponent<HexTile>(out HexTile info);
+                if (info != null)
+                {
+                    types.TryAdd(info.Terrain, prefabs[i]);
+                }
+            }
+            
+        }
+
+        //Used to
+        public void RefreshMap()
         {
             //Delay the delete call until after validate/update via a callback
-            UnityEditor.EditorApplication.delayCall += () =>
+            for (int i = this.transform.childCount; i > 0; --i)
             {
-                for (int i = this.transform.childCount; i > 0; --i)
-                {
-                    DestroyImmediate(this.transform.GetChild(0).gameObject);
-                }
-                CreateHexTileGrid();
-            };
+                DestroyImmediate(this.transform.GetChild(0).gameObject);
+            }
+            GetTerrainTypes();
+            CreateHexTileGrid();
         }
 
         private void CreateHexTileGrid()
         {
-
+            if(this == null)
+            {
+                return;
+            }
             float tileWidth = prefabs[0].GetComponent<MeshRenderer>().bounds.size.x;
             float tileHeight = prefabs[0].GetComponent<MeshRenderer>().bounds.size.z;
             float widthOffset;
@@ -61,8 +80,11 @@ namespace TurnTheTides
                 widthOffset = column % 2 == 1 ? tileWidth / 2 : 0;
                 for (int row = 0; row < row_length; row++)
                 {
+                    //Logic for getting the terrain type from a tile.
+                    //We can use this once have have the terrain type from the json to spawn the correct objects.
+                    //Debug.Log(prefabs[UnityEngine.Random.Range(0, prefabs.Count).GetComponent<HexTile>().Terrain);
                     GameObject newTile = Instantiate(
-                        prefabs[UnityEngine.Random.Range(0, prefabs.Length)],
+                        prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
                         new Vector3(row * tileWidth + widthOffset, 0, column * heightOffset),
                         Quaternion.identity);
                     newTile.name = $"{row}, {column}";
