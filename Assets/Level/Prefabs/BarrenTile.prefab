@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6060878671420071333}
   - component: {fileID: 7468802078356306320}
   - component: {fileID: 757778052772613855}
+  - component: {fileID: 3950160581381892637}
   m_Layer: 0
   m_Name: BarrenTile
   m_TagString: Untagged
@@ -100,3 +101,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _terrain: 0
+--- !u!64 &3950160581381892637
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182494995460906722}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6202518890732439607, guid: 240e59d74b2a6574b94fa250aa35f4a8, type: 3}
