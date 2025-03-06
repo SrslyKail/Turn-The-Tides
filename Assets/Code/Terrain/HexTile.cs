@@ -6,7 +6,7 @@ namespace TurnTheTides
     /// Abstract base for all HexTiles to extend from.
     /// Allows us to store water and land tiles in the same lists.
     /// </summary>
-    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     abstract class HexTile : MonoBehaviour
     {
         public abstract TerrainType Terrain { get; }
