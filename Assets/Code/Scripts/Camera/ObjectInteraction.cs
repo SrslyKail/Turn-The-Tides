@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    [Header("Selection Time")]
+    [Header("Thresholds")]
     [Space]
-    public float timeToHoldClickBeforeScrollingCamera = 0.15f;
     public float distanceToMoveMouseBeforeScrollingCamera = 1.0f;
 
-    [Header("Camera Scrolling")]
-    [Space]
-    public float cameraScrollSpeed = 0.1f;
+
 
 
     GameObject selectedObject = null;
@@ -21,7 +18,8 @@ public class ObjectInteraction : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            ScrollCamera();
+            mouseMovement = Input.mousePositionDelta * Time.deltaTime;
+            distanceMouseMoved += mouseMovement.magnitude;
         }
 
         else if (Input.GetMouseButtonUp(0))
@@ -61,14 +59,4 @@ public class ObjectInteraction : MonoBehaviour
         }
     }
 
-    void ScrollCamera()
-    {
-        // Get the mouse movement
-        mouseMovement = Input.mousePositionDelta * Time.deltaTime;
-        distanceMouseMoved += mouseMovement.magnitude;
-        Debug.Log(distanceMouseMoved.ToString());
-
-        // Move the camera
-        Camera.main.transform.position -= new Vector3(mouseMovement.x, 0, mouseMovement.y) * cameraScrollSpeed;
-    }
 }

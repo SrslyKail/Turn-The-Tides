@@ -7,40 +7,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 
-public class RTSCameraController : MonoBehaviour
+public class KeyboardMovement : MonoBehaviour
 {
     [Header("Movement Speeds")]
     [Space]
     public float minPanSpeed;
     public float maxPanSpeed;
     public float secToMaxSpeed; //seconds taken to reach max speed;
-    public float zoomSpeed;
-
-    [Header("Movement Limits")]
-    [Space]
-    public bool enableMovementLimits;
-    public Vector2 heightLimit;
-    public Vector2 lenghtLimit;
-    public Vector2 widthLimit;
-    private Vector2 zoomLimit;
 
     private float panSpeed;
-    private Vector3 initialPos;
     private Vector3 panMovement;
-    private Vector3 pos;
     private float panIncrease = 0.0f;
 
-
-
-
-
-    // Use this for initialization
-    void Start()
-    {
-        initialPos = transform.position;
-        zoomLimit.x = 15;
-        zoomLimit.y = 65;
-    }
 
 
     void Update()
@@ -93,31 +71,6 @@ public class RTSCameraController : MonoBehaviour
         }
 
         #endregion
-
-        #region Zoom
-
-        Camera.main.fieldOfView -= Input.mouseScrollDelta.y * zoomSpeed;
-        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, zoomLimit.x, zoomLimit.y);
-
-        #endregion
-
-
-        #region boundaries
-
-        if (enableMovementLimits == true)
-        {
-            //movement limits
-            pos = transform.position;
-            pos.y = Mathf.Clamp(pos.y, heightLimit.x, heightLimit.y);
-            pos.z = Mathf.Clamp(pos.z, lenghtLimit.x, lenghtLimit.y);
-            pos.x = Mathf.Clamp(pos.x, widthLimit.x, widthLimit.y);
-            transform.position = pos;
-        }
-
-
-
-        #endregion
-
     }
 
 }
