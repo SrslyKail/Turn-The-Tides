@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 570567413612538793, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 757778052772613855, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: _terrain
       value: 5
@@ -60,7 +64,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7569408207757649510, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141468004475154637, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 643894674633644512, guid: 7b45daeb71f3450468195e6feeed5aa5, type: 3}
+    m_RemovedComponents:
+    - {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
