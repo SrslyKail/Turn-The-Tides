@@ -62,6 +62,16 @@ namespace TurnTheTides
             }
             GetTerrainTypes();
             CreateHexTileGrid();
+            RandomizeTileHeights();
+        }
+
+        private void RandomizeTileHeights()
+        {
+            HexTile[] childTiles = GetComponentsInChildren<HexTile>(true);
+            foreach (HexTile item in childTiles)
+            {
+                item.Elevation = UnityEngine.Random.Range(1, 5);
+            }
         }
 
         private void CreateHexTileGrid()
