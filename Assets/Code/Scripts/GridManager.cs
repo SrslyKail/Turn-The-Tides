@@ -70,8 +70,9 @@ namespace TurnTheTides
             {
                 return;
             }
-            float tileWidth = prefabs[0].GetComponent<MeshRenderer>().bounds.size.x;
-            float tileHeight = prefabs[0].GetComponent<MeshRenderer>().bounds.size.z;
+            Bounds tileBounds = prefabs[0].GetComponentInChildren<MeshRenderer>().bounds;
+            float tileWidth = tileBounds.size.x;
+            float tileHeight = tileBounds.size.z;
             float widthOffset;
             float heightOffset = (3f / 4f) * tileHeight;
 

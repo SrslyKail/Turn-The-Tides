@@ -8,13 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 251404285085564448, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 570567413612538793, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Name
       value: Barren
       objectReference: {fileID: 0}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,6 +62,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141468004475154637, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6202518890732439607, guid: 240e59d74b2a6574b94fa250aa35f4a8, type: 3}
+    - target: {fileID: 8540021981206106759, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088737808715506701, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
