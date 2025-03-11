@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEditor.UI;
+using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 
 namespace TurnTheTides
 {
@@ -9,8 +12,15 @@ namespace TurnTheTides
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     abstract class HexTile : MonoBehaviour
     {
+        static readonly float height_pos_unit = 0.1f;
+        static readonly float height_scale_unit = 1f;
+        [SerializeField]
+        GameObject DirtScaler;
+        [SerializeField]
+        GameObject parentObject;
         public abstract TerrainType Terrain { get; }
 
+        [SerializeField]
         private int _elevation;
         /// <summary>
         /// Elevation represents the base of the tile.
@@ -21,7 +31,24 @@ namespace TurnTheTides
         public virtual int Elevation
         {
             get { return _elevation; }
-            private set { _elevation = value; }
+            set
+            {
+                _elevation = value;
+                Vector3 curPos = parentObject.transform.position;
+                parentObject.transform.position = new(curPos.x, value * height_pos_unit, curPos.z);
+                Vector3 dirtScale = DirtScaler.transform.localScale;
+                DirtScaler.transform.localScale = new (dirtScale.x, value * height_scale_unit, dirtScale.z);
+            }
+        }
+
+        private void Start()
+        {
+            MeshCollider collider = GetComponent<MeshCollider>();
+            Debug.Log(collider.sharedMesh);
+            if(collider.sharedMesh == null)
+            {
+                collider.sharedMesh = GetComponent<MeshFilter>().mesh;
+            }
         }
     }
 }
