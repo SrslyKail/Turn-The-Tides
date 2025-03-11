@@ -40,5 +40,15 @@ namespace TurnTheTides
                 DirtScaler.transform.localScale = new (dirtScale.x, value * height_scale_unit, dirtScale.z);
             }
         }
+
+        private void Start()
+        {
+            MeshCollider collider = GetComponent<MeshCollider>();
+            Debug.Log(collider.sharedMesh);
+            if(collider.sharedMesh == null)
+            {
+                collider.sharedMesh = GetComponent<MeshFilter>().mesh;
+            }
+        }
     }
 }
