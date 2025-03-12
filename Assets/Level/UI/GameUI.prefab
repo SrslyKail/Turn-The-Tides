@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 818722693599273238}
   - component: {fileID: 7922538861561576193}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: PollutionProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,6 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3882563746125817324}
+  - component: {fileID: 5164289022696200566}
   m_Layer: 0
   m_Name: GameUI
   m_TagString: Untagged
@@ -232,6 +233,19 @@ Transform:
   - {fileID: 4843451936703872634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5164289022696200566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341444467110216313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7524c4bba2d4ad946b592524c85b8b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pollutionMeter: {fileID: 1118019594687940167}
 --- !u!1 &2773410725657680071
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +257,7 @@ GameObject:
   - component: {fileID: 2470177958981509653}
   - component: {fileID: 7977858085883962648}
   - component: {fileID: 135805745407551416}
+  - component: {fileID: 1118019594687940167}
   m_Layer: 5
   m_Name: PollutionMeter
   m_TagString: Untagged
@@ -309,6 +324,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1118019594687940167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2773410725657680071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e401f88072903a459a42ad941157977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProgressSlider: {fileID: 7922538861561576193}
 --- !u!1 &5529882852147632062
 GameObject:
   m_ObjectHideFlags: 0
