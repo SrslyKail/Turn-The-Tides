@@ -6,20 +6,25 @@ using UnityEngine;
 namespace TurnTheTides
 {
 
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class GridManager : MonoBehaviour
     {
 
         [Range(1, 100)]
         public int row_length, column_length;
         [SerializeField]
+        private TextAsset dataFile;
+        [SerializeField]
         List<GameObject> prefabs;
         Dictionary<TerrainType, GameObject> types;
+        List<List<HexTile>> hexTiles;
+        GeoGrid geoData;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-
+            Debug.LogWarning("Refreshing map!");
+            RefreshMap();
         }
 
         // Update is called once per frame
@@ -27,10 +32,11 @@ namespace TurnTheTides
         {
 
         }
-        //Only runs when in the editor.
-        private void OnValidate()
+
+        [ContextMenu("Refresh Map")]
+        public void ContextRefresh()
         {
-            UnityEditor.EditorApplication.delayCall += RefreshMap;
+            RefreshMap();
         }
 
         /// <summary>
@@ -49,18 +55,42 @@ namespace TurnTheTides
                     types.TryAdd(info.Terrain, prefabs[i]);
                 }
             }
-            
         }
 
-        //Used to
-        public void RefreshMap()
+        private void RefreshGeoData()
         {
+            geoData = JSONParser.ParseFromString(dataFile.text);
+        }
+        
+        private void RefreshMap()
+        {
+            hexTiles ??= new() { };
+            //foreach(List<HexTile> row in hexTiles)
+            //{
+            //    foreach(HexTile tile in row)
+            //    {
+            //        if(tile != null)
+            //        {
+            //            Destroy(tile.gameObject);
+            //        }
+                   
+            //    }
+            //}
             //Delay the delete call until after validate/update via a callback
             for (int i = this.transform.childCount; i > 0; --i)
             {
                 DestroyImmediate(this.transform.GetChild(0).gameObject);
             }
-            GetTerrainTypes();
+
+            if (geoData is null)
+            {
+                RefreshGeoData();
+            }
+
+            if (types is null)
+            {
+                GetTerrainTypes();
+            }
             CreateHexTileGrid();
             RandomizeTileHeights();
         }
@@ -69,17 +99,13 @@ namespace TurnTheTides
         {
             HexTile[] childTiles = GetComponentsInChildren<HexTile>(true);
             foreach (HexTile item in childTiles)
-            {
-                item.Elevation = UnityEngine.Random.Range(1, 5);
+                {
+                    item.Elevation = UnityEngine.Random.Range(1, 5);
+                }
             }
-        }
 
         private void CreateHexTileGrid()
         {
-            if(this == null)
-            {
-                return;
-            }
             Bounds tileBounds = prefabs[0].GetComponentInChildren<MeshRenderer>().bounds;
             float tileWidth = tileBounds.size.x;
             float tileHeight = tileBounds.size.z;
@@ -98,6 +124,7 @@ namespace TurnTheTides
                         prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
                         new Vector3(row * tileWidth + widthOffset, 0, column * heightOffset),
                         Quaternion.identity);
+
                     newTile.name = $"{row}, {column}";
                     newTile.transform.SetParent(this.transform);
                 }

@@ -44,7 +44,6 @@ namespace TurnTheTides
         private void Start()
         {
             MeshCollider collider = GetComponent<MeshCollider>();
-            Debug.Log(collider.sharedMesh);
             if(collider.sharedMesh == null)
             {
                 collider.sharedMesh = GetComponent<MeshFilter>().mesh;
