@@ -20,23 +20,6 @@ namespace TurnTheTides
         List<List<HexTile>> hexTiles;
         GeoGrid geoData;
 
-        //public GridManager(
-        //    TextAsset dataFile,
-        //    int row_length, 
-        //    int column_length, 
-        //    List<GameObject> prefabs, 
-        //    Dictionary<TerrainType, GameObject> types)
-        //{
-        //    this.dataFile = dataFile;
-        //    this.prefabs = prefabs;
-        //    this.types = types;
-        //    RefreshGeoData();
-        //    RefreshMap();
-        //    this.hexTiles = new();
-
-        //}
-
-
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {

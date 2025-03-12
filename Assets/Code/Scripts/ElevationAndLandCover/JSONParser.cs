@@ -16,59 +16,10 @@ namespace TurnTheTides
     public class GeoGrid
     {
         public readonly List<List<Geopoint>> data;
-        public readonly double min_long;
-        public readonly double max_long;
-        public readonly double min_lat;
-        public readonly double max_lat;
 
         public GeoGrid(List<List<Geopoint>> data)
         {
             this.data = data;
-            double min_long = double.MaxValue;
-            double max_long = double.MinValue;
-            double min_lat = double.MaxValue;
-            double max_lat = double.MinValue;
-            foreach(List<Geopoint> row in data)
-            {
-                ParseRowData(ref min_long, ref max_long, ref min_lat, ref max_lat, row);
-            }
-            this.min_long = min_long;
-            this.min_lat = min_lat;
-            this.max_long = max_long;
-            this.max_lat = max_lat;
-        }
-
-        public override string ToString()
-        {
-            return $"Lat: {min_lat}, {max_lat}\nLong: {min_long}, {max_long}";
-        }
-
-        private static void ParseRowData(
-            ref double min_long,
-            ref double max_long,
-            ref double min_lat,
-            ref double max_lat,
-            List<Geopoint> row)
-        {
-            foreach (Geopoint point in row)
-            {
-                if (point.Longitude < min_long)
-                {
-                    min_long = point.Longitude;
-                }
-                else if (point.Longitude > max_long)
-                {
-                    max_long = point.Longitude;
-                }
-                if (point.Latitude < min_lat)
-                {
-                    min_lat = point.Latitude;
-                }
-                else if (point.Latitude > max_lat)
-                {
-                    max_lat = point.Latitude;
-                }
-            }
         }
     }
 
