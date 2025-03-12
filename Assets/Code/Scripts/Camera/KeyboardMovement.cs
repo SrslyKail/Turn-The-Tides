@@ -11,15 +11,16 @@ public class KeyboardMovement : MonoBehaviour
 {
     [Header("Movement Speeds")]
     [Space]
+    [Range(5, 100)]
     public float minPanSpeed = 5;
+    [Range(20, 100)]
     public float maxPanSpeed = 20;
+    [Range(1, 5)]
     public float secToMaxSpeed = 3; //seconds taken to reach max speed;
 
     private float panSpeed;
     private Vector3 panMovement;
     private float panIncrease = 0.0f;
-
-
 
     void Update()
     {
