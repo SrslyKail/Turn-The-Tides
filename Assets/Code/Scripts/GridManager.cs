@@ -9,6 +9,7 @@ namespace TurnTheTides
     [ExecuteInEditMode]
     public class GridManager : MonoBehaviour
     {
+        private bool createdCallback = false;
 
         [Range(1, 100)]
         public int row_length, column_length;
@@ -30,7 +31,12 @@ namespace TurnTheTides
         //Only runs when in the editor.
         private void OnValidate()
         {
-            UnityEditor.EditorApplication.delayCall += RefreshMap;
+            if(createdCallback is false)
+            {
+                UnityEditor.EditorApplication.delayCall += RefreshMap;
+                createdCallback = true;
+            }
+            
         }
 
         /// <summary>
@@ -56,9 +62,9 @@ namespace TurnTheTides
         public void RefreshMap()
         {
             //Delay the delete call until after validate/update via a callback
-            for (int i = this.transform.childCount; i > 0; --i)
+            for (int i = gameObject.transform.childCount; i > 0; --i)
             {
-                DestroyImmediate(this.transform.GetChild(0).gameObject);
+                DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
             }
             GetTerrainTypes();
             CreateHexTileGrid();
@@ -99,7 +105,7 @@ namespace TurnTheTides
                         new Vector3(row * tileWidth + widthOffset, 0, column * heightOffset),
                         Quaternion.identity);
                     newTile.name = $"{row}, {column}";
-                    newTile.transform.SetParent(this.transform);
+                    newTile.transform.SetParent(this.gameObject.transform);
                 }
             }
         }
