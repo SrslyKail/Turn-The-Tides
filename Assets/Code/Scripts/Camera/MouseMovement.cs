@@ -9,8 +9,8 @@ public class MouseMovement : MonoBehaviour
     [Header("Rotation")]
     [Space]
     public float rotationSpeed = 60.0f;
-    public Vector2 rotationHorizontalBounds = new Vector2(-90, 90);
-    public Vector2 rotationVerticalBounds = new Vector2(-90, 90);
+    public Vector2 rotationHorizontalBounds = new(-90, 90);
+    public Vector2 rotationVerticalBounds = new(-90, 90);
 
     private Vector2 mouseMovement;
     private Vector3 cameraRotation;
