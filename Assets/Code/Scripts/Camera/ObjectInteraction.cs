@@ -6,9 +6,6 @@ public class ObjectInteraction : MonoBehaviour
     [Space]
     public float distanceToMoveMouseBeforeScrollingCamera = 1.0f;
 
-
-
-
     GameObject selectedObject = null;
     Vector3 mouseMovement = Vector3.zero;
     float distanceMouseMoved = 0.0f;

@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace TurnTheTides
 {
+    /// <summary>
+    /// Script that all hextiles should have on a child object.
+    /// Represents and contains the graphical elements on top of the core hex tile.
+    /// Ensures our objects have the required components
+    /// Made by Corey Buchan
+    /// </summary>
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     public class Terrain : MonoBehaviour
     {

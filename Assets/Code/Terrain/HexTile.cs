@@ -8,9 +8,9 @@ namespace TurnTheTides
     /// <summary>
     /// Abstract base for all HexTiles to extend from.
     /// Allows us to store water and land tiles in the same lists.
+    /// Controls the height and scaling for the child classes to deal with elevation representation.
+    /// Made by Corey Buchan.
     /// </summary>
-   
-
     abstract class HexTile : MonoBehaviour
     {
         static readonly float height_pos_unit = 0.1f;
@@ -21,6 +21,7 @@ namespace TurnTheTides
 
         [SerializeField]
         private int _elevation;
+
         /// <summary>
         /// Elevation represents the base of the tile.
         /// For land tiles, this should never change.

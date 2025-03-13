@@ -5,8 +5,8 @@ using UnityEngine;
 namespace TurnTheTides
 {
     /// <summary>
-    /// Abstract base for all HexTiles to extend from.
-    /// Allows us to store water and land tiles in the same lists.
+    /// Tile to track features unique to a Forest.
+    /// Made by Corey Buchan
     /// </summary>
     class ForestTile : LandTile
     {

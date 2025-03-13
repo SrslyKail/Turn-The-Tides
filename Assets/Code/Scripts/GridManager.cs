@@ -2,38 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 
 namespace TurnTheTides
 {
 
+    /// <summary>
+    /// Object to manage the state of the grid.
+    /// Responsible for generating the map and tracking the bounds.
+    /// Made by Corey Buchan
+    /// </summary>
     [ExecuteAlways]
     public class GridManager : MonoBehaviour
     {
-
         private int row_count; //target is 57
         private int column_count; //target is 47
         [SerializeField]
         private TextAsset dataFile;
         [SerializeField]
-        List<GameObject> prefabs;
-        Dictionary<TerrainType, GameObject> types;
-        List<List<HexTile>> hexTiles;
-        GeoGrid geoData;
+        private List<GameObject> prefabs;
+        private Dictionary<TerrainType, GameObject> types;
+        private GeoGrid geoData;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            Debug.LogWarning("Refreshing map!");
+            Debug.LogWarning("Setting up map!");
             RefreshMap();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
 
@@ -55,6 +50,10 @@ namespace TurnTheTides
             }
         }
 
+        /// <summary>
+        /// Resets the logic for the map, destroying all child objects, 
+        /// regenerating geoData if needed, and creating the hexgrid.
+        /// </summary>
         [ContextMenu("Refresh Map")]
         private void RefreshMap()
         {
@@ -76,6 +75,9 @@ namespace TurnTheTides
             CreateHexTileGrid();
         }
 
+        /// <summary>
+        /// Gets data from the JSON and updates the row/column counts.
+        /// </summary>
         private void RefreshGeoData()
         {
             geoData = JSONParser.ParseFromString(dataFile.text);
@@ -84,6 +86,9 @@ namespace TurnTheTides
             Debug.Log($"Rows:{row_count}, columns:{column_count}");
         }
 
+        /// <summary>
+        /// Using all gathered data, create the hexgrid.
+        /// </summary>
         private void CreateHexTileGrid()
         {
             Bounds tileBounds = prefabs[0].GetComponentInChildren<MeshRenderer>().bounds;
@@ -99,16 +104,15 @@ namespace TurnTheTides
                 int indexOffset = offset ? 0 : 1;
                 for (int row = 0; row < row_count/3; row++)
                 {
-                    //Logic for getting the terrain type from a tile.
-                    //We can use this once have have the terrain type from the json to spawn the correct objects.
-                    //Debug.Log(prefabs[UnityEngine.Random.Range(0, prefabs.Count).GetComponent<HexTile>().Terrain);
                     GameObject newTile = Instantiate(
                         prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
                         new Vector3(row * tileWidth + widthOffset, 0, column/2 * heightOffset),
                         Quaternion.identity);
-                    newTile.name = $"{row}, {column-1}";
+
                     double dataElevation = getAverageElevation(column + indexOffset, row);
-                    newTile.GetComponentInChildren<HexTile>().Elevation = (int)Math.Floor(dataElevation);
+                    newTile.GetComponent<HexTile>().Elevation = (int)Math.Floor(dataElevation);
+
+                    newTile.name = $"{row}, {column / 2}";
                     newTile.transform.SetParent(this.gameObject.transform);
                 }
                 offset = !offset;
