@@ -74,21 +74,25 @@ namespace TurnTheTides
             float heightOffset = (3f / 4f) * tileHeight;
             bool offset = false;
 
-            for (int column = 1; column < column_count-2; column+=2)
+            for (int column = 1; column < column_count/3; column+=2)
             {
                 widthOffset = offset ? tileWidth / 2 : 0;
                 int indexOffset = offset ? 0 : 1;
-                for (int row = 0; row < row_count/3; row++)
+                for (int row = 0; row < row_count; row++)
                 {
-                    GameObject prefab = getPrefabOfType(geoData.data[row][column].TerrainType);
+                    Geopoint pointData = geoData.data[row][column];
+                    GameObject prefab = getPrefabOfType(pointData.TerrainType);
                     GameObject newTile = Instantiate(
                         // prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
                         prefab,
                         new Vector3(row * tileWidth + widthOffset, 0, column/2 * heightOffset),
                         Quaternion.identity);
 
-                    double dataElevation = getAverageElevation(column + indexOffset, row);
-                    newTile.GetComponent<HexTile>().Elevation = (int)Math.Floor(dataElevation);
+                    double dataElevation = pointData.TerrainType.Equals(TerrainType.Ocean) ? 0d: getAverageElevation(column + indexOffset, row);
+                    HexTile hexTile = newTile.GetComponent<HexTile>();
+                    hexTile.Elevation = (int)Math.Floor(dataElevation);
+                    hexTile.longitude = pointData.Longitude;
+                    hexTile.latitude = pointData.Latitude;
 
 
                     newTile.name = $"{row}, {column / 2}";

@@ -9,7 +9,7 @@ namespace TurnTheTides
     /// Made by Corey Buchan
     /// </summary>
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-    public class Terrain : MonoBehaviour
+    public class HexTerrain : MonoBehaviour
     {
         public TerrainType Type { get; }
 

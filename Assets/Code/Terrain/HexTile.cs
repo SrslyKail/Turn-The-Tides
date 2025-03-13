@@ -18,6 +18,9 @@ namespace TurnTheTides
         [SerializeField]
         GameObject DirtScaler;
         public abstract TerrainType Terrain { get; }
+        public double longitude;
+        public double latitude;
+
 
         [SerializeField]
         private int _elevation;
