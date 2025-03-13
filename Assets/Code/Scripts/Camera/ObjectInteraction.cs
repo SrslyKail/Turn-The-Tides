@@ -52,9 +52,6 @@ public class ObjectInteraction : MonoBehaviour
 
             // Change the color of the selected object
             selectedObject.GetComponent<Renderer>().material.color = Color.red;
-
-            // Print the name of the selected object
-            Debug.Log(selectedObject.name);
         }
     }
 
