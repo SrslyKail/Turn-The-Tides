@@ -28,14 +28,18 @@ namespace TurnTheTides
                 { "Old Forest" , TerrainType.Forest },
                 { "Recently Logged", TerrainType.Barren },
         };
+        private double _elevation;
+
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LandUseLabel { get; set; }
-        public double Elevation { get; set; }
+        public double Elevation {
+            get { return _elevation / 10d; }
+            set { _elevation = value; }
+        }
         public TerrainType TerrainType {
             get
             {
-
                 LandUseMapping.TryGetValue(LandUseLabel, out TerrainType type);
                 if(type == TerrainType.Invalid)
                 {
