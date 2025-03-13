@@ -91,11 +91,12 @@ namespace TurnTheTides
             float tileHeight = tileBounds.size.z;
             float widthOffset;
             float heightOffset = (3f / 4f) * tileHeight;
+            bool offset = false;
 
             for (int column = 1; column < column_count-2; column+=2)
             {
-                widthOffset = column % 2 == 1 ? tileWidth / 2 : 0;
-                int indexOffset = (column % 2);
+                widthOffset = offset ? tileWidth / 2 : 0;
+                int indexOffset = offset ? 0 : 1;
                 for (int row = 0; row < row_count/3; row++)
                 {
                     //Logic for getting the terrain type from a tile.
@@ -103,14 +104,14 @@ namespace TurnTheTides
                     //Debug.Log(prefabs[UnityEngine.Random.Range(0, prefabs.Count).GetComponent<HexTile>().Terrain);
                     GameObject newTile = Instantiate(
                         prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
-                        new Vector3(row * tileWidth + widthOffset, 0, column * heightOffset),
+                        new Vector3(row * tileWidth + widthOffset, 0, column/2 * heightOffset),
                         Quaternion.identity);
                     newTile.name = $"{row}, {column-1}";
                     double dataElevation = getAverageElevation(column + indexOffset, row);
                     newTile.GetComponentInChildren<HexTile>().Elevation = (int)Math.Floor(dataElevation);
                     newTile.transform.SetParent(this.gameObject.transform);
-
                 }
+                offset = !offset;
             }
         }
 
