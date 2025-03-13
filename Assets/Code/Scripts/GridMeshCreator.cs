@@ -6,7 +6,7 @@ using Unity.VersionControl.Git;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 [ExecuteInEditMode]
-public class Grid : MonoBehaviour
+public class GridMeshCreator : MonoBehaviour
 {
     public int xSize, ySize, zSize;
     private Vector3[] vertices;
