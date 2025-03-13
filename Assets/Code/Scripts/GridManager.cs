@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 
 namespace TurnTheTides
@@ -88,32 +89,31 @@ namespace TurnTheTides
 
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
-            for (int column = 1; column < column_count/3; column+=2)
+            for (int y = 0; y < row_count; y+=2)
             {
                 //See if we need to offset the tile
                 widthOffset = offset ? tileWidth / 2 : 0;
-                int indexOffset = offset ? 0 : 1;
 
                 //For each point in the row
                 //This is the x-coordinate
-                for (int row = 0; row < row_count; row++)
+                for (int x = 1; x < column_count-1; x+=2)
                 {
 
                     //Get the data from [row][item]
-                    Geopoint pointData = geoData.data[row][column];
+                    Geopoint pointData = geoData.data[y][x];
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            row * tileWidth + widthOffset,
+                            x/2 * tileWidth + widthOffset,
                             0, 
-                            column/2 * heightOffset),
+                            y/2 * heightOffset),
                         Quaternion.identity);
 
                     //Cleanup for terrain type. Ocean elevation should be 0.
                     double dataElevation = pointData
                         .TerrainType.Equals(TerrainType.Ocean)
                         ? 0d
-                        : GetAverageElevation(column + indexOffset, row);
+                        : pointData.Elevation;
 
                     HexTile hexTile = newTile.GetComponent<HexTile>();
 
@@ -123,7 +123,7 @@ namespace TurnTheTides
                     hexTile.latitude = pointData.Latitude;
 
                     //Set the name and parent.
-                    newTile.name = $"{row}, {column / 2}";
+                    newTile.name = $"{x/2}, {y/2}";
                     newTile.transform.SetParent(this.gameObject.transform);
                 }
                 offset = !offset;
