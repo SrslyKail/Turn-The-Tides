@@ -27,6 +27,7 @@ namespace TurnTheTides
                 { "Recently Burned", TerrainType.Barren },
                 { "Old Forest" , TerrainType.Forest },
                 { "Recently Logged", TerrainType.Barren },
+                { "Glaciers and Snow", TerrainType.Snow },
         };
         private double _elevation;
 
@@ -34,7 +35,7 @@ namespace TurnTheTides
         public double Longitude { get; set; }
         public string LandUseLabel { get; set; }
         public double Elevation {
-            get { return _elevation / 10d; }
+            get { return _elevation/10; }
             set { _elevation = value; }
         }
         public TerrainType TerrainType {

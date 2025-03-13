@@ -122,6 +122,7 @@ namespace TurnTheTides
                     hexTile.Elevation = (int)Math.Floor(dataElevation);
                     hexTile.longitude = pointData.Longitude;
                     hexTile.latitude = pointData.Latitude;
+                    hexTile.GetComponentInChildren<HexTerrain>().landUseLabel = pointData.LandUseLabel;
 
                     //Set the name and parent.
                     newTile.name = $"{x/2}, {y/2}";
