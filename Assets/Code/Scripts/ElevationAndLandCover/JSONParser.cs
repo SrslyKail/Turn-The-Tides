@@ -8,9 +8,9 @@ namespace TurnTheTides
 {
     public class Geopoint
     {
-        private static Dictionary<String, TerrainType> LandUseMapping = new()
+        private static readonly Dictionary<string, TerrainType> LandUseMapping = new()
         {
-                { "Wetlands", TerrainType.Forest },
+                { "Wetlands", TerrainType.River },
                 { "Alpine" , TerrainType.Forest },
                 { "Mining", TerrainType.Barren },
                 { "Young Forest", TerrainType.Forest },
@@ -61,13 +61,18 @@ namespace TurnTheTides
 
     class JSONParser: MonoBehaviour
     {
+        /// <summary>
+        /// Parses a JSON string and returns a GeoGrid.
+        /// </summary>
+        /// <param name="input">The JSON formatted string.</param>
+        /// <returns>A GeoGrid.</returns>
         public static GeoGrid ParseFromString(String input)
         {
-            List<List<Geopoint>> multiDimensionalArray = new List<List<Geopoint>>();
+            List<List<Geopoint>> multiDimensionalArray = new();
             try
             {
                    
-                JsonSerializer serializer = new JsonSerializer();
+                JsonSerializer serializer = new();
                 var rows = JsonConvert.DeserializeObject<List<Dictionary<string, List<Geopoint>>>>(input);
 
                 foreach (Dictionary<string, List<Geopoint>> rowDict in rows)
@@ -78,6 +83,7 @@ namespace TurnTheTides
                     }
                 }
             }
+            //TODO: Add more specific exception handling.
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading or parsing the file: {ex.Message}");
@@ -86,9 +92,10 @@ namespace TurnTheTides
 
             return new GeoGrid(multiDimensionalArray);
         }
+
         public static List<List<Geopoint>> ParseFromFile(String filePath)
         {
-            List<List<Geopoint>> multiDimensionalArray = new List<List<Geopoint>>();
+            List<List<Geopoint>> multiDimensionalArray = new();
 
             if (!File.Exists(filePath))
             {
@@ -99,8 +106,8 @@ namespace TurnTheTides
             try
             {
                 using StreamReader file = File.OpenText(filePath);
-                using JsonTextReader reader = new JsonTextReader(file);
-                JsonSerializer serializer = new JsonSerializer();
+                using JsonTextReader reader = new(file);
+                JsonSerializer serializer = new();
                 var rows = serializer.Deserialize<List<Dictionary<string, List<Geopoint>>>>(reader);
 
                 foreach (var row in rows)
@@ -118,17 +125,5 @@ namespace TurnTheTides
 
             return multiDimensionalArray;
         }
-
-        //public static void Main(string[] args)
-        //{
-        //    List<List<Geopoint>> newList = JSONParser.Parse(/*Put the file path here*/);
-        //    foreach (var row in newList)
-        //    {
-        //        foreach (var geopoint in row)
-        //        {
-        //            Console.WriteLine($"Latitude: {geopoint.Latitude}, Longitude: {geopoint.Longitude}, Land Use Label: {geopoint.LandUseLabel}, Elevation: {geopoint.Elevation}");
-        //        }
-        //    }
-        //}
     }
 }
