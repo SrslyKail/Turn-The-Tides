@@ -8,10 +8,46 @@ namespace TurnTheTides
 {
     public class Geopoint
     {
+        private static Dictionary<String, TerrainType> LandUseMapping = new()
+        {
+                { "Wetlands", TerrainType.Forest },
+                { "Alpine" , TerrainType.Forest },
+                { "Mining", TerrainType.Barren },
+                { "Young Forest", TerrainType.Forest },
+                { "Urban", TerrainType.Urban },
+                { "Sub alpine Avalanche Chutes", TerrainType.Barren },
+                { "Agriculture", TerrainType.Farm },
+                { "Fresh Water" , TerrainType.Lake },
+                { "Recreation Activities", TerrainType.Forest },
+                { "Estuaries", TerrainType.River },
+                { "Range Lands", TerrainType.Barren },
+                { "Residential Agriculture Mixtures", TerrainType.Farm },
+                { "Barren Surfaces", TerrainType.Barren },
+                { "Salt Water" , TerrainType.Ocean },
+                { "Recently Burned", TerrainType.Barren },
+                { "Old Forest" , TerrainType.Forest },
+                { "Recently Logged", TerrainType.Barren },
+        };
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LandUseLabel { get; set; }
         public double Elevation { get; set; }
+        public TerrainType TerrainType {
+            get
+            {
+
+                LandUseMapping.TryGetValue(LandUseLabel, out TerrainType type);
+                if(type == TerrainType.Invalid)
+                {
+                    Debug.LogError($"Could not find mapping for terrain type {LandUseLabel}");
+                    return TerrainType.Barren;
+                }
+                else
+                {
+                    return type;
+                }
+            }
+        }
     }
     public class GeoGrid
     {

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 39262316477283475, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: _terrain
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 757778052772613855, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: _terrain

@@ -5,11 +5,8 @@ namespace TurnTheTides
     /// <summary>
     /// Base class for all water tiles; rivers, lakes, and oceans.
     /// </summary>
-    abstract class Water : HexTile
+    class Water : HexTile
     {
-        //CB: If we want to add more detailed terrain types then we can remove this.
-        public override TerrainType Terrain { get { return TerrainType.Water; } }
-
         private int _height;
 
         /// <summary>
@@ -22,6 +19,8 @@ namespace TurnTheTides
                 return _height;
             }
         }
+
+        public override TerrainType Terrain => TerrainType.Invalid;
 
         /// <summary>
         /// Change the current height of the water.

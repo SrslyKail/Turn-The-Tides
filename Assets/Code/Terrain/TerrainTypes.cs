@@ -7,8 +7,12 @@ namespace TurnTheTides
     /// </summary>
     public enum TerrainType
     {
+        Invalid,
         Barren,
-        Water,
+        Ocean,
+        River,
+        Lake,
+        Swamp,
         Land,
         Forest,
         Urban,

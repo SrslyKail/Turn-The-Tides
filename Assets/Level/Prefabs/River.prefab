@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1995005880092192169
+--- !u!1001 &6555701832705584007
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,24 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 39262316477283475, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: _terrain
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 570567413612538793, guid: c0ba217a1a815314881f091b9321573f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 757778052772613855, guid: c0ba217a1a815314881f091b9321573f, type: 3}
-      propertyPath: _terrain
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Name
-      value: Farm
+      value: River
       objectReference: {fileID: 0}
-    - target: {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 643894674633644512, guid: 7b45daeb71f3450468195e6feeed5aa5, type: 3}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -68,16 +56,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7569408207757649510, guid: c0ba217a1a815314881f091b9321573f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8141468004475154637, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 643894674633644512, guid: 7b45daeb71f3450468195e6feeed5aa5, type: 3}
-    m_RemovedComponents:
-    - {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      objectReference: {fileID: 2269102592704157123, guid: dd8f48d1f4930154380497b2b44d258e, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -9,7 +9,7 @@ namespace TurnTheTides
     /// </summary>
     class Lake : Water
     {
-
+        public override TerrainType Terrain => TerrainType.Lake;
     }
 
 }

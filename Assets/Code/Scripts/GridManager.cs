@@ -21,7 +21,6 @@ namespace TurnTheTides
         private TextAsset dataFile;
         [SerializeField]
         private List<GameObject> prefabs;
-        private Dictionary<TerrainType, GameObject> types;
         private GeoGrid geoData;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,25 +28,6 @@ namespace TurnTheTides
         {
             Debug.LogWarning("Setting up map!");
             RefreshMap();
-        }
-
-
-        /// <summary>
-        /// Makes a dictionary of all the terrain types and their corrosponding tiles.
-        /// I am unsure of how well this will work 
-        /// </summary>
-        private void GetTerrainTypes()
-        {
-            types = new Dictionary<TerrainType, GameObject>();
-            for (int i = 0; i < prefabs.Count; i++)
-            {
-                GameObject obj = prefabs[i];
-                obj.TryGetComponent<HexTile>(out HexTile info);
-                if (info != null)
-                {
-                    types.TryAdd(info.Terrain, prefabs[i]);
-                }
-            }
         }
 
         /// <summary>
@@ -68,10 +48,6 @@ namespace TurnTheTides
                 RefreshGeoData();
             }
 
-            if (types is null)
-            {
-                GetTerrainTypes();
-            }
             CreateHexTileGrid();
         }
 
@@ -104,19 +80,34 @@ namespace TurnTheTides
                 int indexOffset = offset ? 0 : 1;
                 for (int row = 0; row < row_count/3; row++)
                 {
+                    GameObject prefab = getPrefabOfType(geoData.data[row][column].TerrainType);
                     GameObject newTile = Instantiate(
-                        prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
+                        // prefabs[UnityEngine.Random.Range(0, prefabs.Count)],
+                        prefab,
                         new Vector3(row * tileWidth + widthOffset, 0, column/2 * heightOffset),
                         Quaternion.identity);
 
                     double dataElevation = getAverageElevation(column + indexOffset, row);
                     newTile.GetComponent<HexTile>().Elevation = (int)Math.Floor(dataElevation);
 
+
                     newTile.name = $"{row}, {column / 2}";
                     newTile.transform.SetParent(this.gameObject.transform);
                 }
                 offset = !offset;
             }
+        }
+
+        private GameObject getPrefabOfType(TerrainType type)
+        {
+            foreach(GameObject prefab in prefabs)
+            {
+                if(prefab.GetComponent<HexTile>().Terrain.Equals(type))
+                {
+                    return prefab;
+                }
+            }
+            throw new ArgumentException($"Could not find prefab for type {type}");
         }
 
         private double getAverageElevation(int column, int row)
