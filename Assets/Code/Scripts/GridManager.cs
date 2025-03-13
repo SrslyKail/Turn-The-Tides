@@ -86,6 +86,7 @@ namespace TurnTheTides
             //Offset for hexagons to sit together in staggered rows
             float heightOffset = (3f / 4f) * tileHeight; 
             bool offset = false;
+            Debug.Log($"Width: {tileWidth}, Height:{tileHeight}");
 
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
