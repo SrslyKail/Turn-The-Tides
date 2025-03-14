@@ -17,7 +17,8 @@ namespace TurnTheTides
         Forest,
         Urban,
         Farm,
-        Snow
+        Snow,
+        Rural
     }
 }
 

@@ -21,7 +21,7 @@ namespace TurnTheTides
                 { "Recreation Activities", TerrainType.Forest },
                 { "Estuaries", TerrainType.River },
                 { "Range Lands", TerrainType.Barren },
-                { "Residential Agriculture Mixtures", TerrainType.Farm },
+                { "Residential Agriculture Mixtures", TerrainType.Rural },
                 { "Barren Surfaces", TerrainType.Barren },
                 { "Salt Water" , TerrainType.Ocean },
                 { "Recently Burned", TerrainType.Barren },
