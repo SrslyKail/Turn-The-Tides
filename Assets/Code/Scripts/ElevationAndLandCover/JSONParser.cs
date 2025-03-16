@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace TurnTheTides
@@ -34,7 +35,17 @@ namespace TurnTheTides
         public double Longitude { get; set; }
         public string LandUseLabel { get; set; }
         public double Elevation {
-            get { return _elevation / 10d; }
+            get {
+
+                double A = 0.8; //Overall exaggeration
+                double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
+
+                if(_elevation < 0)
+                { return -1* (Math.Pow(Math.Abs(_elevation), N)); }
+                if (_elevation > 0)
+                { return A * Math.Pow(_elevation, N); }
+                return _elevation;
+            }
             set { _elevation = value; }
         }
         public TerrainType TerrainType {
