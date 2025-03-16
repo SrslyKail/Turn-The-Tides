@@ -28,6 +28,7 @@ namespace TurnTheTides
                 { "Recently Burned", TerrainType.Barren },
                 { "Old Forest" , TerrainType.Forest },
                 { "Recently Logged", TerrainType.Barren },
+                { "Glaciers and Snow", TerrainType.Snow },
         };
         private double _elevation;
 

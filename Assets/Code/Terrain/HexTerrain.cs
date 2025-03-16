@@ -13,6 +13,8 @@ namespace TurnTheTides
     {
         public TerrainType Type { get; }
 
+        public string landUseLabel;
+
         private void Awake()
         {
             MeshCollider collider = GetComponent<MeshCollider>();
