@@ -96,4 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DirtScaler: {fileID: 726741924022296446}
+  longitude: 0
+  latitude: 0
   _elevation: 0
