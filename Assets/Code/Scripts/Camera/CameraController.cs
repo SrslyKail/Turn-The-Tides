@@ -44,6 +44,16 @@ public class CameraController : MonoBehaviour
 
     private GameObject selectedObject;
 
+
+    public void OnSelectButtonPressed(InputAction.CallbackContext context)
+    {
+        // if button is pressed (not released), select object at marker
+        if (context.started)
+        {
+            SelectObjectAtMarker();
+        }
+    }
+
     private void MoveMarker(Vector3 delta)
     {
         // get transform as if x-rotation was 0
@@ -74,7 +84,22 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
     }
 
-    void SelectObject()
+    private void SelectObject(GameObject target)
+    {
+        // If we have already selected an object, deselect it
+        if (selectedObject != null)
+        {
+            selectedObject.GetComponent<Renderer>().material.color = Color.white;
+        }
+
+        // Set the selected object to the object that was hit
+        selectedObject = target;
+
+        // Change the color of the selected object
+        target.GetComponent<Renderer>().material.color = Color.red;
+    }
+
+    private void SelectObjectAtMousePosition()
     {
         // Get the ray from the camera to the mouse
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -82,17 +107,28 @@ public class CameraController : MonoBehaviour
         // If the ray hits an object
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // If we have already selected an object, deselect it
-            if (selectedObject != null)
+            // Get the selected game object
+            GameObject target = hit.collider.gameObject;
+
+            if (target != null)
             {
-                selectedObject.GetComponent<Renderer>().material.color = Color.white;
+                SelectObject(target);
             }
+        }
+    }
 
-            // Set the selected object to the object that was hit
-            selectedObject = hit.collider.gameObject;
-
-            // Change the color of the selected object
-            selectedObject.GetComponent<Renderer>().material.color = Color.red;
+    private void SelectObjectAtMarker()
+    {
+        // raycast downwards from immediately above the marker
+        RaycastHit hit;
+        Vector3 raycastOrigin = markerPosition + (Vector3.up);
+        Vector3 raycastDirection = Vector3.down;
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit))
+        {
+            Debug.Log("Selecting object at marker");
+            // if raycast hits a GameObject, select it
+            GameObject hitObject = hit.collider.gameObject;
+            SelectObject(hitObject);
         }
     }
 
@@ -139,6 +175,11 @@ public class CameraController : MonoBehaviour
             MoveMarker(movementInput);
         }
 
+        if (rotationInput.sqrMagnitude > 0.0f)
+        {
+            RotateCamera(rotationInput);
+        }
+
         // if UI is selected, do not move camera with mouse
         if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
@@ -170,7 +211,7 @@ public class CameraController : MonoBehaviour
             if (distanceMouseDragged < DistanceToDragMouseBeforeIgnoringObjectSelection)
             {
                 // if the mouse hasn't been dragged too far, select the object
-                SelectObject();
+                SelectObjectAtMousePosition();
             }
             // reset distance mouse has been dragged
             distanceMouseDragged = 0.0f;
