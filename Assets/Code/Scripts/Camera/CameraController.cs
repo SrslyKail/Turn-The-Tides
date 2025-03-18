@@ -1,0 +1,140 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+/// <summary>
+/// Controls everything related to the camera, including movement, rotation, and tracking.
+/// 
+/// Written by Gurjeet Bhangoo.
+/// </summary>
+public class CameraController : MonoBehaviour
+{
+    [Header("Movement")]
+    public float MovementSpeed = 10.0f;
+
+    [Header("Rotation")]
+    public float RotationSpeed = 60.0f;
+    public Vector2 RotationVerticalBounds;
+    public bool RotationUseHorizontalBounds = false;
+    public Vector2 RotationHorizontalBounds;
+
+    [Header("Tracking")]
+    public float DistanceFromMarker = 10.0f;
+    public float VerticalTrackingStartingHeightOffset = 128.0f;
+    public float VerticalTrackingMaxScanDistance = 256.0f;
+    public float VerticalTrackingUpdateSpeed = 10.0f;
+
+    private PlayerInput playerInput;
+
+    private Vector2 mouseMovement;
+
+    private Vector3 cameraRotation;
+
+    private Vector3 markerPosition;
+
+    private float currentHeight;
+
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
+    private void MoveMarker(Vector3 delta)
+    {
+        // get transform as if x-rotation was 0
+        Vector3 forward = transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+        Vector3 right = transform.right;
+        right.y = 0;
+        right.Normalize();
+
+        markerPosition += MovementSpeed * Time.fixedDeltaTime * ((delta.x * right) + (delta.y * forward));
+    }
+
+    private void RotateCamera(Vector2 delta)
+    {
+        cameraRotation.x -= delta.y * (RotationSpeed * Time.fixedDeltaTime);
+        cameraRotation.y += delta.x * (RotationSpeed * Time.fixedDeltaTime);
+
+        // clamp vertical rotation
+        cameraRotation.x = Mathf.Clamp(cameraRotation.x, RotationVerticalBounds.x, RotationVerticalBounds.y);
+
+        // clamp horizontal rotation
+        if (RotationUseHorizontalBounds)
+        {
+            cameraRotation.y = Mathf.Clamp(cameraRotation.y, RotationHorizontalBounds.x, RotationHorizontalBounds.y);
+        }
+
+        transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+    }
+
+    private void MoveMarkerPositionToSurface()
+    {
+        // raycast from the sky downwards
+        RaycastHit hit;
+        Vector3 raycastOrigin = markerPosition + (Vector3.up * VerticalTrackingStartingHeightOffset);
+        Vector3 raycastDirection = Vector3.down;
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, VerticalTrackingMaxScanDistance))
+        {
+            // if raycast hits a HexTile, set marker's y position to HexTile's elevation
+            GameObject hitObject = hit.collider.gameObject;
+            currentHeight = hitObject.transform.position.y;
+        }
+
+        // once the current height has been set, lerp the marker's y position to the current height
+        markerPosition.y = Mathf.Lerp(markerPosition.y, currentHeight, Time.fixedDeltaTime * VerticalTrackingUpdateSpeed);
+    }
+
+    private void SyncCameraToMarker()
+    {
+        transform.SetPositionAndRotation(markerPosition + transform.forward * -DistanceFromMarker, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0));
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        initialRotation = transform.rotation;
+        initialPosition = transform.position;
+        currentHeight = transform.position.y;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        Vector2 movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
+
+        Vector2 rotationInput = playerInput.actions["Rotate"].ReadValue<Vector2>();
+
+        if (movementInput.sqrMagnitude > 0.0f)
+        {
+            MoveMarker(movementInput);
+        }
+
+        // if UI is selected, do not move camera with mouse
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        // store current mouse movement
+        mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
+        // if left-click is held, move camera along x and z axis with mouse movement
+        if (Input.GetMouseButton(0))
+        {
+            MoveMarker(mouseMovement);
+        }
+
+        // if right-click is held, rotate camera with mouse movement
+        if (Input.GetMouseButton(1))
+        {
+            RotateCamera(mouseMovement);
+        }
+    }
+
+    void LateUpdate()
+    {
+        MoveMarkerPositionToSurface();
+        SyncCameraToMarker();
+    }
+
+}
