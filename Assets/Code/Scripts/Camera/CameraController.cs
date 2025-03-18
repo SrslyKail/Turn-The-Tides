@@ -23,9 +23,15 @@ public class CameraController : MonoBehaviour
     public float VerticalTrackingMaxScanDistance = 256.0f;
     public float VerticalTrackingUpdateSpeed = 10.0f;
 
+    [Header("Object Selection")]
+    public GameUI GameUi;
+    public float DistanceToDragMouseBeforeIgnoringObjectSelection = 1.0f;
+
+
     private PlayerInput playerInput;
 
     private Vector2 mouseMovement;
+    private float distanceMouseDragged;
 
     private Vector3 cameraRotation;
 
@@ -35,6 +41,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+
+    private GameObject selectedObject;
 
     private void MoveMarker(Vector3 delta)
     {
@@ -64,6 +72,28 @@ public class CameraController : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+    }
+
+    void SelectObject()
+    {
+        // Get the ray from the camera to the mouse
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        // If the ray hits an object
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            // If we have already selected an object, deselect it
+            if (selectedObject != null)
+            {
+                selectedObject.GetComponent<Renderer>().material.color = Color.white;
+            }
+
+            // Set the selected object to the object that was hit
+            selectedObject = hit.collider.gameObject;
+
+            // Change the color of the selected object
+            selectedObject.GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 
     private void MoveMarkerPositionToSurface()
@@ -118,16 +148,32 @@ public class CameraController : MonoBehaviour
         // store current mouse movement
         mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        // if left-click is held, move camera along x and z axis with mouse movement
-        if (Input.GetMouseButton(0))
-        {
-            MoveMarker(mouseMovement);
-        }
 
         // if right-click is held, rotate camera with mouse movement
         if (Input.GetMouseButton(1))
         {
             RotateCamera(mouseMovement);
+        }
+
+        // if left-click is held, move camera along x and z axis with mouse movement
+        if (Input.GetMouseButton(0))
+        {
+            MoveMarker(-mouseMovement);
+
+            // also keep track of how far the mouse has been dragged
+            distanceMouseDragged += mouseMovement.magnitude;
+        }
+
+        // if left-click is released, check if the mouse hasn't been dragged too far
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (distanceMouseDragged < DistanceToDragMouseBeforeIgnoringObjectSelection)
+            {
+                // if the mouse hasn't been dragged too far, select the object
+                SelectObject();
+            }
+            // reset distance mouse has been dragged
+            distanceMouseDragged = 0.0f;
         }
     }
 
