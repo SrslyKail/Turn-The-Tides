@@ -27,8 +27,16 @@ public class CameraController : MonoBehaviour
     public GameUI GameUi;
     public float DistanceToDragMouseBeforeIgnoringObjectSelection = 1.0f;
 
+    [Header("Zoom")]
+    public float DefaultZoomLevel = 60.0f;
+    public float ZoomSpeed = 10.0f;
+    public float ZoomScrollInterval = 5.0f;
+    public float ZoomUpdateSpeed = 10.0f;
+    public Vector2 ZoomBounds;
 
     private PlayerInput playerInput;
+
+    private float zoomLevel;
 
     private Vector2 mouseMovement;
     private float distanceMouseDragged;
@@ -43,7 +51,6 @@ public class CameraController : MonoBehaviour
     private Quaternion initialRotation;
 
     private GameObject selectedObject;
-
 
     public void OnSelectButtonPressed(InputAction.CallbackContext context)
     {
@@ -82,6 +89,12 @@ public class CameraController : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+    }
+
+    private void ZoomCamera(float delta)
+    {
+        zoomLevel += delta;
+        zoomLevel = Mathf.Clamp(zoomLevel, ZoomBounds.x, ZoomBounds.y);
     }
 
     private void SelectObject(GameObject target)
@@ -154,6 +167,11 @@ public class CameraController : MonoBehaviour
         transform.SetPositionAndRotation(markerPosition + transform.forward * -DistanceFromMarker, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0));
     }
 
+    private void InterpolateCameraFovToZoomLevel()
+    {
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, zoomLevel, Time.fixedDeltaTime * ZoomUpdateSpeed);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -161,6 +179,7 @@ public class CameraController : MonoBehaviour
         initialRotation = transform.rotation;
         initialPosition = transform.position;
         currentHeight = transform.position.y;
+        zoomLevel = DefaultZoomLevel;
     }
 
     // Update is called once per frame
@@ -178,6 +197,16 @@ public class CameraController : MonoBehaviour
         if (rotationInput.sqrMagnitude > 0.0f)
         {
             RotateCamera(rotationInput);
+        }
+
+        float zoomInput = playerInput.actions["Zoom"].ReadValue<float>();
+        if (zoomInput < 0.0f)
+        {
+            ZoomCamera(1.0f * ZoomSpeed * Time.fixedDeltaTime);
+        }
+        else if (zoomInput > 0.0f)
+        {
+            ZoomCamera(-1.0f * ZoomSpeed * Time.fixedDeltaTime);
         }
 
         // if UI is selected, do not move camera with mouse
@@ -205,6 +234,13 @@ public class CameraController : MonoBehaviour
             distanceMouseDragged += mouseMovement.magnitude;
         }
 
+        // if scroll-wheel is moved, zoom camera in or out
+        var scrollDelta = Input.mouseScrollDelta.y;
+        if (scrollDelta != 0)
+        {
+            ZoomCamera(-scrollDelta * ZoomScrollInterval);
+        }
+
         // if left-click is released, check if the mouse hasn't been dragged too far
         if (Input.GetMouseButtonUp(0))
         {
@@ -222,6 +258,7 @@ public class CameraController : MonoBehaviour
     {
         MoveMarkerPositionToSurface();
         SyncCameraToMarker();
+        InterpolateCameraFovToZoomLevel();
     }
 
 }
