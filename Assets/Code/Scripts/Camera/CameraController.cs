@@ -178,8 +178,14 @@ public class CameraController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         initialRotation = transform.rotation;
         initialPosition = transform.position;
-        currentHeight = transform.position.y;
+
+        cameraRotation = initialRotation.eulerAngles;
+        markerPosition = initialPosition;
+
+        currentHeight = initialPosition.y;
         zoomLevel = DefaultZoomLevel;
+
+        SyncCameraToMarker();
     }
 
     // Update is called once per frame
@@ -208,30 +214,14 @@ public class CameraController : MonoBehaviour
         {
             ZoomCamera(-1.0f * ZoomSpeed * Time.fixedDeltaTime);
         }
+    }
 
+    void Update()
+    {
         // if UI is selected, do not move camera with mouse
         if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             return;
-        }
-
-        // store current mouse movement
-        mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-
-        // if right-click is held, rotate camera with mouse movement
-        if (Input.GetMouseButton(1))
-        {
-            RotateCamera(mouseMovement);
-        }
-
-        // if left-click is held, move camera along x and z axis with mouse movement
-        if (Input.GetMouseButton(0))
-        {
-            MoveMarker(-mouseMovement);
-
-            // also keep track of how far the mouse has been dragged
-            distanceMouseDragged += mouseMovement.magnitude;
         }
 
         // if scroll-wheel is moved, zoom camera in or out
@@ -241,8 +231,27 @@ public class CameraController : MonoBehaviour
             ZoomCamera(-scrollDelta * ZoomScrollInterval);
         }
 
+        // store current mouse movement
+        mouseMovement = Input.mousePositionDelta;
+
+
+        // if right-click is held, rotate camera with mouse movement
+        if (playerInput.actions["RotateCameraWithMouse"].IsPressed())
+        {
+            RotateCamera(mouseMovement);
+        }
+
+        // if left-click is held, move camera along x and z axis with mouse movement
+        if (playerInput.actions["DragCameraWithMouse"].IsPressed())
+        {
+            MoveMarker(-mouseMovement);
+
+            // also keep track of how far the mouse has been dragged
+            distanceMouseDragged += mouseMovement.magnitude;
+        }
+
         // if left-click is released, check if the mouse hasn't been dragged too far
-        if (Input.GetMouseButtonUp(0))
+        if (playerInput.actions["DragCameraWithMouse"].WasCompletedThisFrame())
         {
             if (distanceMouseDragged < DistanceToDragMouseBeforeIgnoringObjectSelection)
             {
