@@ -215,6 +215,7 @@ namespace TurnTheTides
 
             Mesh mesh = new();
             mesh.CombineMeshes(combine);
+            mesh.name = "Ocean";
             //Reactivate the parent.
             oceanParent.SetActive(true);
             oceanParent.GetComponent<MeshFilter>().mesh = mesh;
