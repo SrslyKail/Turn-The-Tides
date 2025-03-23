@@ -131,7 +131,7 @@ namespace TurnTheTides
                     hexTile.Elevation = (int)Math.Floor(dataElevation);
                     hexTile.longitude = pointData.Longitude;
                     hexTile.latitude = pointData.Latitude;
-                    hexTile.GetComponentInChildren<HexTerrain>().landUseLabel = pointData.LandUseLabel;
+                    hexTile.landUseLabel = pointData.LandUseLabel;
 
                     //Set the name and parent.
                     newTile.name = $"{x / 2}, {y / 2}";
@@ -205,10 +205,7 @@ namespace TurnTheTides
         {
             List<MeshFilter> meshFilters = toCombine
                 .Select(tile => { 
-                    return tile
-                    .GetComponentInChildren<HexTerrain>()
-                    .gameObject
-                    .GetComponent<MeshFilter>(); 
+                    return tile.GetComponent<MeshFilter>(); 
                 }).ToList();
             List<CombineInstance> combine = new();
 
@@ -229,10 +226,7 @@ namespace TurnTheTides
             GameObject oceanParent = toCombine.First();
             oceanParent.SetActive(true);
 
-            HexTerrain terrainTile = oceanParent.GetComponentInChildren<HexTerrain>(true);
-            terrainTile.gameObject.SetActive(true);
-            oceanParent.AddComponent<MeshFilter>().mesh = mesh;
-            terrainTile.transform.GetComponent<MeshFilter>().mesh = mesh;
+            oceanParent.GetComponent<MeshFilter>().mesh = mesh;
 
         }
 
