@@ -27,6 +27,7 @@ namespace TurnTheTides
         private int data_column_count; 
         private int map_row_count; //target is 57
         private int map_column_count; //target is 47
+        private int map_size_offset = 2;
 
         private List<List<GameObject>> tiles;
 
@@ -71,8 +72,8 @@ namespace TurnTheTides
             data_row_count = geoData.data.Count;
             data_column_count = geoData.data[0].Count;
             Debug.Log($"Rows:{data_row_count}, columns:{data_column_count}");
-            map_row_count = data_row_count / 2;
-            map_column_count = data_column_count / 2 - 1;
+            map_row_count = data_row_count / map_size_offset;
+            map_column_count = data_column_count / map_size_offset - 1;
         }
 
         /// <summary>
@@ -97,16 +98,16 @@ namespace TurnTheTides
 
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
-            for (int y = 0; y < data_row_count; y += 2)
+            for (int y = 0; y < data_row_count; y += map_size_offset)
             {
                 //See if we need to offset the tile
-                widthOffset = offset ? tileWidth / 2 : 0;
+                widthOffset = offset ? tileWidth / map_size_offset : 0;
                 List<GameObject> rowList = new();
                 tiles.Add(rowList);
 
                 //For each point in the row
                 //This is the x-coordinate
-                for (int x = 1; x < data_column_count - 1; x += 2)
+                for (int x = 1; x < data_column_count - 1; x += map_size_offset)
                 {
 
                     //Get the data from [row][item]
@@ -114,9 +115,9 @@ namespace TurnTheTides
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            x / 2 * tileWidth + widthOffset,
+                            x / map_size_offset * tileWidth + widthOffset,
                             0,
-                            y / 2 * heightOffset),
+                            y / map_size_offset * heightOffset),
                         Quaternion.identity);
 
                     //Cleanup for terrain type. Ocean elevation should be 0.
@@ -134,7 +135,7 @@ namespace TurnTheTides
                     hexTile.landUseLabel = pointData.LandUseLabel;
 
                     //Set the name and parent.
-                    newTile.name = $"{x / 2}, {y / 2}";
+                    newTile.name = $"{x / map_size_offset}, {y / map_size_offset}";
                     newTile.transform.SetParent(this.gameObject.transform);
                     rowList.Add(newTile);
                 }
@@ -160,72 +161,62 @@ namespace TurnTheTides
             throw new ArgumentException($"Could not find prefab for type {type}");
         }
 
-        /// <summary>
-        /// Gets the average elevation to help smooth out steep slopes.
-        /// This may be removed later, but its useful for the current data setup.
-        /// </summary>
-        /// <param name="column">the X coordinate of the data</param>
-        /// <param name="row">The Y coordinate of the data</param>
-        /// <returns>The average elevation between this tile and its neighbors</returns>
-        private double GetAverageElevation(int column, int row)
-        {
-            List<double> elevations = new()
-            {
-                geoData.data[row][column - 1].Elevation,
-                geoData.data[row][column].Elevation,
-                geoData.data[row][column + 1].Elevation
-            };
-
-            return elevations.Sum() / elevations.Count();
-        }
-
         public void MergeWaterTiles()
         {
+            // Get all the ocean tiles.
+            // Use a set to ensure it doesnt contain duplicates.
             HashSet<GameObject> oceanTiles = this.transform
                 .GetComponentsInChildren<Ocean>()
                 .Select(ocean => { return ocean.gameObject; })
                 .ToHashSet();
 
+            //A Hash set that contains all the "visited" water files.
+            // Makes sure we don't merge multiple meshes.
             HashSet<GameObject> visited = new();
+            //Iterate over the entire map.
             for(int row = 0; row < tiles.Count; row++)
             {
                 for(int col = 0; col < tiles[row].Count; col++)
                 {
                     GameObject obj = tiles[row][col];
+                    // If we havent visted it, and it is also an ocean tile.
                     if (!visited.Contains(obj) && oceanTiles.Contains(obj))
                     {
+                        //Do a BFS to get all the adjacent tiles to this one
                         HashSet<GameObject> found = BFS_OceanTiles(row, col, visited);
+                        //Combine the meshes for all the found connected ocean tiles.
                         CombineMeshes(found);
-                        Debug.Log($"Combined {found.Count} tiles");
                     }
                 }
             }           
         }
         private void CombineMeshes(HashSet<GameObject> toCombine)
         {
-            List<MeshFilter> meshFilters = toCombine
+            //Convert the has to an array so we can index
+            MeshFilter[] meshFilters = toCombine
                 .Select(tile => { 
                     return tile.GetComponent<MeshFilter>(); 
-                }).ToList();
-            List<CombineInstance> combine = new();
+                }).ToArray();
 
-            for (int i = 0;  i < meshFilters.Count; i++)
+            // Create a combine instance array
+            // This has the added benefit of creating the objects at the same time.
+            CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+            // This is the object that will hold the combine mesh
+            // We also need it for relative positioning of the mesh.
+            GameObject oceanParent = toCombine.First();
+            for(int i = 0; i < meshFilters.Length; i++)
             {
-                CombineInstance instance = new()
-                {
-                    mesh = meshFilters[i].sharedMesh,
-                    transform = meshFilters[i].transform.localToWorldMatrix
-                };
-                combine.Add(instance);
-                
+                combine[i].mesh = meshFilters[i].sharedMesh;
+                //Offset the current mesh WORLD position by the parents LOCAL position to effectively get the difference.
+                combine[i].transform = oceanParent.transform.worldToLocalMatrix * meshFilters[i].transform.localToWorldMatrix;
                 meshFilters[i].gameObject.SetActive(false);
             }
 
             Mesh mesh = new();
-            mesh.CombineMeshes(combine.ToArray());
-            GameObject oceanParent = toCombine.First();
+            mesh.CombineMeshes(combine);
+            //Reactivate the parent.
             oceanParent.SetActive(true);
-
             oceanParent.GetComponent<MeshFilter>().mesh = mesh;
 
         }

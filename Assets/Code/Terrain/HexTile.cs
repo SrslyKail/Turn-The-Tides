@@ -18,13 +18,13 @@ namespace TurnTheTides
         static readonly float height_scale_unit = 1f;
         [SerializeField]
         GameObject DirtScaler;
+        [SerializeField] // Allows us to see it in the editor.
+        private int _elevation;
+
         public abstract TerrainType Terrain { get; }
         public double longitude;
         public double latitude;
-
-
-        [SerializeField]
-        private int _elevation;
+        public string landUseLabel;
 
         /// <summary>
         /// Elevation represents the base of the tile.
@@ -40,12 +40,11 @@ namespace TurnTheTides
                 _elevation = value;
                 Vector3 curPos = this.transform.position;
                 this.transform.position = new(curPos.x, value * height_pos_unit, curPos.z);
+
                 Vector3 dirtScale = DirtScaler.transform.localScale;
                 DirtScaler.transform.localScale = new (dirtScale.x, value * height_scale_unit, dirtScale.z);
             }
         }
-
-        public string landUseLabel;
 
         private void Awake()
         {
