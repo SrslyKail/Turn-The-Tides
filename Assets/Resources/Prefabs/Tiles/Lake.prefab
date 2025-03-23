@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lake
       objectReference: {fileID: 0}
+    - target: {fileID: 2036706925369898684, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8802771628929948559, guid: 35f0333d1604da64bb70dd58ccf5e3bb, type: 3}
     - target: {fileID: 3978168725734214611, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -89,4 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DirtScaler: {fileID: 5568212331511729806}
+  longitude: 0
+  latitude: 0
   _elevation: 0
+  landUseLabel: 

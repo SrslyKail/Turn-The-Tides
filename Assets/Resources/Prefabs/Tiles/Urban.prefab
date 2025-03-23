@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Urban
       objectReference: {fileID: 0}
+    - target: {fileID: 5634935364738535517, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8812488633559952905, guid: 87cf9ae27f3638d4cb7a1516d0f62cdd, type: 3}
     - target: {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Mesh
       value: 

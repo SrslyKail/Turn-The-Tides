@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Farm
       objectReference: {fileID: 0}
+    - target: {fileID: 5634935364738535517, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 643894674633644512, guid: 7b45daeb71f3450468195e6feeed5aa5, type: 3}
     - target: {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Mesh
       value: 

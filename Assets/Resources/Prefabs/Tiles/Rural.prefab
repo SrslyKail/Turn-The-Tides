@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rural
       objectReference: {fileID: 0}
+    - target: {fileID: 5634935364738535517, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4779835450769151668, guid: e595fe29e4ed4be4ea962ad83f2ffb23, type: 3}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

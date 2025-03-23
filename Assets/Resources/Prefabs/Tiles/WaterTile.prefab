@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterTile
       objectReference: {fileID: 0}
+    - target: {fileID: 5634935364738535517, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8802771628929948559, guid: 35f0333d1604da64bb70dd58ccf5e3bb, type: 3}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -66,6 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 8802771628929948559, guid: 35f0333d1604da64bb70dd58ccf5e3bb, type: 3}
     m_RemovedComponents:
     - {fileID: 39262316477283475, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+    - {fileID: 7371759086503436939, guid: c0ba217a1a815314881f091b9321573f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -99,3 +104,4 @@ MonoBehaviour:
   longitude: 0
   latitude: 0
   _elevation: 0
+  landUseLabel: 

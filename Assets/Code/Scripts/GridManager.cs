@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
 using UnityEngine;
 
 
@@ -232,6 +231,7 @@ namespace TurnTheTides
 
             HexTerrain terrainTile = oceanParent.GetComponentInChildren<HexTerrain>(true);
             terrainTile.gameObject.SetActive(true);
+            oceanParent.AddComponent<MeshFilter>().mesh = mesh;
             terrainTile.transform.GetComponent<MeshFilter>().mesh = mesh;
 
         }

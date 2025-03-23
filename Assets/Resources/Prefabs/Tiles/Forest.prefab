@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forest
       objectReference: {fileID: 0}
+    - target: {fileID: 5634935364738535517, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5720556590480990760, guid: 64022679cfae23e468e8a8fe05994f20, type: 3}
     - target: {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Mesh
       value: 

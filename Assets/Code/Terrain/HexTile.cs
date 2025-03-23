@@ -11,6 +11,7 @@ namespace TurnTheTides
     /// Controls the height and scaling for the child classes to deal with elevation representation.
     /// Made by Corey Buchan.
     /// </summary>
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     abstract class HexTile : MonoBehaviour
     {
         static readonly float height_pos_unit = 0.1f;
@@ -44,13 +45,16 @@ namespace TurnTheTides
             }
         }
 
-        private void Start()
+        public string landUseLabel;
+
+        private void Awake()
         {
             MeshCollider collider = GetComponent<MeshCollider>();
-            if(collider.sharedMesh == null)
+            if (collider.sharedMesh == null)
             {
                 collider.sharedMesh = GetComponent<MeshFilter>().mesh;
             }
         }
+
     }
 }
