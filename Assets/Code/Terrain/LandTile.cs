@@ -5,8 +5,9 @@ using UnityEngine;
 namespace TurnTheTides
 {
     /// <summary>
-    /// Abstract base for all HexTiles to extend from.
-    /// Allows us to store water and land tiles in the same lists.
+    /// base for all land-based to extend from.
+    /// Allows us to store all land terrain in the same collections.
+    /// Made by Corey Buchan.
     /// </summary>
     class LandTile : HexTile
     {

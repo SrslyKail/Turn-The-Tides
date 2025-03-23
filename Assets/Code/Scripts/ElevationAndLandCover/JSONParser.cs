@@ -2,16 +2,68 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace TurnTheTides
 {
     public class Geopoint
     {
+        private static readonly Dictionary<string, TerrainType> LandUseMapping = new()
+        {
+                { "Wetlands", TerrainType.River },
+                { "Alpine" , TerrainType.Forest },
+                { "Mining", TerrainType.Barren },
+                { "Young Forest", TerrainType.Forest },
+                { "Urban", TerrainType.Urban },
+                { "Sub alpine Avalanche Chutes", TerrainType.Barren },
+                { "Agriculture", TerrainType.Farm },
+                { "Fresh Water" , TerrainType.Lake },
+                { "Recreation Activities", TerrainType.Forest },
+                { "Estuaries", TerrainType.River },
+                { "Range Lands", TerrainType.Barren },
+                { "Residential Agriculture Mixtures", TerrainType.Rural },
+                { "Barren Surfaces", TerrainType.Barren },
+                { "Salt Water" , TerrainType.Ocean },
+                { "Recently Burned", TerrainType.Barren },
+                { "Old Forest" , TerrainType.Forest },
+                { "Recently Logged", TerrainType.Barren },
+                { "Glaciers and Snow", TerrainType.Snow },
+        };
+        private double _elevation;
+
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LandUseLabel { get; set; }
-        public double Elevation { get; set; }
+        public double Elevation {
+            get {
+
+                double A = 0.8; //Overall exaggeration
+                double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
+
+                if(_elevation < 0)
+                { return -1* (Math.Pow(Math.Abs(_elevation), N)); }
+                if (_elevation > 0)
+                { return A * Math.Pow(_elevation, N); }
+                return _elevation;
+            }
+            set { _elevation = value; }
+        }
+        public TerrainType TerrainType {
+            get
+            {
+                LandUseMapping.TryGetValue(LandUseLabel, out TerrainType type);
+                if(type == TerrainType.Invalid)
+                {
+                    Debug.LogError($"Could not find mapping for terrain type {LandUseLabel}");
+                    return TerrainType.Barren;
+                }
+                else
+                {
+                    return type;
+                }
+            }
+        }
     }
     public class GeoGrid
     {
@@ -25,13 +77,18 @@ namespace TurnTheTides
 
     class JSONParser: MonoBehaviour
     {
+        /// <summary>
+        /// Parses a JSON string and returns a GeoGrid.
+        /// </summary>
+        /// <param name="input">The JSON formatted string.</param>
+        /// <returns>A GeoGrid.</returns>
         public static GeoGrid ParseFromString(String input)
         {
-            List<List<Geopoint>> multiDimensionalArray = new List<List<Geopoint>>();
+            List<List<Geopoint>> multiDimensionalArray = new();
             try
             {
                    
-                JsonSerializer serializer = new JsonSerializer();
+                JsonSerializer serializer = new();
                 var rows = JsonConvert.DeserializeObject<List<Dictionary<string, List<Geopoint>>>>(input);
 
                 foreach (Dictionary<string, List<Geopoint>> rowDict in rows)
@@ -42,6 +99,7 @@ namespace TurnTheTides
                     }
                 }
             }
+            //TODO: Add more specific exception handling.
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading or parsing the file: {ex.Message}");
@@ -50,9 +108,10 @@ namespace TurnTheTides
 
             return new GeoGrid(multiDimensionalArray);
         }
+
         public static List<List<Geopoint>> ParseFromFile(String filePath)
         {
-            List<List<Geopoint>> multiDimensionalArray = new List<List<Geopoint>>();
+            List<List<Geopoint>> multiDimensionalArray = new();
 
             if (!File.Exists(filePath))
             {
@@ -63,8 +122,8 @@ namespace TurnTheTides
             try
             {
                 using StreamReader file = File.OpenText(filePath);
-                using JsonTextReader reader = new JsonTextReader(file);
-                JsonSerializer serializer = new JsonSerializer();
+                using JsonTextReader reader = new(file);
+                JsonSerializer serializer = new();
                 var rows = serializer.Deserialize<List<Dictionary<string, List<Geopoint>>>>(reader);
 
                 foreach (var row in rows)
@@ -82,17 +141,5 @@ namespace TurnTheTides
 
             return multiDimensionalArray;
         }
-
-        //public static void Main(string[] args)
-        //{
-        //    List<List<Geopoint>> newList = JSONParser.Parse(/*Put the file path here*/);
-        //    foreach (var row in newList)
-        //    {
-        //        foreach (var geopoint in row)
-        //        {
-        //            Console.WriteLine($"Latitude: {geopoint.Latitude}, Longitude: {geopoint.Longitude}, Land Use Label: {geopoint.LandUseLabel}, Elevation: {geopoint.Elevation}");
-        //        }
-        //    }
-        //}
     }
 }

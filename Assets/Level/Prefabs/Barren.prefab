@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 39262316477283475, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: _terrain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 718651542968982415, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalScale.y
       value: 0
@@ -15,6 +19,10 @@ PrefabInstance:
     - target: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Name
       value: Barren
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669975101135713078, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7297470301304139058, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_LocalPosition.x

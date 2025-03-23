@@ -1,15 +1,24 @@
 ﻿
 namespace TurnTheTides
 {
-    // CB: We can add more types as we go, I'm mostly just initializing this so we have it.
+    /// <summary>
+    /// A Enum to hold all the types of terrain we can make.
+    /// Made by Corey Buchan.
+    /// </summary>
     public enum TerrainType
     {
+        Invalid,
         Barren,
-        Water,
+        Ocean,
+        River,
+        Lake,
+        Swamp,
         Land,
         Forest,
         Urban,
-        Farm
+        Farm,
+        Snow,
+        Rural
     }
 }
 
