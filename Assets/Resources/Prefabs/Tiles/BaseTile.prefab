@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bf4f98e814dce4ea279c57f73ea41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtScaler: {fileID: 6369635916465404319}
+  _dirtScaler: {fileID: 6369635916465404319}
+  _elevation: 0
   longitude: 0
   latitude: 0
-  _elevation: 0
   landUseLabel: 
+  x_index: 0
+  y_index: 0
   _terrain: 0
 --- !u!33 &5634935364738535517
 MeshFilter:

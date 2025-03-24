@@ -92,8 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfc088432e1c794aaba1db03671ecce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtScaler: {fileID: 5568212331511729806}
+  _dirtScaler: {fileID: 5568212331511729806}
+  _elevation: 0
   longitude: 0
   latitude: 0
-  _elevation: 0
   landUseLabel: 
+  x_index: 0
+  y_index: 0

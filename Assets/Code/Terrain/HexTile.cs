@@ -14,17 +14,28 @@ namespace TurnTheTides
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     abstract class HexTile : MonoBehaviour
     {
-        static readonly float height_pos_unit = 0.1f;
-        static readonly float height_scale_unit = 1f;
+        public static readonly float height_pos_unit = 0.1f;
+        public static readonly float height_scale_unit = 1f;
         [SerializeField]
-        GameObject DirtScaler;
+        private GameObject _dirtScaler;
         [SerializeField] // Allows us to see it in the editor.
-        private int _elevation;
+        protected int _elevation;
 
         public abstract TerrainType Terrain { get; }
         public double longitude;
         public double latitude;
         public string landUseLabel;
+        public int x_index;
+        public int y_index;
+
+        public GameObject DirtScaler
+        { 
+            get { return _dirtScaler; }
+            private set
+            {
+                _dirtScaler = value;
+            } 
+        }
 
         /// <summary>
         /// Elevation represents the base of the tile.

@@ -309,9 +309,14 @@ namespace TurnTheTides
             Mesh mesh = new();
             mesh.CombineMeshes(combine);
             mesh.name = "Ocean";
+            mesh.RecalculateNormals();
+            mesh.RecalculateTangents();
+
             //Reactivate the parent.
             oceanParent.SetActive(true);
             oceanParent.GetComponent<MeshFilter>().mesh = mesh;
+            Material mat = Resources.Load("WaterMaterial") as Material;
+            oceanParent.GetComponent<MeshRenderer>().material = mat;
         }
     }
 }
