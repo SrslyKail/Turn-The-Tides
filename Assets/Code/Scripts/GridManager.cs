@@ -133,6 +133,8 @@ namespace TurnTheTides
                     hexTile.longitude = pointData.Longitude;
                     hexTile.latitude = pointData.Latitude;
                     hexTile.landUseLabel = pointData.LandUseLabel;
+                    hexTile.x_index = x;
+                    hexTile.y_index = y;
 
                     //Set the name and parent.
                     newTile.name = $"{x / map_size_offset}, {y / map_size_offset}";
@@ -159,6 +161,25 @@ namespace TurnTheTides
                 }
             }
             throw new ArgumentException($"Could not find prefab for type {type}");
+        }
+
+        [ContextMenu("Flood")]
+        public void Flood()
+        {
+            // Get all the ocean tiles.
+            // Use a set to ensure it doesnt contain duplicates.
+            List<GameObject> oceanTiles = this.transform
+                .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
+                .Select(ocean => { return ocean.gameObject; }).ToList();
+
+            //Increment the elevation for each of the ocean tiles.
+            foreach(GameObject tile in oceanTiles)
+            {
+                tile.GetComponent<HexTile>().Elevation++;
+            }
+            //BFS to find all adjacent non-ocean tiles
+                //Check if they're lower elevation than the current ocean tile
+                    //If they are, flood them and add to the queue
         }
 
         public void MergeWaterTiles()
