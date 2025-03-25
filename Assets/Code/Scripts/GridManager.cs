@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace TurnTheTides
         private int map_row_count; //target is 57
         private int map_column_count; //target is 47
         public readonly int map_size_offset = 2;
+
+        readonly int[] adjacency = new int[3] { -1, 0, 1 };
 
         private List<List<GameObject>> tiles;
 
@@ -177,9 +180,63 @@ namespace TurnTheTides
             {
                 tile.GetComponent<Ocean>().Elevation++;
             }
-            //BFS to find all adjacent non-ocean tiles
-                //Check if they're lower elevation than the current ocean tile
-                    //If they are, flood them and add to the queue
+
+            Queue checkQueue = new(oceanTiles);
+            while(checkQueue.Count != 0)
+            {
+                GameObject oceanTile = checkQueue.Dequeue() as GameObject;
+                HexTile details = oceanTile.GetComponent<HexTile>();
+                int start_row = details.y_index;
+                int start_col = details.x_index;
+
+                foreach (int adj_row in adjacency)
+                {
+                    int check_row = adj_row + start_row;
+                    foreach (int adj_col in adjacency)
+                    {
+                        int check_col = adj_col + start_col;
+
+                        //make sure we dont check off array
+                        if (check_row >= 0 && check_col >= 0
+                            && check_row < map_row_count && check_col < map_column_count)
+                        {
+                            try
+                            {
+                                GameObject toCheck = tiles[check_row][check_col];
+                                HexTile checkDetails = toCheck.GetComponent<HexTile>();
+                                // If it IS an ocean tile, we ignore it.
+                                if (!checkDetails.TryGetComponent<Ocean>(out _) &&
+                                    checkDetails.Elevation < details.Elevation)
+                                {
+                                    GameObject newTile = Instantiate(oceanTile);
+                                    newTile.SetActive(true);
+                                    newTile.transform.parent = this.transform;
+                                    newTile.transform.position = toCheck.transform.position;
+                                    newTile.transform.localScale = oceanTile.transform.localScale;
+                                    newTile.name = $"Flooded {checkDetails.landUseLabel}";
+
+                                    tiles[check_row][check_col] = newTile;
+                                    HexTile newDetails = newTile.GetComponent<HexTile>();
+                                    newDetails.x_index = checkDetails.x_index;
+                                    newDetails.y_index = checkDetails.y_index;
+
+                                    Ocean newOcean = newTile.GetComponent<Ocean>();
+                                    newOcean.Elevation = details.Elevation;
+                                    
+                                    DestroyImmediate(toCheck);
+                                    
+                                    checkQueue.Enqueue(newTile);
+                                }
+                            }
+                            catch (NullReferenceException)
+                            {
+                                Debug.LogError($"Could not find tile at {check_row}, {check_col}");
+                            }
+                        }
+                    }
+                }
+            }
+            MergeWaterTiles();
         }
 
         public void MergeWaterTiles()
@@ -228,7 +285,6 @@ namespace TurnTheTides
 
         private HashSet<GameObject> BFS_OceanTiles_Helper(int row, int col, HashSet<GameObject> oldVisited)
         {
-            int[] adjacency = new int[3] { -1, 0, 1 };
             GameObject startTile = tiles[row][col];
             Queue<KeyValuePair<GameObject, Point>> queue = new();
 
