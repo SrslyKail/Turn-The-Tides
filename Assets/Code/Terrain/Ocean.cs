@@ -21,7 +21,10 @@ namespace TurnTheTides
                 Vector3 scaler = this.transform.localScale;
                 if (value > 0)
                 {
-                    this.transform.localScale = new(scaler.x, (value + 1 + height_scale_unit) * height_scale_unit, scaler.z);
+                    this.transform.localScale = new(
+                        scaler.x,
+                        (value + 1 + height_scale_unit) * height_scale_unit,
+                        scaler.z);
                 }
 
             }

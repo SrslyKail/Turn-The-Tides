@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Rendering.Universal.Internal;
@@ -49,13 +50,30 @@ namespace TurnTheTides
             set
             {
                 _elevation = value;
+                double A = 0.8; //Overall exaggeration
+                double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
+                double evaluated;
+                if (_elevation < 0)
+                { 
+                    evaluated = -1 * (Math.Pow(Math.Abs(_elevation), N));
+                }
+                else if (_elevation > 0)
+                { 
+                    evaluated = A * Math.Pow(_elevation, N); 
+                }
+                else
+                {
+                    evaluated = _elevation;
+                }
+                    
+                
                 Vector3 curPos = this.transform.position;
-                this.transform.position = new(curPos.x, value * height_pos_unit, curPos.z);
+                this.transform.position = new(curPos.x, (float)(evaluated * height_pos_unit), curPos.z);
 
                 Vector3 dirtScale = DirtScaler.transform.localScale;
                 if(value > 0)
                 {
-                    DirtScaler.transform.localScale = new(dirtScale.x, value * height_scale_unit, dirtScale.z);
+                    DirtScaler.transform.localScale = new(dirtScale.x, (float)(evaluated * height_scale_unit), dirtScale.z);
                 }
                 
             }
