@@ -53,7 +53,11 @@ namespace TurnTheTides
                 this.transform.position = new(curPos.x, value * height_pos_unit, curPos.z);
 
                 Vector3 dirtScale = DirtScaler.transform.localScale;
-                DirtScaler.transform.localScale = new (dirtScale.x, value * height_scale_unit, dirtScale.z);
+                if(value > 0)
+                {
+                    DirtScaler.transform.localScale = new(dirtScale.x, value * height_scale_unit, dirtScale.z);
+                }
+                
             }
         }
 

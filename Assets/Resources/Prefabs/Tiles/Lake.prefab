@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: _terrain
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6595996879433317742, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5979624915448961650, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
     - {fileID: -167825106223129016, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}

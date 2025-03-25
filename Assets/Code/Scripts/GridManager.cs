@@ -175,7 +175,7 @@ namespace TurnTheTides
             //Increment the elevation for each of the ocean tiles.
             foreach(GameObject tile in oceanTiles)
             {
-                tile.GetComponent<HexTile>().Elevation++;
+                tile.GetComponent<Ocean>().Elevation++;
             }
             //BFS to find all adjacent non-ocean tiles
                 //Check if they're lower elevation than the current ocean tile
@@ -287,9 +287,11 @@ namespace TurnTheTides
         {
             //Convert the has to an array so we can index
             MeshFilter[] meshFilters = toCombine
-                .Select(tile => {
+                .Select(tile =>
+                {
                     return tile.GetComponent<MeshFilter>();
                 }).ToArray();
+
 
             // Create a combine instance array
             // This has the added benefit of creating the objects at the same time.
@@ -314,7 +316,9 @@ namespace TurnTheTides
 
             //Reactivate the parent.
             oceanParent.SetActive(true);
+            oceanParent.GetComponent<HexTile>().DirtScaler.SetActive(false);
             oceanParent.GetComponent<MeshFilter>().mesh = mesh;
+            oceanParent.transform.localScale += new Vector3(0, HexTile.height_scale_unit, 0);
             Material mat = Resources.Load("WaterMaterial") as Material;
             oceanParent.GetComponent<MeshRenderer>().material = mat;
         }
