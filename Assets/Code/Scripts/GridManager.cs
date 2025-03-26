@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -209,22 +210,25 @@ namespace TurnTheTides
                                     checkDetails.Elevation < details.Elevation)
                                 {
                                     GameObject newTile = Instantiate(oceanTile);
-                                    newTile.SetActive(true);
-                                    newTile.transform.parent = this.transform;
-                                    newTile.transform.position = toCheck.transform.position;
+
+                                    newTile.transform.parent = this.gameObject.transform;
+                                    newTile.transform.position = new Vector3(
+                                        toCheck.transform.position.x,
+                                        oceanTile.transform.position.y,
+                                        toCheck.transform.position.z
+                                    );
                                     newTile.transform.localScale = oceanTile.transform.localScale;
                                     newTile.name = $"Flooded {checkDetails.landUseLabel}";
 
-                                    tiles[check_row][check_col] = newTile;
                                     HexTile newDetails = newTile.GetComponent<HexTile>();
                                     newDetails.x_index = checkDetails.x_index;
                                     newDetails.y_index = checkDetails.y_index;
-
-                                    Ocean newOcean = newTile.GetComponent<Ocean>();
-                                    newOcean.Elevation = details.Elevation;
+                                    newDetails.Elevation = details.Elevation;
                                     
                                     DestroyImmediate(toCheck);
-                                    
+                                    newTile.SetActive(true);
+
+                                    tiles[check_row][check_col] = newTile;
                                     checkQueue.Enqueue(newTile);
                                 }
                             }
@@ -343,10 +347,9 @@ namespace TurnTheTides
         {
             //Convert the has to an array so we can index
             MeshFilter[] meshFilters = toCombine
-                .Select(tile =>
-                {
-                    return tile.GetComponent<MeshFilter>();
-                }).ToArray();
+                .Where(tile => { return tile.activeInHierarchy; })
+                .Select(tile => { return tile.GetComponent<MeshFilter>();})
+                .ToArray();
 
 
             // Create a combine instance array

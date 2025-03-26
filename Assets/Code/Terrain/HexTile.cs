@@ -50,33 +50,39 @@ namespace TurnTheTides
             set
             {
                 _elevation = value;
-                double A = 0.8; //Overall exaggeration
-                double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
-                double evaluated;
-                if (_elevation < 0)
-                { 
-                    evaluated = -1 * (Math.Pow(Math.Abs(_elevation), N));
-                }
-                else if (_elevation > 0)
-                { 
-                    evaluated = A * Math.Pow(_elevation, N); 
-                }
-                else
-                {
-                    evaluated = _elevation;
-                }
-                    
-                
+                double evaluated = ClampElevation(value);
+
                 Vector3 curPos = this.transform.position;
                 this.transform.position = new(curPos.x, (float)(evaluated * height_pos_unit), curPos.z);
 
                 Vector3 dirtScale = DirtScaler.transform.localScale;
-                if(value > 0)
+                if (value > 0)
                 {
                     DirtScaler.transform.localScale = new(dirtScale.x, (float)(evaluated * height_scale_unit), dirtScale.z);
                 }
-                
+
             }
+        }
+
+        protected double ClampElevation(double elevation)
+        {
+            double A = 0.8; //Overall exaggeration
+            double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
+            double evaluated;
+            if (elevation < 0)
+            {
+                evaluated = -1 * (Math.Pow(Math.Abs(elevation), N));
+            }
+            else if (elevation > 0)
+            {
+                evaluated = A * Math.Pow(elevation, N);
+            }
+            else
+            {
+                evaluated = elevation;
+            }
+
+            return evaluated;
         }
 
         private void Awake()

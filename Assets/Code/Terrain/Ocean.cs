@@ -16,14 +16,16 @@ namespace TurnTheTides
             get { return _elevation; }
             set
             {
-                _elevation = value;
+                base._elevation = value + 1;
+
+                double evaluated = ClampElevation(value);
 
                 Vector3 scaler = this.transform.localScale;
                 if (value > 0)
                 {
                     this.transform.localScale = new(
                         scaler.x,
-                        (value + 1 + height_scale_unit) * height_scale_unit,
+                        (float)(evaluated) * height_scale_unit,
                         scaler.z);
                 }
 
