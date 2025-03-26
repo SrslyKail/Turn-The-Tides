@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: _terrain
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 718651542968982415, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193772682067487775, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e61b267333495d9498da4e164bcc14cb, type: 2}
+    - target: {fileID: 4087541051289228126, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e61b267333495d9498da4e164bcc14cb, type: 2}
     - target: {fileID: 5161851158273309625, guid: c0ba217a1a815314881f091b9321573f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -100,8 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a42c9506aeec854ebcffa41fcf1842d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtScaler: {fileID: 726741924022296446}
+  _dirtScaler: {fileID: 726741924022296446}
+  _elevation: 0
   longitude: 0
   latitude: 0
-  _elevation: 0
   landUseLabel: 
+  x_index: 0
+  y_index: 0

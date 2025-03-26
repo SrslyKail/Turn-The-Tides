@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: _terrain
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6595996879433317742, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7694757435020228031, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e61b267333495d9498da4e164bcc14cb, type: 2}
     m_RemovedComponents:
     - {fileID: -167825106223129016, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
     m_RemovedGameObjects: []
@@ -86,11 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77334242f430cdc4d879d93e19f57612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtScaler: {fileID: 8976758103025267092}
+  _dirtScaler: {fileID: 8976758103025267092}
+  _elevation: 0
   longitude: 0
   latitude: 0
-  _elevation: 0
   landUseLabel: 
+  x_index: 0
+  y_index: 0
 --- !u!1 &8976758103025267092 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 726741924022296446, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}

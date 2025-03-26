@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Rendering.Universal.Internal;
@@ -14,17 +15,28 @@ namespace TurnTheTides
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     abstract class HexTile : MonoBehaviour
     {
-        static readonly float height_pos_unit = 0.1f;
-        static readonly float height_scale_unit = 1f;
+        public static readonly float height_pos_unit = 0.1f;
+        public static readonly float height_scale_unit = 1f;
         [SerializeField]
-        GameObject DirtScaler;
+        private GameObject _dirtScaler;
         [SerializeField] // Allows us to see it in the editor.
-        private int _elevation;
+        protected int _elevation;
 
         public abstract TerrainType Terrain { get; }
         public double longitude;
         public double latitude;
         public string landUseLabel;
+        public int x_index;
+        public int y_index;
+
+        public GameObject DirtScaler
+        { 
+            get { return _dirtScaler; }
+            private set
+            {
+                _dirtScaler = value;
+            } 
+        }
 
         /// <summary>
         /// Elevation represents the base of the tile.
@@ -38,12 +50,39 @@ namespace TurnTheTides
             set
             {
                 _elevation = value;
+                double evaluated = ClampElevation(value);
+
                 Vector3 curPos = this.transform.position;
-                this.transform.position = new(curPos.x, value * height_pos_unit, curPos.z);
+                this.transform.position = new(curPos.x, (float)(evaluated * height_pos_unit), curPos.z);
 
                 Vector3 dirtScale = DirtScaler.transform.localScale;
-                DirtScaler.transform.localScale = new (dirtScale.x, value * height_scale_unit, dirtScale.z);
+                if (value > 0)
+                {
+                    DirtScaler.transform.localScale = new(dirtScale.x, (float)(evaluated * height_scale_unit), dirtScale.z);
+                }
+
             }
+        }
+
+        protected double ClampElevation(double elevation)
+        {
+            double A = 0.8; //Overall exaggeration
+            double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
+            double evaluated;
+            if (elevation < 0)
+            {
+                evaluated = -1 * (Math.Pow(Math.Abs(elevation), N));
+            }
+            else if (elevation > 0)
+            {
+                evaluated = A * Math.Pow(elevation, N);
+            }
+            else
+            {
+                evaluated = elevation;
+            }
+
+            return evaluated;
         }
 
         private void Awake()

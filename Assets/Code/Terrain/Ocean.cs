@@ -10,6 +10,27 @@ namespace TurnTheTides
     class Ocean : Water
     {
         public override TerrainType Terrain => TerrainType.Ocean;
+
+        public override int Elevation
+        {
+            get { return _elevation; }
+            set
+            {
+                base._elevation = value + 1;
+
+                double evaluated = ClampElevation(value);
+
+                Vector3 scaler = this.transform.localScale;
+                if (value > 0)
+                {
+                    this.transform.localScale = new(
+                        scaler.x,
+                        (float)(evaluated) * height_scale_unit,
+                        scaler.z);
+                }
+
+            }
+        }
     }
 }
 
