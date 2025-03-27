@@ -20,7 +20,7 @@ namespace TurnTheTides
         [SerializeField]
         private GameObject _dirtScaler;
         [SerializeField] // Allows us to see it in the editor.
-        protected int _elevation;
+        protected float _elevation;
         //yearly pollution amount
         protected float pollutionValue;
         //When you destroy a tile, gain this
@@ -51,7 +51,7 @@ namespace TurnTheTides
         /// For water tiles, we will implement a Height attribute to track
         /// the difference between the base elevation and the depth of the water.
         /// </summary>
-        public virtual int Elevation
+        public virtual float Elevation
         {
             get { return _elevation; }
             set

@@ -11,12 +11,12 @@ namespace TurnTheTides
     {
         public override TerrainType Terrain => TerrainType.Ocean;
 
-        public override int Elevation
+        public override float Elevation
         {
             get { return _elevation; }
             set
             {
-                base._elevation = value + 1;
+                base._elevation = value;
 
                 double evaluated = ClampElevation(value);
 
