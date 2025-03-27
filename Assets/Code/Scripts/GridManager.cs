@@ -22,6 +22,8 @@ namespace TurnTheTides
         private TextAsset dataFile;
         [SerializeField]
         private List<GameObject> prefabs;
+        [Range(0.01f, 1f)]
+        private readonly float floodIncrement = 0.08f;
 
         private GeoGrid geoData; //For storing the JSON data
 
@@ -198,7 +200,7 @@ namespace TurnTheTides
             //Increment the elevation for each of the ocean tiles.
             foreach(GameObject tile in oceanTiles)
             {
-                tile.GetComponent<Ocean>().Elevation++;
+                tile.GetComponent<Ocean>().Elevation += floodIncrement;
             }
 
             Queue checkQueue = new(oceanTiles);
@@ -228,7 +230,7 @@ namespace TurnTheTides
                                 if (!checkDetails.TryGetComponent<Ocean>(out _) &&
                                     checkDetails.Elevation < details.Elevation)
                                 {
-                                    freedPollution += checkDetails.Poll
+                                    freedPollution += checkDetails.StoredPollution;
                                     GameObject newTile = Instantiate(oceanTile);
 
                                     newTile.transform.parent = this.gameObject.transform;
@@ -262,6 +264,18 @@ namespace TurnTheTides
                 }
             }
             MergeWaterTiles();
+            return freedPollution;
+        }
+
+        public float CalculateNewPollution()
+        {
+            float newPollution = 0;
+            List<HexTile> children = transform.GetComponentsInChildren<HexTile>().ToList();
+            foreach(HexTile tile in children)
+            {
+                newPollution += tile.PollutionValue;
+            }
+            return newPollution;
         }
 
         public void MergeWaterTiles()
@@ -279,7 +293,6 @@ namespace TurnTheTides
                 //Combine the meshes for all the found connected ocean tiles.
                 CombineMeshes(tree);
             }
-            
         }
 
         private List<List<GameObject>> BFS_OceanTiles(HashSet<GameObject> oceanTiles)

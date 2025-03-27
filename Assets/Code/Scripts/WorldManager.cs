@@ -9,7 +9,6 @@ public class WorldManager : MonoBehaviour
     private static WorldManager _instance;
     public float PollutionLevel { get; private set; }
     public readonly float PollutionMax = float.MaxValue;
-    private readonly GridManager gridManager;
 
     private WorldManager()
     {
@@ -39,6 +38,9 @@ public class WorldManager : MonoBehaviour
     public void NextTurn()
     {
         GridManager gridManager = GridManager.GetInstance();
+        float newPollution = gridManager.Flood();
+        newPollution += gridManager.CalculateNewPollution();
+        PollutionLevel += newPollution;
 
     }
 }
