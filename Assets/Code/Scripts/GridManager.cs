@@ -217,14 +217,15 @@ namespace TurnTheTides
                                         oceanTile.transform.position.y,
                                         toCheck.transform.position.z
                                     );
-                                    newTile.transform.localScale = oceanTile.transform.localScale;
-                                    newTile.name = $"Flooded {checkDetails.landUseLabel}";
 
                                     HexTile newDetails = newTile.GetComponent<HexTile>();
                                     newDetails.x_index = checkDetails.x_index;
                                     newDetails.y_index = checkDetails.y_index;
                                     newDetails.Elevation = details.Elevation;
-                                    
+
+                                    newTile.transform.localScale = oceanTile.transform.localScale;
+                                    newTile.name = $"Flooded {checkDetails.landUseLabel}";
+
                                     DestroyImmediate(toCheck);
                                     newTile.SetActive(true);
 
