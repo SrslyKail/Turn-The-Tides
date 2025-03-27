@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: _terrain
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6595996879433317742, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5979624915448961650, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
     - {fileID: -167825106223129016, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
@@ -92,8 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfc088432e1c794aaba1db03671ecce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtScaler: {fileID: 5568212331511729806}
+  _dirtScaler: {fileID: 5568212331511729806}
+  _elevation: 0
   longitude: 0
   latitude: 0
-  _elevation: 0
   landUseLabel: 
+  x_index: 0
+  y_index: 0
