@@ -101,10 +101,5 @@ namespace TurnTheTides
             }
         }
 
-        public void StorePollution()
-        {
-
-        }
-
     }
 }

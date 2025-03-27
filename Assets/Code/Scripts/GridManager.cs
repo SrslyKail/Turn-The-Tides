@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -41,16 +40,29 @@ namespace TurnTheTides
 
         private GridManager()
         {
-            if (_instance != null)
-            {
-                throw new ArgumentException("World Manager constructor was called when an instance already exists.");
-            }
-            _instance = this;
+            
         }
 
         public static GridManager GetInstance()
         {
-            return _instance == null ? new() : _instance;
+            return _instance;
+        }
+
+
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+            if (_instance != null && _instance != this)
+            {
+                if (Application.isEditor)
+                {
+                    DestroyImmediate(this.gameObject);
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
+            }
         }
 
 
@@ -230,7 +242,7 @@ namespace TurnTheTides
                                 if (!checkDetails.TryGetComponent<Ocean>(out _) &&
                                     checkDetails.Elevation < details.Elevation)
                                 {
-                                    freedPollution += checkDetails.StoredPollution;
+                                    freedPollution += 0;
                                     GameObject newTile = Instantiate(oceanTile);
 
                                     newTile.transform.parent = this.gameObject.transform;
@@ -273,7 +285,7 @@ namespace TurnTheTides
             List<HexTile> children = transform.GetComponentsInChildren<HexTile>().ToList();
             foreach(HexTile tile in children)
             {
-                newPollution += tile.PollutionValue;
+                newPollution += Geopoint.PollutionMapping.GetValueOrDefault(tile.Terrain, 0); ;
             }
             return newPollution;
         }

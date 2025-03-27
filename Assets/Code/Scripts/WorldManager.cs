@@ -7,22 +7,43 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     private static WorldManager _instance;
-    public float PollutionLevel { get; private set; }
+    [SerializeField]
+    private float _pollutionLevel;
+    [SerializeField]
+    private GridManager gridManager;
+    public float PollutionLevel
+    {
+        get
+        {
+            return _pollutionLevel;
+        }
+        private set
+        {
+            _pollutionLevel = value;
+        }
+    }
     public readonly float PollutionMax = float.MaxValue;
 
-    private WorldManager()
+    void Awake()
     {
-        if (_instance != null)
+        DontDestroyOnLoad(gameObject);
+        if (_instance != null && _instance != this)
         {
-            throw new ArgumentException("World Manager constructor was called when an instance already exists.");
+            if (Application.isEditor)
+            {
+                DestroyImmediate(this.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
-        _instance = this;
         PollutionLevel = 0;
     }
 
     public static WorldManager GetInstance()
     {
-        return _instance == null ? new() : _instance;
+        return _instance;
     }
 
     public void IncreasePollution(float amount)
@@ -30,17 +51,17 @@ public class WorldManager : MonoBehaviour
         PollutionLevel += amount;
     }
 
-    public void DecreaseAmount(float amount)
+    public void DecreasePollution(float amount)
     {
         PollutionLevel -= amount;
     }
 
+    [ContextMenu("Next Turn")]
     public void NextTurn()
     {
-        GridManager gridManager = GridManager.GetInstance();
         float newPollution = gridManager.Flood();
         newPollution += gridManager.CalculateNewPollution();
         PollutionLevel += newPollution;
-
+        Debug.Log($"New pollution: {PollutionLevel}");
     }
 }

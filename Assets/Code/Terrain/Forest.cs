@@ -15,5 +15,11 @@ namespace TurnTheTides
             pollutionValue = -0.1f;
             storedPollution = 1.5f;
         }
+
+        private void Awake()
+        {
+            pollutionValue = -0.1f;
+            storedPollution = 1.5f;
+        }
     }
 }

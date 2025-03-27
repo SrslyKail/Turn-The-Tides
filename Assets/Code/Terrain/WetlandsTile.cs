@@ -7,4 +7,10 @@ class WetlandsTile : LandTile
         pollutionValue = -0.2f;
         storedPollution = 17.5f;
     }
+
+    private void Awake()
+    {
+        pollutionValue = -0.2f;
+        storedPollution = 17.5f;
+    }
 }

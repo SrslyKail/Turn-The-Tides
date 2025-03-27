@@ -15,6 +15,11 @@ namespace TurnTheTides
         {
             pollutionValue = 0;
         }
+
+        private void Awake()
+        {
+            pollutionValue = 0;
+        }
     }
 
 }

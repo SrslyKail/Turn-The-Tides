@@ -6,4 +6,9 @@ class AgricultureTile : LandTile
     {
         pollutionValue = 0.05f;
     }
+
+    private void Awake()
+    {
+        pollutionValue = 0.05f;
+    }
 }
