@@ -34,12 +34,21 @@ namespace TurnTheTides
         readonly int[] adjacency = new int[3] { -1, 0, 1 };
 
         private List<List<GameObject>> tiles;
-
         private static GridManager _instance;
+
 
         private GridManager()
         {
+            if (_instance != null)
+            {
+                throw new ArgumentException("World Manager constructor was called when an instance already exists.");
+            }
+            _instance = this;
+        }
 
+        public static GridManager GetInstance()
+        {
+            return _instance == null ? new() : _instance;
         }
 
 
@@ -176,8 +185,10 @@ namespace TurnTheTides
         }
 
         [ContextMenu("Flood")]
-        public void Flood()
+        public float Flood()
         {
+            float freedPollution = 0f;
+
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.
             List<GameObject> oceanTiles = this.transform
@@ -217,6 +228,7 @@ namespace TurnTheTides
                                 if (!checkDetails.TryGetComponent<Ocean>(out _) &&
                                     checkDetails.Elevation < details.Elevation)
                                 {
+                                    freedPollution += checkDetails.Poll
                                     GameObject newTile = Instantiate(oceanTile);
 
                                     newTile.transform.parent = this.gameObject.transform;
