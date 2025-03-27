@@ -12,6 +12,8 @@ namespace TurnTheTides
     {
         public ForestTile(TerrainType terrain): base(terrain)
         {
+            pollutionValue = -0.1f;
+            storedPollution = 1.5f;
         }
     }
 }

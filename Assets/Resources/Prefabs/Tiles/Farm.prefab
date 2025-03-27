@@ -82,7 +82,41 @@ PrefabInstance:
       objectReference: {fileID: 643894674633644512, guid: 7b45daeb71f3450468195e6feeed5aa5, type: 3}
     m_RemovedComponents:
     - {fileID: 6060878671420071333, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+    - {fileID: 39262316477283475, guid: c0ba217a1a815314881f091b9321573f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1043978789719701338}
   m_SourcePrefab: {fileID: 100100000, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+--- !u!1 &4884946927676331062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6369635916465404319, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+  m_PrefabInstance: {fileID: 1995005880092192169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6648514793141056331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+  m_PrefabInstance: {fileID: 1995005880092192169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1043978789719701338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648514793141056331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed08cffe31a226a46a00bbaf869df560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dirtScaler: {fileID: 4884946927676331062}
+  _elevation: 0
+  longitude: 0
+  latitude: 0
+  landUseLabel: 
+  x_index: 0
+  y_index: 0
+  _terrain: 9

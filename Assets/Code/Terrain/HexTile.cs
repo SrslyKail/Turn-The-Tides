@@ -21,6 +21,13 @@ namespace TurnTheTides
         private GameObject _dirtScaler;
         [SerializeField] // Allows us to see it in the editor.
         protected int _elevation;
+        //yearly pollution amount
+        protected float pollutionValue;
+        //When you destroy a tile, gain this
+        protected float storedPollution = 2;
+
+        public float PollutionValue { get; }
+        public float StoredPollution { get; }
 
         public abstract TerrainType Terrain { get; }
         public double longitude;
@@ -92,6 +99,11 @@ namespace TurnTheTides
             {
                 collider.sharedMesh = GetComponent<MeshFilter>().mesh;
             }
+        }
+
+        public void StorePollution()
+        {
+
         }
 
     }

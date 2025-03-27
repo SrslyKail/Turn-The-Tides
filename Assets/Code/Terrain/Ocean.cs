@@ -31,6 +31,11 @@ namespace TurnTheTides
 
             }
         }
+
+        public Ocean()
+        {
+            pollutionValue = 0;
+        }
     }
 }
 

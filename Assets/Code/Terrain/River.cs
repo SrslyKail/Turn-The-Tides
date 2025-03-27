@@ -9,6 +9,11 @@ namespace TurnTheTides
     class River : Water
     {
         public override TerrainType Terrain => TerrainType.River;
+
+        public River()
+        {
+            pollutionValue = 0;
+        }
     }
 
 }

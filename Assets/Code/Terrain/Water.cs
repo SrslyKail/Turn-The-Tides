@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace TurnTheTides
 {
     /// <summary>
@@ -29,6 +27,11 @@ namespace TurnTheTides
         public virtual void ChangeHeight(int newHeight)
         {
             _height = newHeight;
+        }
+
+        public Water()
+        {
+            pollutionValue = 0;
         }
     }
 }

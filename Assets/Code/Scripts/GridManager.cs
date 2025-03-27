@@ -35,6 +35,14 @@ namespace TurnTheTides
 
         private List<List<GameObject>> tiles;
 
+        private static GridManager _instance;
+
+        private GridManager()
+        {
+
+        }
+
+
         // Start is called once before the first execution of Update
         // after the MonoBehaviour is created
         void Start()
