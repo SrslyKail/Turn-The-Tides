@@ -6,7 +6,7 @@ class UrbanTile : LandTile
     {
         pollutionValue = 24000f;
     }
-    public UrbanTile(TerrainType terrain) : base(terrain)
+    public UrbanTile(TerrainType terrain)
     {
         pollutionValue = 24000f;
     }

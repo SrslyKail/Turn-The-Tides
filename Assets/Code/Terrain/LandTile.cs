@@ -11,13 +11,6 @@ namespace TurnTheTides
     /// </summary>
     class LandTile : HexTile
     {
-        [SerializeField]
-        TerrainType _terrain;
-        public override TerrainType Terrain => _terrain;
 
-        public LandTile(TerrainType terrain)
-        {
-            _terrain = terrain;
-        }
     }
 }

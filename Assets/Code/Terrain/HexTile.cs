@@ -21,6 +21,8 @@ namespace TurnTheTides
         private GameObject _dirtScaler;
         [SerializeField] // Allows us to see it in the editor.
         protected float _elevation;
+        [SerializeField]
+        TerrainType _terrain;
         //yearly pollution amount
         protected float pollutionValue;
         //When you destroy a tile, gain this
@@ -29,12 +31,12 @@ namespace TurnTheTides
         public float PollutionValue { get; }
         public float StoredPollution { get; }
 
-        public abstract TerrainType Terrain { get; }
+        public virtual TerrainType Terrain => _terrain;
         public double longitude;
         public double latitude;
         public string landUseLabel;
-        public int x_index;
-        public int y_index;
+        public int col_index;
+        public int row_index;
 
         public GameObject DirtScaler
         { 

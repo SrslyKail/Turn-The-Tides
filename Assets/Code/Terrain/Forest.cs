@@ -10,7 +10,7 @@ namespace TurnTheTides
     /// </summary>
     class ForestTile : LandTile
     {
-        public ForestTile(TerrainType terrain): base(terrain)
+        public ForestTile()
         {
             pollutionValue = -0.1f;
             storedPollution = 1.5f;

@@ -1,6 +1,8 @@
+using Mono.Cecil;
 using System;
 using TurnTheTides;
 using Unity.Editor.Tasks;
+using UnityEditor.SearchService;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -8,10 +10,18 @@ public class WorldManager : MonoBehaviour
 {
     private static WorldManager _instance;
     [SerializeField]
-    private float _pollutionLevel;
+    private TextAsset dataFile;
+    [SerializeField]
+    private double _pollutionLevel;
+
+    [Range(0.01f, 1f)]
+    private float floodIncrement = 0.08f;
+    private GeoGrid geoGrid;
     [SerializeField]
     private GridManager gridManager;
-    public float PollutionLevel
+
+
+    public double PollutionLevel
     {
         get
         {
@@ -22,11 +32,15 @@ public class WorldManager : MonoBehaviour
             _pollutionLevel = value;
         }
     }
-    public readonly float PollutionMax = float.MaxValue;
+    public readonly double PollutionMax = double.MaxValue;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        if(_instance == null)
+        {
+            _instance = this;
+        }
         if (_instance != null && _instance != this)
         {
             if (Application.isEditor)
@@ -38,7 +52,58 @@ public class WorldManager : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        if(gridManager == null)
+        {
+            gridManager = Resources.Load("/Prefabs/Managers/GridManager") as GridManager;
+        }
+        else if(gridManager != null && gridManager.gameObject != null)
+        {
+            if (Application.isEditor)
+            {
+                DestroyImmediate(gridManager.gameObject);
+            }
+            else
+            {
+                Destroy(gridManager.gameObject);
+            }
+        }
+
+        if(gridManager == null)
+        {
+            GameObject gridManagerObj = new("Grid Manager", typeof(GridManager));
+            gridManager = gridManagerObj.GetComponent<GridManager>();
+            Instantiate(gridManagerObj);
+        }
+
+        //If we have no data, get data
+        if (geoGrid is null)
+        {
+            RefreshGeoData();
+        }
+
         PollutionLevel = 0;
+    }
+
+    /// <summary>
+    /// Gets data from the JSON and updates the row/column counts.
+    /// </summary>
+    private void RefreshGeoData()
+    {
+        geoGrid = JSONParser.ParseFromString(dataFile.text);
+        Debug.Log($"Rows:{geoGrid.data.Count}, columns:{geoGrid.data[0].Count}");
+
+    }
+
+    /// <summary>
+    /// Resets the logic for the map, destroying all child objects, 
+    /// regenerating geoData if needed, and creating the hexgrid.
+    /// </summary>
+    [ContextMenu("Refresh Game")]
+    private void SetupWorld()
+    {
+        RefreshGeoData();
+        gridManager.CreateMap(geoGrid);
     }
 
     public static WorldManager GetInstance()
@@ -46,12 +111,12 @@ public class WorldManager : MonoBehaviour
         return _instance;
     }
 
-    public void IncreasePollution(float amount)
+    public void IncreasePollution(double amount)
     {
         PollutionLevel += amount;
     }
 
-    public void DecreasePollution(float amount)
+    public void DecreasePollution(double amount)
     {
         PollutionLevel -= amount;
     }
@@ -59,7 +124,7 @@ public class WorldManager : MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
-        float newPollution = gridManager.Flood();
+        double newPollution = gridManager.Flood(floodIncrement);
         newPollution += gridManager.CalculateNewPollution();
         PollutionLevel += newPollution;
         Debug.Log($"New pollution: {PollutionLevel}");
