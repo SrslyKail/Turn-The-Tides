@@ -74,11 +74,16 @@ namespace TurnTheTides
     }
     public class GeoGrid
     {
+        public readonly int row_count;
+        public readonly int column_count;
+
         public readonly List<List<Geopoint>> data;
 
         public GeoGrid(List<List<Geopoint>> data)
         {
             this.data = data;
+            row_count = data.Count;
+            column_count = data[0].Count;
         }
     }
 
