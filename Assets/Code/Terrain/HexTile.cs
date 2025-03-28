@@ -37,6 +37,8 @@ namespace TurnTheTides
         public string landUseLabel;
         public int col_index;
         public int row_index;
+        public int x_index;
+        public int y_index;
 
         public GameObject DirtScaler
         { 

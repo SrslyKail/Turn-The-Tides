@@ -103,7 +103,8 @@ public class WorldManager : MonoBehaviour
     private void SetupWorld()
     {
         RefreshGeoData();
-        gridManager.CreateMap(geoGrid);
+        gridManager.RefreshMap();
+        //gridManager.CreateMap(geoGrid);
     }
 
     public static WorldManager GetInstance()
@@ -124,7 +125,8 @@ public class WorldManager : MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
-        double newPollution = gridManager.Flood(floodIncrement);
+        //double newPollution = gridManager.Flood(floodIncrement);
+        double newPollution = gridManager.Flood();
         newPollution += gridManager.CalculateNewPollution();
         PollutionLevel += newPollution;
         Debug.Log($"New pollution: {PollutionLevel}");

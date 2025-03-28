@@ -79,7 +79,7 @@ namespace TurnTheTides
         /// regenerating geoData if needed, and creating the hexgrid.
         /// </summary>
         [ContextMenu("Refresh Map")]
-        private void RefreshMap()
+        public void RefreshMap()
         {
             //Delete all the current children
             for (int i = gameObject.transform.childCount; i > 0; --i)
