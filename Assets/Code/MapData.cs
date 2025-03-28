@@ -14,6 +14,7 @@ public class MapData : ScriptableObject
     public  int dataColumnCount;
     public  int mapRowCount;
     public  int mapColumnCount;
+    public float floodIncrement;
 
     private void OnValidate()
     {
@@ -25,11 +26,17 @@ public class MapData : ScriptableObject
 
     public MapData(
         TextAsset dataFile, 
-        int map_size_offset
+        int map_size_offset,
+        float flood_increment
         )
     {
         _dataFile = dataFile;
         this.mapSizeOffset = map_size_offset;
+        if(flood_increment <= 0)
+        {
+            flood_increment = 0.01f;
+        }
+        this.floodIncrement = flood_increment;
         ProcessDataFile();
     }
 

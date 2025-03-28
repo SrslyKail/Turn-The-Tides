@@ -2,6 +2,7 @@ using Mono.Cecil;
 using System;
 using TurnTheTides;
 using Unity.Editor.Tasks;
+using UnityEditor;
 using UnityEditor.SearchService;
 using UnityEditorInternal;
 using UnityEngine;
@@ -9,17 +10,25 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     private static WorldManager _instance;
-    [SerializeField]
-    private TextAsset dataFile;
+
+    public MapData MapData
+    {
+        get
+        {
+            return data;
+        }
+        private set
+        {
+            data = value;
+        }
+    }
     [SerializeField]
     private double _pollutionLevel;
 
-    [Range(0.01f, 1f)]
-    private float floodIncrement = 0.08f;
-    private GeoGrid geoGrid;
     [SerializeField]
     private GridManager gridManager;
-
+    [SerializeField]
+    private MapData data;
 
     public double PollutionLevel
     {
@@ -32,7 +41,13 @@ public class WorldManager : MonoBehaviour
             _pollutionLevel = value;
         }
     }
+
     public readonly double PollutionMax = double.MaxValue;
+
+    public void CreateNewLevel(TextAsset levelData, int mapSizeOffset, float flood_increment)
+    {
+        data = new(levelData, mapSizeOffset, flood_increment);
+    }
 
     void Awake()
     {
@@ -55,7 +70,9 @@ public class WorldManager : MonoBehaviour
 
         if(gridManager == null)
         {
-            gridManager = Resources.Load("/Prefabs/Managers/GridManager") as GridManager;
+            GameObject gridManagerObj = new("Grid Manager", typeof(GridManager));
+            gridManager = gridManagerObj.GetComponent<GridManager>();
+            Instantiate(gridManagerObj);
         }
         else if(gridManager != null && gridManager.gameObject != null)
         {
@@ -69,31 +86,9 @@ public class WorldManager : MonoBehaviour
             }
         }
 
-        if(gridManager == null)
-        {
-            GameObject gridManagerObj = new("Grid Manager", typeof(GridManager));
-            gridManager = gridManagerObj.GetComponent<GridManager>();
-            Instantiate(gridManagerObj);
-        }
-
-        //If we have no data, get data
-        if (geoGrid is null)
-        {
-            RefreshGeoData();
-        }
-
         PollutionLevel = 0;
     }
 
-    /// <summary>
-    /// Gets data from the JSON and updates the row/column counts.
-    /// </summary>
-    private void RefreshGeoData()
-    {
-        geoGrid = JSONParser.ParseFromString(dataFile.text);
-        Debug.Log($"Rows:{geoGrid.data.Count}, columns:{geoGrid.data[0].Count}");
-
-    }
 
     /// <summary>
     /// Resets the logic for the map, destroying all child objects, 
@@ -102,9 +97,19 @@ public class WorldManager : MonoBehaviour
     [ContextMenu("Refresh Game")]
     private void SetupWorld()
     {
-        RefreshGeoData();
-        gridManager.RefreshMap();
-        //gridManager.CreateMap(geoGrid);
+        if(MapData == null)
+        {
+            EditorUtility.DisplayDialog(
+                "No map data",
+                "No map data has been given to the World Manager.", 
+                "Close"
+                );
+        }
+        else
+        {
+            gridManager.RefreshMap(MapData);
+        }
+            
     }
 
     public static WorldManager GetInstance()
