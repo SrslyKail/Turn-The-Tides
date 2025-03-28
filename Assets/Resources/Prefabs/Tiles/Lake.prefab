@@ -98,8 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dirtScaler: {fileID: 5568212331511729806}
   _elevation: 0
+  _terrain: 4
   longitude: 0
   latitude: 0
   landUseLabel: 
-  x_index: 0
-  y_index: 0
+  row_index: 0
+  col_index: 0

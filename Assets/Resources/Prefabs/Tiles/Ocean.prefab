@@ -96,11 +96,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dirtScaler: {fileID: 8976758103025267092}
   _elevation: 0
+  _terrain: 2
   longitude: 0
   latitude: 0
   landUseLabel: 
-  x_index: 0
-  y_index: 0
+  row_index: 0
+  col_index: 0
 --- !u!1 &8976758103025267092 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 726741924022296446, guid: bfc8a5dab75940847a4cf7f21e55f94f, type: 3}
