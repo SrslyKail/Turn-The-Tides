@@ -1,8 +1,7 @@
-using UnityEngine;
 using TurnTheTides;
-class WetlandsTile : LandTile
+internal class WetlandsTile: LandTile
 {
-    public WetlandsTile(TerrainType terrain)
+    public WetlandsTile()
     {
         pollutionValue = -0.2f;
         storedPollution = 17.5f;

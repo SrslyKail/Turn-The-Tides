@@ -1,6 +1,4 @@
-﻿using Unity;
-
-namespace TurnTheTides
+﻿namespace TurnTheTides
 {
     /// <summary>
     /// A Enum to hold all the types of terrain we can make.

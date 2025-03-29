@@ -1,12 +1,8 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UIElements;
-using System.Runtime.CompilerServices;
-using Unity.VersionControl.Git;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 [ExecuteInEditMode]
-public class GridMeshCreator : MonoBehaviour
+public class GridMeshCreator: MonoBehaviour
 {
     public int xSize, ySize, zSize;
     private Vector3[] vertices;
@@ -28,9 +24,9 @@ public class GridMeshCreator : MonoBehaviour
         int cornerVertices = 8;
         int edgeVertices = (xSize + ySize + zSize - 3) * 4;
         int faceVertices = (
-            (xSize - 1) * (ySize - 1) +
-            (xSize - 1) * (zSize - 1) +
-            (ySize - 1) * (zSize - 1)) * 2;
+            ((xSize - 1) * (ySize - 1)) +
+            ((xSize - 1) * (zSize - 1)) +
+            ((ySize - 1) * (zSize - 1))) * 2;
 
         vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
 
@@ -80,12 +76,12 @@ public class GridMeshCreator : MonoBehaviour
 
     private void CreateTriangles()
     {
-        int quads = (xSize * ySize + xSize * zSize + ySize * zSize) * 2;
+        int quads = ((xSize * ySize) + (xSize * zSize) + (ySize * zSize)) * 2;
         int[] triangles = new int[quads * 6];
         int ring = (xSize + zSize) * 2;
         int t = 0, v = 0;
 
-        for(int z = 0; z <= zSize; z++)
+        for (int z = 0; z <= zSize; z++)
         {
             for (int q = 0; q < xSize; q++, v++)
             {
@@ -96,17 +92,17 @@ public class GridMeshCreator : MonoBehaviour
                 t = SetQuad(triangles, t, v, v + 1, v + ring, v + ring + 1);
             }
         }
-        
+
 
         mesh.triangles = triangles;
     }
 
     private static int SetQuad(
-        int[] triangles, 
-        int i, 
-        int v00, 
-        int v10, 
-        int v01, 
+        int[] triangles,
+        int i,
+        int v00,
+        int v10,
+        int v01,
         int v11)
     {
         triangles[i] = v00;
@@ -150,7 +146,7 @@ public class GridMeshCreator : MonoBehaviour
         int[] triangles = new int[xSize * ySize * pointsPerQuad];
 
         //We increment vi because theres 1 more vertex than quad per row
-        for(int ti = 0, vi = 0, y = 0; y < ySize; y++, vi++)
+        for (int ti = 0, vi = 0, y = 0; y < ySize; y++, vi++)
         {
             for (int x = 0; x < xSize; x++, ti += pointsPerQuad, vi++)
             {
@@ -159,7 +155,7 @@ public class GridMeshCreator : MonoBehaviour
                 triangles[ti + 4] = triangles[ti + 1] = vi + xSize + 1;
                 triangles[ti + 5] = vi + xSize + 2;
             }
-            
+
         }
 
         mesh.triangles = triangles;
@@ -169,7 +165,7 @@ public class GridMeshCreator : MonoBehaviour
     //Draw a sphere at each vertice so we can visualize where they are
     private void OnDrawGizmos()
     {
-        if(vertices == null)
+        if (vertices == null)
         {
             return;
         }

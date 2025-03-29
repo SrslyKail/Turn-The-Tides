@@ -1,8 +1,7 @@
-using UnityEngine;
 using TurnTheTides;
-class AgricultureTile : LandTile
+internal class AgricultureTile: LandTile
 {
-    public AgricultureTile(TerrainType terrain)
+    public AgricultureTile()
     {
         pollutionValue = 0.05f;
     }

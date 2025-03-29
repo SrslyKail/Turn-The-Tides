@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace TurnTheTides
@@ -50,17 +49,16 @@ namespace TurnTheTides
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LandUseLabel { get; set; }
-        public double Elevation {
-            get {
-                return _elevation;
-            }
-            set { _elevation = value; }
+        public double Elevation
+        {
+            get => _elevation; set => _elevation = value;
         }
-        public TerrainType TerrainType {
+        public TerrainType TerrainType
+        {
             get
             {
                 LandUseMapping.TryGetValue(LandUseLabel, out TerrainType type);
-                if(type == TerrainType.Invalid)
+                if (type == TerrainType.Invalid)
                 {
                     Debug.LogError($"Could not find mapping for terrain type {LandUseLabel}");
                     return TerrainType.Barren;
@@ -87,25 +85,25 @@ namespace TurnTheTides
         }
     }
 
-    class JSONParser: MonoBehaviour
+    internal class JSONParser: MonoBehaviour
     {
         /// <summary>
         /// Parses a JSON string and returns a GeoGrid.
         /// </summary>
         /// <param name="input">The JSON formatted string.</param>
         /// <returns>A GeoGrid.</returns>
-        public static GeoGrid ParseFromString(String input)
+        public static GeoGrid ParseFromString(string input)
         {
             List<List<Geopoint>> multiDimensionalArray = new();
             try
             {
-                   
+
                 JsonSerializer serializer = new();
                 var rows = JsonConvert.DeserializeObject<List<Dictionary<string, List<Geopoint>>>>(input);
 
                 foreach (Dictionary<string, List<Geopoint>> rowDict in rows)
                 {
-                    foreach(List<Geopoint> row in rowDict.Values)
+                    foreach (List<Geopoint> row in rowDict.Values)
                     {
                         multiDimensionalArray.Add(row);
                     }
@@ -116,12 +114,12 @@ namespace TurnTheTides
             {
                 Console.WriteLine($"Error reading or parsing the file: {ex.Message}");
             }
-            
+
 
             return new GeoGrid(multiDimensionalArray);
         }
 
-        public static List<List<Geopoint>> ParseFromFile(String filePath)
+        public static List<List<Geopoint>> ParseFromFile(string filePath)
         {
             List<List<Geopoint>> multiDimensionalArray = new();
 

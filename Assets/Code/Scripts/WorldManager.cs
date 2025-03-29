@@ -1,80 +1,56 @@
-using Mono.Cecil;
-using System;
 using TurnTheTides;
-using Unity.Editor.Tasks;
 using UnityEditor;
-using UnityEditor.SearchService;
-using UnityEditorInternal;
 using UnityEngine;
 
-public class WorldManager : MonoBehaviour
+public class WorldManager: MonoBehaviour
 {
     private static WorldManager _instance;
 
+    public double PollutionLevel
+    {
+        get => _pollutionLevel; private set => _pollutionLevel = value;
+    }
+
+    public readonly double PollutionMax = double.MaxValue;
+
     public MapData MapData
     {
-        get
-        {
-            return data;
-        }
-        private set
-        {
-            data = value;
-        }
+        get => data; private set => data = value;
     }
     [SerializeField]
     private double _pollutionLevel;
-
     [SerializeField]
     private GridManager gridManager;
     [SerializeField]
     private MapData data;
 
-    public double PollutionLevel
-    {
-        get
-        {
-            return _pollutionLevel;
-        }
-        private set
-        {
-            _pollutionLevel = value;
-        }
-    }
-
-    public readonly double PollutionMax = double.MaxValue;
-
-    public void CreateNewLevel(TextAsset levelData, int mapSizeOffset, float flood_increment)
-    {
-        data = new(levelData, mapSizeOffset, flood_increment);
-    }
-
-    void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = this;
         }
+
         if (_instance != null && _instance != this)
         {
             if (Application.isEditor)
             {
-                DestroyImmediate(this.gameObject);
+                DestroyImmediate(gameObject);
             }
             else
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
 
-        if(gridManager == null)
+        if (gridManager == null)
         {
             GameObject gridManagerObj = new("Grid Manager", typeof(GridManager));
             gridManager = gridManagerObj.GetComponent<GridManager>();
             Instantiate(gridManagerObj);
         }
-        else if(gridManager != null && gridManager.gameObject != null)
+        else if (gridManager != null && gridManager.gameObject != null)
         {
             if (Application.isEditor)
             {
@@ -89,6 +65,14 @@ public class WorldManager : MonoBehaviour
         PollutionLevel = 0;
     }
 
+    public void CreateNewLevel(
+        TextAsset levelData,
+        int mapSizeOffset,
+        float flood_increment
+    )
+    {
+        data = new(levelData, mapSizeOffset, flood_increment);
+    }
 
     /// <summary>
     /// Resets the logic for the map, destroying all child objects, 
@@ -97,11 +81,11 @@ public class WorldManager : MonoBehaviour
     [ContextMenu("Refresh Game")]
     private void SetupWorld()
     {
-        if(MapData == null)
+        if (MapData == null)
         {
             EditorUtility.DisplayDialog(
                 "No map data",
-                "No map data has been given to the World Manager.", 
+                "No map data has been given to the World Manager.",
                 "Close"
                 );
         }
@@ -109,7 +93,7 @@ public class WorldManager : MonoBehaviour
         {
             gridManager.RefreshMap(MapData);
         }
-            
+
     }
 
     public static WorldManager GetInstance()

@@ -1,12 +1,11 @@
-using UnityEngine;
 using TurnTheTides;
-class UrbanTile : LandTile
+internal class UrbanTile: LandTile
 {
     private void Awake()
     {
         pollutionValue = 24000f;
     }
-    public UrbanTile(TerrainType terrain)
+    public UrbanTile()
     {
         pollutionValue = 24000f;
     }

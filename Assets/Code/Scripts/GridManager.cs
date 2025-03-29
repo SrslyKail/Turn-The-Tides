@@ -8,41 +8,56 @@ using UnityEngine;
 
 namespace TurnTheTides
 {
-
     /// <summary>
     /// Object to manage the state of the grid.
     /// Responsible for generating the map and tracking the bounds.
     /// Made by Corey Buchan
     /// </summary>
     [ExecuteAlways]
-    public class GridManager : MonoBehaviour
+    public class GridManager: MonoBehaviour
     {
         [SerializeField]
         private List<GameObject> prefabs;
-
-        readonly int[] adjacency = new int[3] { -1, 0, 1 };
-
         private List<List<GameObject>> tiles;
         private static GridManager _instance;
+        public static GridManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    GridManager found = GridManager.FindFirstObjectByType(typeof(GridManager), FindObjectsInactive.Include) as GridManager;
+
+                    if (found == null)
+                    {
+                        found = new();
+                    }
+
+                    _instance = found;
+                }
+
+                return _instance;
+            }
+        }
         private float floodIncrement;
+        private static readonly int[] adjacency = new int[3] { -1, 0, 1 };
 
         public static GridManager GetInstance()
         {
-            return _instance;
+            return Instance;
         }
 
-        void Awake()
+        private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (_instance != null && _instance != this)
+            if (Instance != null && Instance != this)
             {
                 if (Application.isEditor)
                 {
-                    DestroyImmediate(this.gameObject);
+                    DestroyImmediate(gameObject);
                 }
                 else
                 {
-                    Destroy(this.gameObject);
+                    Destroy(gameObject);
                 }
             }
         }
@@ -59,6 +74,7 @@ namespace TurnTheTides
             {
                 DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
             }
+
             floodIncrement = mapData.floodIncrement;
             tiles = new();
             //Make the map
@@ -82,7 +98,7 @@ namespace TurnTheTides
 
             float widthOffset;
             //Offset for hexagons to sit together in staggered rows
-            float heightOffset = (3f / 4f) * tileHeight;
+            float heightOffset = 3f / 4f * tileHeight;
             bool offset = false;
             Debug.Log($"Width: {tileWidth}, Height:{tileHeight}");
 
@@ -105,7 +121,7 @@ namespace TurnTheTides
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            x / 2 * tileWidth + widthOffset,
+                            (x / 2 * tileWidth) + widthOffset,
                             0,
                             y / 2 * heightOffset),
                         Quaternion.identity);
@@ -128,9 +144,10 @@ namespace TurnTheTides
 
                     //Set the name and parent.
                     newTile.name = $"{x / mapData.mapSizeOffset}, {y / mapData.mapSizeOffset}";
-                    newTile.transform.SetParent(this.gameObject.transform);
+                    newTile.transform.SetParent(gameObject.transform);
                     rowList.Add(newTile);
                 }
+
                 offset = !offset;
             }
         }
@@ -150,6 +167,7 @@ namespace TurnTheTides
                     return prefab;
                 }
             }
+
             throw new ArgumentException($"Could not find prefab for type {type}");
         }
 
@@ -160,18 +178,18 @@ namespace TurnTheTides
 
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.
-            List<GameObject> oceanTiles = this.transform
+            List<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; }).ToList();
 
             //Increment the elevation for each of the ocean tiles.
-            foreach(GameObject tile in oceanTiles)
+            foreach (GameObject tile in oceanTiles)
             {
                 tile.GetComponent<Ocean>().Elevation += floodIncrement;
             }
 
             Queue checkQueue = new(oceanTiles);
-            while(checkQueue.Count != 0)
+            while (checkQueue.Count != 0)
             {
                 GameObject oceanTile = checkQueue.Dequeue() as GameObject;
                 HexTile details = oceanTile.GetComponent<HexTile>();
@@ -202,7 +220,7 @@ namespace TurnTheTides
                                     freedPollution += 0;
                                     GameObject newTile = Instantiate(oceanTile);
 
-                                    newTile.transform.parent = this.gameObject.transform;
+                                    newTile.transform.parent = gameObject.transform;
                                     newTile.transform.position = new Vector3(
                                         toCheck.transform.position.x,
                                         oceanTile.transform.position.y,
@@ -232,6 +250,7 @@ namespace TurnTheTides
                     }
                 }
             }
+
             MergeWaterTiles();
             return freedPollution;
         }
@@ -240,10 +259,12 @@ namespace TurnTheTides
         {
             float newPollution = 0;
             List<HexTile> children = transform.GetComponentsInChildren<HexTile>().ToList();
-            foreach(HexTile tile in children)
+            foreach (HexTile tile in children)
             {
-                newPollution += Geopoint.PollutionMapping.GetValueOrDefault(tile.Terrain, 0); ;
+                newPollution += Geopoint.PollutionMapping.GetValueOrDefault(tile.Terrain, 0);
+                ;
             }
+
             return newPollution;
         }
 
@@ -251,13 +272,13 @@ namespace TurnTheTides
         {
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.
-            HashSet<GameObject> oceanTiles = this.transform
+            HashSet<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; })
                 .ToHashSet();
 
             List<List<GameObject>> oceanTrees = BFS_OceanTiles(oceanTiles);
-            foreach(List<GameObject> tree in oceanTrees)
+            foreach (List<GameObject> tree in oceanTrees)
             {
                 //Combine the meshes for all the found connected ocean tiles.
                 CombineMeshes(tree);
@@ -283,10 +304,11 @@ namespace TurnTheTides
                     if (!visited.Contains(obj) && oceanTiles.Contains(obj))
                     {
                         //Do a BFS to get all the adjacent tiles to this one
-                        trees.Add(BFS_OceanTiles_Helper(row, col, visited).ToList());                        
+                        trees.Add(BFS_OceanTiles_Helper(row, col, visited).ToList());
                     }
                 }
             }
+
             return trees;
         }
 
@@ -305,12 +327,12 @@ namespace TurnTheTides
                 new(startTile, new(row, col))
             );
 
-            while(queue.Count != 0)
+            while (queue.Count != 0)
             {
                 KeyValuePair<GameObject, Point> data = queue.Dequeue();
                 int start_row = data.Value.X;
                 int start_col = data.Value.Y;
-                
+
                 foreach (int adj_row in adjacency)
                 {
                     int check_row = adj_row + start_row;
@@ -340,8 +362,9 @@ namespace TurnTheTides
                             }
                         }
                     }
-                } 
+                }
             }
+
             return currVisited;
         }
         private void CombineMeshes(List<GameObject> toCombine)
@@ -349,7 +372,7 @@ namespace TurnTheTides
             //Convert the has to an array so we can index
             MeshFilter[] meshFilters = toCombine
                 .Where(tile => { return tile.activeInHierarchy; })
-                .Select(tile => { return tile.GetComponent<MeshFilter>();})
+                .Select(tile => { return tile.GetComponent<MeshFilter>(); })
                 .ToArray();
 
 

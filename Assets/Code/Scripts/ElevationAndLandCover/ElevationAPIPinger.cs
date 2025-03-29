@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.IO;
 
 public class ElevationPoint
 {
@@ -20,7 +20,7 @@ public class Geometry
 
 public class Program
 {
-    private static readonly HttpClient client = new HttpClient();
+    private static readonly HttpClient client = new();
 
     public static async Task Main(string[] args)
     {
@@ -32,14 +32,14 @@ public class Program
         int longitudeSteps = 168;
         int latitudeSteps = 60;
 
-        List<ElevationPoint[]> allRows = new List<ElevationPoint[]>();
+        List<ElevationPoint[]> allRows = new();
 
         double latitudeIncrement = (endLatitude - startLatitude) / (latitudeSteps + 1);
 
         for (int i = 0; i < latitudeSteps; i++)
         {
             double currentLongitude = startLongitude;
-            double currentLatitude = startLatitude + i * latitudeIncrement;
+            double currentLatitude = startLatitude + (i * latitudeIncrement);
 
             string path = $"LINESTRING({startLongitude} {currentLatitude}, {endLongitude} {currentLatitude})";
 

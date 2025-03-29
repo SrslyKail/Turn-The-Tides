@@ -3,20 +3,14 @@ namespace TurnTheTides
     /// <summary>
     /// Base class for all water tiles; rivers, lakes, and oceans.
     /// </summary>
-    class Water : HexTile
+    internal class Water: HexTile
     {
         private int _height;
 
         /// <summary>
         /// Tracks the difference between the bottom and top of the water tile.
         /// </summary>
-        public virtual int Height
-        {
-            get
-            {
-                return _height;
-            }
-        }
+        public virtual int Height => _height;
 
         public override TerrainType Terrain => TerrainType.Invalid;
 
