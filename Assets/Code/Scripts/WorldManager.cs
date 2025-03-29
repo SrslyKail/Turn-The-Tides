@@ -15,7 +15,7 @@ public class WorldManager: MonoBehaviour
 
     public MapData MapData
     {
-        get => data; private set => data = value;
+        get => data; set => data = value;
     }
     [SerializeField]
     private double _pollutionLevel;
@@ -24,9 +24,46 @@ public class WorldManager: MonoBehaviour
     [SerializeField]
     private MapData data;
 
+    public GridManager GridManager
+    {
+        get
+        {
+            if (gridManager == null)
+            {
+                CreateNewGridManager();
+            }
+
+            return gridManager;
+        }
+        private set
+        {
+            gridManager = value;
+        }
+    }
+
     private void Awake()
     {
+        SingletonCheck();
+
         DontDestroyOnLoad(gameObject);
+
+        if (gridManager == null)
+        {
+            CreateNewGridManager();
+        }
+
+        PollutionLevel = 0;
+    }
+
+    private void CreateNewGridManager()
+    {
+        GameObject gridManagerPrefab = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
+        PrefabUtility.InstantiatePrefab(gridManagerPrefab);
+        gridManager = gridManagerPrefab.GetComponent<GridManager>();
+    }
+
+    private void SingletonCheck()
+    {
         if (_instance == null)
         {
             _instance = this;
@@ -43,26 +80,6 @@ public class WorldManager: MonoBehaviour
                 Destroy(gameObject);
             }
         }
-
-        if (gridManager == null)
-        {
-            GameObject gridManagerObj = new("Grid Manager", typeof(GridManager));
-            gridManager = gridManagerObj.GetComponent<GridManager>();
-            Instantiate(gridManagerObj);
-        }
-        else if (gridManager != null && gridManager.gameObject != null)
-        {
-            if (Application.isEditor)
-            {
-                DestroyImmediate(gridManager.gameObject);
-            }
-            else
-            {
-                Destroy(gridManager.gameObject);
-            }
-        }
-
-        PollutionLevel = 0;
     }
 
     public void CreateNewLevel(
@@ -71,7 +88,8 @@ public class WorldManager: MonoBehaviour
         float flood_increment
     )
     {
-        data = new(levelData, mapSizeOffset, flood_increment);
+        MapData = new(levelData, mapSizeOffset, flood_increment);
+        SetupWorld();
     }
 
     /// <summary>
@@ -79,7 +97,7 @@ public class WorldManager: MonoBehaviour
     /// regenerating geoData if needed, and creating the hexgrid.
     /// </summary>
     [ContextMenu("Refresh Game")]
-    private void SetupWorld()
+    public void SetupWorld()
     {
         if (MapData == null)
         {
@@ -91,7 +109,7 @@ public class WorldManager: MonoBehaviour
         }
         else
         {
-            gridManager.BuildMap(MapData);
+            GridManager.BuildMap(MapData);
         }
 
     }

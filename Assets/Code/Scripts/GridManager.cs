@@ -26,11 +26,17 @@ namespace TurnTheTides
             {
                 if (_instance == null)
                 {
-                    GridManager found = GridManager.FindFirstObjectByType(typeof(GridManager), FindObjectsInactive.Include) as GridManager;
+
+                    GridManager found = FindFirstObjectByType(typeof(GridManager), FindObjectsInactive.Include) as GridManager;
 
                     if (found == null)
                     {
                         found = new();
+                    }
+
+                    if(found.enabled == false)
+                    {
+                        found.enabled = true;
                     }
 
                     _instance = found;
