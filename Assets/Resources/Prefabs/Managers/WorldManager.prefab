@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2677544134509117915}
   - component: {fileID: 3587284054275986376}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: WorldManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pollutionLevel: 22175970
   gridManager: {fileID: 0}
+  data: {fileID: 0}
