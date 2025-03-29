@@ -53,6 +53,10 @@ public class WorldManager: MonoBehaviour
         }
 
         PollutionLevel = 0;
+        if(MapData != null)
+        {
+            gridManager.BuildMap(MapData);
+        }
     }
 
     private void CreateNewGridManager()
