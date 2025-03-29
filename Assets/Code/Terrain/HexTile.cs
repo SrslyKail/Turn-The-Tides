@@ -76,14 +76,17 @@ namespace TurnTheTides
             return evaluated;
         }
 
-        private void Awake()
+        protected void Awake()
         {
             MeshCollider collider = GetComponent<MeshCollider>();
             if (collider.sharedMesh == null)
             {
                 collider.sharedMesh = GetComponent<MeshFilter>().mesh;
             }
+            SetPollution();
         }
+
+        protected abstract void SetPollution();
 
     }
 }

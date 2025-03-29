@@ -23,12 +23,7 @@ namespace TurnTheTides
             _height = newHeight;
         }
 
-        public Water()
-        {
-            pollutionValue = 0;
-        }
-
-        private void Awake()
+        protected override void SetPollution()
         {
             pollutionValue = 0;
         }

@@ -1,8 +1,7 @@
 using TurnTheTides;
 public class WetlandsTile: LandTile
 {
-
-    private void Awake()
+    protected override void SetPollution()
     {
         pollutionValue = -0.2f;
         storedPollution = 17.5f;

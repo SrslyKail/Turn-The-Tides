@@ -7,11 +7,6 @@
     public class Lake: Water
     {
         public override TerrainType Terrain => TerrainType.Lake;
-
-        private void Awake()
-        {
-            pollutionValue = 0;
-        }
     }
 
 }
