@@ -1,0 +1,68 @@
+[
+    {
+        "0": [
+            {
+                "latitude": 0,
+                "longitude": 0,
+                "landUseLabel": "Wetlands",
+                "elevation": 5.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 1,
+                "landUseLabel": "Urban",
+                "elevation": 25.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 2,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 50.0
+            }
+        ]
+    },
+    {
+        "1": [
+            {
+                "latitude": 1,
+                "longitude": 0,
+                "landUseLabel": "Fresh Water",
+                "elevation": 5.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 1,
+                "landUseLabel": "Old Forest",
+                "elevation": 10.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 2,
+                "landUseLabel": "Glaciers and Snow",
+                "elevation": 100.0
+            }
+        ]
+    },
+    {
+        "2": [
+            {
+                "latitude": 2,
+                "longitude": 0,
+                "landUseLabel": "Mining",
+                "elevation": 50.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 1,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 2,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 25.0
+            }
+        ]
+    }
+]

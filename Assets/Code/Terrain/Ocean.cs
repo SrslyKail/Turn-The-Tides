@@ -7,29 +7,39 @@ namespace TurnTheTides
     /// Class that will contain the logic for the "tides" in "turn the tides".
     /// Made by Corey Buchan.
     /// </summary>
-    class Ocean : Water
+    internal class Ocean: Water
     {
         public override TerrainType Terrain => TerrainType.Ocean;
 
-        public override int Elevation
+        public override float Elevation
         {
-            get { return _elevation; }
+            get => _elevation;
             set
             {
-                base._elevation = value + 1;
+                base._elevation = value;
 
                 double evaluated = ClampElevation(value);
 
-                Vector3 scaler = this.transform.localScale;
+                Vector3 scaler = transform.localScale;
                 if (value > 0)
                 {
-                    this.transform.localScale = new(
+                    transform.localScale = new(
                         scaler.x,
-                        (float)(evaluated) * height_scale_unit,
+                        (float)evaluated * height_scale_unit,
                         scaler.z);
                 }
 
             }
+        }
+
+        public Ocean()
+        {
+            pollutionValue = 0;
+        }
+
+        private void Awake()
+        {
+            pollutionValue = 0;
         }
     }
 }

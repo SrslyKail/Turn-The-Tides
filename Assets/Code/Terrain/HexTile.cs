@@ -1,8 +1,5 @@
 ﻿using System;
-using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.Rendering.Universal.Internal;
 
 namespace TurnTheTides
 {
@@ -13,29 +10,36 @@ namespace TurnTheTides
     /// Made by Corey Buchan.
     /// </summary>
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-    abstract class HexTile : MonoBehaviour
+    internal abstract class HexTile: MonoBehaviour
     {
         public static readonly float height_pos_unit = 0.1f;
         public static readonly float height_scale_unit = 1f;
         [SerializeField]
         private GameObject _dirtScaler;
         [SerializeField] // Allows us to see it in the editor.
-        protected int _elevation;
+        protected float _elevation;
+        [SerializeField]
+        private TerrainType _terrain;
+        //yearly pollution amount
+        protected float pollutionValue;
+        //When you destroy a tile, gain this
+        protected float storedPollution = 2;
 
-        public abstract TerrainType Terrain { get; }
+        public float PollutionValue { get; }
+        public float StoredPollution { get; }
+
+        public virtual TerrainType Terrain => _terrain;
         public double longitude;
         public double latitude;
         public string landUseLabel;
+        public int col_index;
+        public int row_index;
         public int x_index;
         public int y_index;
 
         public GameObject DirtScaler
-        { 
-            get { return _dirtScaler; }
-            private set
-            {
-                _dirtScaler = value;
-            } 
+        {
+            get => _dirtScaler; private set => _dirtScaler = value;
         }
 
         /// <summary>
@@ -44,16 +48,16 @@ namespace TurnTheTides
         /// For water tiles, we will implement a Height attribute to track
         /// the difference between the base elevation and the depth of the water.
         /// </summary>
-        public virtual int Elevation
+        public virtual float Elevation
         {
-            get { return _elevation; }
+            get => _elevation;
             set
             {
                 _elevation = value;
                 double evaluated = ClampElevation(value);
 
-                Vector3 curPos = this.transform.position;
-                this.transform.position = new(curPos.x, (float)(evaluated * height_pos_unit), curPos.z);
+                Vector3 curPos = transform.position;
+                transform.position = new(curPos.x, (float)(evaluated * height_pos_unit), curPos.z);
 
                 Vector3 dirtScale = DirtScaler.transform.localScale;
                 if (value > 0)
@@ -68,20 +72,7 @@ namespace TurnTheTides
         {
             double A = 0.8; //Overall exaggeration
             double N = 0.58; //exponential factor, increase to increase differences, higher effect at higher raw elevations
-            double evaluated;
-            if (elevation < 0)
-            {
-                evaluated = -1 * (Math.Pow(Math.Abs(elevation), N));
-            }
-            else if (elevation > 0)
-            {
-                evaluated = A * Math.Pow(elevation, N);
-            }
-            else
-            {
-                evaluated = elevation;
-            }
-
+            double evaluated = elevation < 0 ? -1 * Math.Pow(Math.Abs(elevation), N) : elevation > 0 ? A * Math.Pow(elevation, N) : elevation;
             return evaluated;
         }
 

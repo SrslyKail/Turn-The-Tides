@@ -3,52 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
 namespace TurnTheTides
 {
-
     /// <summary>
     /// Object to manage the state of the grid.
     /// Responsible for generating the map and tracking the bounds.
     /// Made by Corey Buchan
     /// </summary>
     [ExecuteAlways]
-    public class GridManager : MonoBehaviour
+    public class GridManager: MonoBehaviour
     {
         [SerializeField]
-        private TextAsset dataFile;
-        [SerializeField]
         private List<GameObject> prefabs;
-
-        private GeoGrid geoData; //For storing the JSON data
-
-        private int data_row_count; 
-        private int data_column_count; 
-        private int map_row_count; //target is 57
-        private int map_column_count; //target is 47
-        public readonly int map_size_offset = 2;
-
-        readonly int[] adjacency = new int[3] { -1, 0, 1 };
-
         private List<List<GameObject>> tiles;
-
-        // Start is called once before the first execution of Update
-        // after the MonoBehaviour is created
-        void Start()
+        private static GridManager _instance;
+        public static GridManager Instance
         {
-            Debug.LogWarning("Setting up map!");
-            RefreshMap();
+            get
+            {
+                if (_instance == null)
+                {
+                    GridManager found = GridManager.FindFirstObjectByType(typeof(GridManager), FindObjectsInactive.Include) as GridManager;
+
+                    if (found == null)
+                    {
+                        found = new();
+                    }
+
+                    _instance = found;
+                }
+
+                return _instance;
+            }
+        }
+        private float floodIncrement;
+        private static readonly int[] adjacency = new int[3] { -1, 0, 1 };
+
+        public static GridManager GetInstance()
+        {
+            return Instance;
         }
 
-        /// <summary>
-        /// Resets the logic for the map, destroying all child objects, 
-        /// regenerating geoData if needed, and creating the hexgrid.
-        /// </summary>
-        [ContextMenu("Refresh Map")]
-        private void RefreshMap()
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                if (Application.isEditor)
+                {
+                    DestroyImmediate(gameObject);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+
+        public void BuildMap(MapData mapData)
         {
             //Delete all the current children
             for (int i = gameObject.transform.childCount; i > 0; --i)
@@ -56,34 +70,17 @@ namespace TurnTheTides
                 DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
             }
 
-            //If we have no data, get data
-            if (geoData is null)
-            {
-                RefreshGeoData();
-            }
+            floodIncrement = mapData.floodIncrement;
             tiles = new();
             //Make the map
-            CreateHexTileGrid();
+            CreateHexTileGrid(mapData);
             MergeWaterTiles();
-        }
-
-        /// <summary>
-        /// Gets data from the JSON and updates the row/column counts.
-        /// </summary>
-        private void RefreshGeoData()
-        {
-            geoData = JSONParser.ParseFromString(dataFile.text);
-            data_row_count = geoData.data.Count;
-            data_column_count = geoData.data[0].Count;
-            Debug.Log($"Rows:{data_row_count}, columns:{data_column_count}");
-            map_row_count = data_row_count / map_size_offset;
-            map_column_count = data_column_count / map_size_offset - 1;
         }
 
         /// <summary>
         /// Using all gathered data, create the hexgrid.
         /// </summary>
-        private void CreateHexTileGrid()
+        private void CreateHexTileGrid(MapData mapData)
         {
             //All tiles should be the same size, so we can use 1 to set the defaults.
             Bounds tileBounds = prefabs[0]
@@ -96,32 +93,33 @@ namespace TurnTheTides
 
             float widthOffset;
             //Offset for hexagons to sit together in staggered rows
-            float heightOffset = (3f / 4f) * tileHeight;
+            float heightOffset = 3f / 4f * tileHeight;
             bool offset = false;
             Debug.Log($"Width: {tileWidth}, Height:{tileHeight}");
 
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
-            for (int y = 0; y < data_row_count; y += map_size_offset)
+            int mapSizeOffset = mapData.mapSizeOffset;
+            for (int y = 0; y < mapData.dataRowCount; y += mapSizeOffset)
             {
                 //See if we need to offset the tile
-                widthOffset = offset ? tileWidth / map_size_offset : 0;
+                widthOffset = offset ? tileWidth / 2 : 0;
                 List<GameObject> rowList = new();
                 tiles.Add(rowList);
 
                 //For each point in the row
                 //This is the x-coordinate
-                for (int x = 1; x < data_column_count - 1; x += map_size_offset)
+                for (int x = 0; x < mapData.dataColumnCount; x += mapSizeOffset)
                 {
 
                     //Get the data from [row][item]
-                    Geopoint pointData = geoData.data[y][x];
+                    Geopoint pointData = mapData.GeoData.data[y][x];
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            x / map_size_offset * tileWidth + widthOffset,
+                            (x / mapSizeOffset * tileWidth) + widthOffset,
                             0,
-                            y / map_size_offset * heightOffset),
+                            y / mapSizeOffset * heightOffset),
                         Quaternion.identity);
 
                     //Cleanup for terrain type. Ocean elevation should be 0.
@@ -141,10 +139,11 @@ namespace TurnTheTides
                     hexTile.y_index = y;
 
                     //Set the name and parent.
-                    newTile.name = $"{x / map_size_offset}, {y / map_size_offset}";
-                    newTile.transform.SetParent(this.gameObject.transform);
+                    newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
+                    newTile.transform.SetParent(gameObject.transform);
                     rowList.Add(newTile);
                 }
+
                 offset = !offset;
             }
         }
@@ -164,26 +163,28 @@ namespace TurnTheTides
                     return prefab;
                 }
             }
+
             throw new ArgumentException($"Could not find prefab for type {type}");
         }
 
-        [ContextMenu("Flood")]
-        public void Flood()
+        public float Flood()
         {
+            float freedPollution = 0f;
+
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.
-            List<GameObject> oceanTiles = this.transform
+            List<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; }).ToList();
 
             //Increment the elevation for each of the ocean tiles.
-            foreach(GameObject tile in oceanTiles)
+            foreach (GameObject tile in oceanTiles)
             {
-                tile.GetComponent<Ocean>().Elevation++;
+                tile.GetComponent<Ocean>().Elevation += floodIncrement;
             }
 
             Queue checkQueue = new(oceanTiles);
-            while(checkQueue.Count != 0)
+            while (checkQueue.Count != 0)
             {
                 GameObject oceanTile = checkQueue.Dequeue() as GameObject;
                 HexTile details = oceanTile.GetComponent<HexTile>();
@@ -198,8 +199,10 @@ namespace TurnTheTides
                         int check_col = adj_col + start_col;
 
                         //make sure we dont check off array
-                        if (check_row >= 0 && check_col >= 0
-                            && check_row < map_row_count && check_col < map_column_count)
+                        if (check_row >= 0
+                            && check_col >= 0
+                            && check_row < tiles.Count
+                            && check_col < tiles[0].Count)
                         {
                             try
                             {
@@ -209,9 +212,10 @@ namespace TurnTheTides
                                 if (!checkDetails.TryGetComponent<Ocean>(out _) &&
                                     checkDetails.Elevation < details.Elevation)
                                 {
+                                    freedPollution += 0;
                                     GameObject newTile = Instantiate(oceanTile);
 
-                                    newTile.transform.parent = this.gameObject.transform;
+                                    newTile.transform.parent = gameObject.transform;
                                     newTile.transform.position = new Vector3(
                                         toCheck.transform.position.x,
                                         oceanTile.transform.position.y,
@@ -241,25 +245,39 @@ namespace TurnTheTides
                     }
                 }
             }
+
             MergeWaterTiles();
+            return freedPollution;
+        }
+
+        public float CalculateNewPollution()
+        {
+            float newPollution = 0;
+            List<HexTile> children = transform.GetComponentsInChildren<HexTile>().ToList();
+            foreach (HexTile tile in children)
+            {
+                newPollution += Geopoint.PollutionMapping.GetValueOrDefault(tile.Terrain, 0);
+                ;
+            }
+
+            return newPollution;
         }
 
         public void MergeWaterTiles()
         {
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.
-            HashSet<GameObject> oceanTiles = this.transform
+            HashSet<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; })
                 .ToHashSet();
 
             List<List<GameObject>> oceanTrees = BFS_OceanTiles(oceanTiles);
-            foreach(List<GameObject> tree in oceanTrees)
+            foreach (List<GameObject> tree in oceanTrees)
             {
                 //Combine the meshes for all the found connected ocean tiles.
                 CombineMeshes(tree);
             }
-            
         }
 
         private List<List<GameObject>> BFS_OceanTiles(HashSet<GameObject> oceanTiles)
@@ -281,10 +299,11 @@ namespace TurnTheTides
                     if (!visited.Contains(obj) && oceanTiles.Contains(obj))
                     {
                         //Do a BFS to get all the adjacent tiles to this one
-                        trees.Add(BFS_OceanTiles_Helper(row, col, visited).ToList());                        
+                        trees.Add(BFS_OceanTiles_Helper(row, col, visited).ToList());
                     }
                 }
             }
+
             return trees;
         }
 
@@ -303,12 +322,12 @@ namespace TurnTheTides
                 new(startTile, new(row, col))
             );
 
-            while(queue.Count != 0)
+            while (queue.Count != 0)
             {
                 KeyValuePair<GameObject, Point> data = queue.Dequeue();
                 int start_row = data.Value.X;
                 int start_col = data.Value.Y;
-                
+
                 foreach (int adj_row in adjacency)
                 {
                     int check_row = adj_row + start_row;
@@ -318,7 +337,7 @@ namespace TurnTheTides
 
                         //make sure we dont check off array
                         if (check_row >= 0 && check_col >= 0
-                            && check_row < map_row_count && check_col < map_column_count)
+                            && check_row < tiles.Count && check_col < tiles[0].Count)
                         {
                             try
                             {
@@ -338,18 +357,17 @@ namespace TurnTheTides
                             }
                         }
                     }
-                } 
+                }
             }
+
             return currVisited;
         }
-
-
         private void CombineMeshes(List<GameObject> toCombine)
         {
             //Convert the has to an array so we can index
             MeshFilter[] meshFilters = toCombine
                 .Where(tile => { return tile.activeInHierarchy; })
-                .Select(tile => { return tile.GetComponent<MeshFilter>();})
+                .Select(tile => { return tile.GetComponent<MeshFilter>(); })
                 .ToArray();
 
 

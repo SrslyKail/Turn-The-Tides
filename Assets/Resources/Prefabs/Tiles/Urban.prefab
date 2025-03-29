@@ -72,8 +72,42 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 8812488633559952905, guid: 87cf9ae27f3638d4cb7a1516d0f62cdd, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 39262316477283475, guid: c0ba217a1a815314881f091b9321573f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7024510154330663064}
   m_SourcePrefab: {fileID: 100100000, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+--- !u!1 &936433230108474553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6369635916465404319, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+  m_PrefabInstance: {fileID: 6096641419982783782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1400747768203320260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5182494995460906722, guid: c0ba217a1a815314881f091b9321573f, type: 3}
+  m_PrefabInstance: {fileID: 6096641419982783782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7024510154330663064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400747768203320260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0089bd607584f4e8784bce80c26f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dirtScaler: {fileID: 936433230108474553}
+  _elevation: 0
+  longitude: 0
+  latitude: 0
+  landUseLabel: 
+  x_index: 0
+  y_index: 0
+  _terrain: 8
