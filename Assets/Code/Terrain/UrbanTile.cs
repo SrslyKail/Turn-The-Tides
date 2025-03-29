@@ -1,11 +1,7 @@
 using TurnTheTides;
 internal class UrbanTile: LandTile
 {
-    private void Awake()
-    {
-        pollutionValue = 24000f;
-    }
-    public UrbanTile()
+    protected override void SetPollution()
     {
         pollutionValue = 24000f;
     }

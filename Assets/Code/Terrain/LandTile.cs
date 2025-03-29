@@ -7,6 +7,9 @@
     /// </summary>
     internal class LandTile: HexTile
     {
-
+        protected override void SetPollution()
+        {
+            pollutionValue = 0;
+        }
     }
 }

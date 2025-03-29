@@ -7,16 +7,6 @@
     internal class River: Water
     {
         public override TerrainType Terrain => TerrainType.River;
-
-        public River()
-        {
-            pollutionValue = 0;
-        }
-
-        private void Awake()
-        {
-            pollutionValue = 0;
-        }
     }
 
 }

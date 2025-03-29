@@ -1,13 +1,7 @@
 using TurnTheTides;
 internal class WetlandsTile: LandTile
 {
-    public WetlandsTile()
-    {
-        pollutionValue = -0.2f;
-        storedPollution = 17.5f;
-    }
-
-    private void Awake()
+    protected override void SetPollution()
     {
         pollutionValue = -0.2f;
         storedPollution = 17.5f;

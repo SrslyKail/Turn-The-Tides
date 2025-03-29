@@ -6,16 +6,11 @@
     /// </summary>
     internal class ForestTile: LandTile
     {
-        public ForestTile()
+        protected override void SetPollution()
         {
             pollutionValue = -0.1f;
             storedPollution = 1.5f;
         }
 
-        private void Awake()
-        {
-            pollutionValue = -0.1f;
-            storedPollution = 1.5f;
-        }
     }
 }
