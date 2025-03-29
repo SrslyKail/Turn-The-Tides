@@ -62,12 +62,7 @@ namespace TurnTheTides
             }
         }
 
-        /// <summary>
-        /// Resets the logic for the map, destroying all child objects, 
-        /// regenerating geoData if needed, and creating the hexgrid.
-        /// </summary>
-        [ContextMenu("Refresh Map")]
-        public void RefreshMap(MapData mapData)
+        public void BuildMap(MapData mapData)
         {
             //Delete all the current children
             for (int i = gameObject.transform.childCount; i > 0; --i)
@@ -104,7 +99,8 @@ namespace TurnTheTides
 
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
-            for (int y = 0; y < mapData.dataRowCount; y += mapData.mapSizeOffset)
+            int mapSizeOffset = mapData.mapSizeOffset;
+            for (int y = 0; y < mapData.dataRowCount; y += mapSizeOffset)
             {
                 //See if we need to offset the tile
                 widthOffset = offset ? tileWidth / 2 : 0;
@@ -113,7 +109,7 @@ namespace TurnTheTides
 
                 //For each point in the row
                 //This is the x-coordinate
-                for (int x = 1; x < mapData.dataColumnCount; x += mapData.mapSizeOffset)
+                for (int x = 0; x < mapData.dataColumnCount; x += mapSizeOffset)
                 {
 
                     //Get the data from [row][item]
@@ -121,9 +117,9 @@ namespace TurnTheTides
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            (x / 2 * tileWidth) + widthOffset,
+                            (x / mapSizeOffset * tileWidth) + widthOffset,
                             0,
-                            y / 2 * heightOffset),
+                            y / mapSizeOffset * heightOffset),
                         Quaternion.identity);
 
                     //Cleanup for terrain type. Ocean elevation should be 0.
@@ -143,7 +139,7 @@ namespace TurnTheTides
                     hexTile.y_index = y;
 
                     //Set the name and parent.
-                    newTile.name = $"{x / mapData.mapSizeOffset}, {y / mapData.mapSizeOffset}";
+                    newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
                     newTile.transform.SetParent(gameObject.transform);
                     rowList.Add(newTile);
                 }
@@ -171,7 +167,6 @@ namespace TurnTheTides
             throw new ArgumentException($"Could not find prefab for type {type}");
         }
 
-        [ContextMenu("Flood")]
         public float Flood()
         {
             float freedPollution = 0f;

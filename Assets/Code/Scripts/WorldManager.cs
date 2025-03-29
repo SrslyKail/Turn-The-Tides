@@ -91,7 +91,7 @@ public class WorldManager: MonoBehaviour
         }
         else
         {
-            gridManager.RefreshMap(MapData);
+            gridManager.BuildMap(MapData);
         }
 
     }

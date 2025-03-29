@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42672f58c712ab4ea0dfd904f4ae80b, type: 3}
   m_Name: LowerMainland
   m_EditorClassIdentifier: 
-  _dataFile: {fileID: 4900000, guid: 9f50e97a56433a440b63a8daf2ae3c4d, type: 3}
+  _dataFile: {fileID: 4900000, guid: b85a120844ed2a9489197a89673d300b, type: 3}
   mapSizeOffset: 2
   dataRowCount: 111
   dataColumnCount: 293
   mapRowCount: 55
   mapColumnCount: 146
-  floodIncrement: 0
+  floodIncrement: 0.08

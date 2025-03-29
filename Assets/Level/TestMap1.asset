@@ -18,4 +18,4 @@ MonoBehaviour:
   dataColumnCount: 3
   mapRowCount: 3
   mapColumnCount: 3
-  floodIncrement: 0
+  floodIncrement: 0.08
