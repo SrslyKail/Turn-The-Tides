@@ -1,6 +1,7 @@
 using TurnTheTides;
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "MapData", menuName = "Scriptable Objects/Tides Map")]
 public class MapData: ScriptableObject
 {
@@ -31,10 +32,12 @@ public class MapData: ScriptableObject
     {
         _dataFile = dataFile;
         mapSizeOffset = map_size_offset;
+
         if (flood_increment <= 0)
         {
             flood_increment = 0.01f;
         }
+
         floodIncrement = flood_increment;
         ProcessDataFile();
     }
