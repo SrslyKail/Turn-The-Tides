@@ -1,11 +1,6 @@
 using TurnTheTides;
-internal class AgricultureTile: LandTile
-{
-    public AgricultureTile()
-    {
-        pollutionValue = 0.05f;
-    }
-
+public class AgricultureTile: LandTile
+{ 
     private void Awake()
     {
         pollutionValue = 0.05f;

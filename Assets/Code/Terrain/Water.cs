@@ -3,7 +3,7 @@ namespace TurnTheTides
     /// <summary>
     /// Base class for all water tiles; rivers, lakes, and oceans.
     /// </summary>
-    internal class Water: HexTile
+    public class Water: HexTile
     {
         private int _height;
 

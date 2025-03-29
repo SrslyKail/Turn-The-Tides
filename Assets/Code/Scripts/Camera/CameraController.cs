@@ -134,7 +134,7 @@ public class CameraController : MonoBehaviour
     {
         // raycast downwards from immediately above the marker
         RaycastHit hit;
-        Vector3 raycastOrigin = markerPosition + (Vector3.up);
+        Vector3 raycastOrigin = markerPosition + Vector3.up;
         Vector3 raycastDirection = Vector3.down;
         if (Physics.Raycast(raycastOrigin, raycastDirection, out hit))
         {

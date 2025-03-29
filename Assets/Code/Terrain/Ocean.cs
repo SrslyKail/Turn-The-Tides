@@ -7,7 +7,7 @@ namespace TurnTheTides
     /// Class that will contain the logic for the "tides" in "turn the tides".
     /// Made by Corey Buchan.
     /// </summary>
-    internal class Ocean: Water
+    public class Ocean: Water
     {
         public override TerrainType Terrain => TerrainType.Ocean;
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace TurnTheTides
 {
-    internal class Snow: LandTile
+    public class Snow: LandTile
     {
         private void Awake()
         {
