@@ -1,0 +1,68 @@
+[
+    {
+        "0": [
+            {
+                "latitude": 0,
+                "longitude": 0,
+                "landUseLabel": "Old Forest",
+                "elevation": 5.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 1,
+                "landUseLabel": "Old Forest",
+                "elevation": 25.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 2,
+                "landUseLabel": "Old Forest",
+                "elevation": 50.0
+            }
+        ]
+    },
+    {
+        "1": [
+            {
+                "latitude": 1,
+                "longitude": 0,
+                "landUseLabel": "Old Forest",
+                "elevation": 5.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 1,
+                "landUseLabel": "Old Forest",
+                "elevation": 10.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 2,
+                "landUseLabel": "Old Forest",
+                "elevation": 100.0
+            }
+        ]
+    },
+    {
+        "2": [
+            {
+                "latitude": 2,
+                "longitude": 0,
+                "landUseLabel": "Old Forest",
+                "elevation": 50.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 1,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 2,
+                "landUseLabel": "Old Forest",
+                "elevation": 25.0
+            }
+        ]
+    }
+]
