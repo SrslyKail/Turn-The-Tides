@@ -41,6 +41,11 @@ public class WaterLevelIndicator : MonoBehaviour
         return _currentSeaLevelMetres;
     }
 
+    public float GetSeaLevelIncrease()
+    {
+        return _seaLevelIncrease;
+    }
+
     private void Update()
     {
         _displayedSeaLevel = Mathf.Lerp(_displayedSeaLevel, _currentSeaLevel, MeterUpdateSpeed * Time.deltaTime);
