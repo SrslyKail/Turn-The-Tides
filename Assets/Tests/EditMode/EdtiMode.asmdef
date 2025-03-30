@@ -7,7 +7,9 @@
         "Scripts",
         "TTT.SO",
         "TTT.Managers",
-        "TTT.Terrain"
+        "TTT.Terrain",
+        "TTT.UI",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [
         "Editor"
