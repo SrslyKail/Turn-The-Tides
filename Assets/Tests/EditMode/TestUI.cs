@@ -1,5 +1,8 @@
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 public class TestUI
@@ -49,5 +52,59 @@ public class TestUI
         nextTurnButton.button = button;
         nextTurnButton.SetButtonEnabled(false);
         Assert.AreEqual(false, button.interactable);
+    }
+
+    /// <summary>
+    /// Tests that the next-turn button click event is invoked when called externally.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator TestNextTurnButtonOnButtonClicked()
+    {
+        GameObject uiContainer = new();
+        NextTurnButton nextTurnButton = uiContainer.AddComponent<NextTurnButton>();
+        Button button = uiContainer.AddComponent<Button>();
+        nextTurnButton.button = button;
+        nextTurnButton.OnButtonClicked = new UnityEvent();
+        nextTurnButton.OnButtonClicked.AddListener(() => { Assert.Pass(); });
+        nextTurnButton.OnClick();
+        yield return null;
+        Assert.Fail();
+    }
+
+
+    /// <summary>
+    /// Tests that the next-turn button click event is invoked when the button it's connected to gets pressed.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator TestNextTurnButtonOnClickEventGetsPassedThrough()
+    {
+        GameObject uiContainer = new();
+        NextTurnButton nextTurnButton = uiContainer.AddComponent<NextTurnButton>();
+        Button button = uiContainer.AddComponent<Button>();
+        nextTurnButton.button = button;
+        nextTurnButton.OnButtonClicked = new UnityEvent();
+        nextTurnButton.OnButtonClicked.AddListener(() => { Assert.Pass(); });
+        button.onClick.AddListener(() => { nextTurnButton.OnClick(); });
+        button.onClick.Invoke();
+        yield return null;
+        Assert.Fail();
+    }
+
+    /// <summary>
+    /// Tests that no event is invoked when the next-turn button is clicked while disabled.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator TestNextTurnButtonNoEventWhenDisabled()
+    {
+        GameObject uiContainer = new();
+        NextTurnButton nextTurnButton = uiContainer.AddComponent<NextTurnButton>();
+        Button button = uiContainer.AddComponent<Button>();
+        nextTurnButton.button = button;
+        nextTurnButton.OnButtonClicked = new UnityEvent();
+        nextTurnButton.OnButtonClicked.AddListener(() => { Assert.Fail(); });
+        nextTurnButton.SetButtonEnabled(false);
+        nextTurnButton.OnClick();
+        yield return null;
+        Assert.Pass();
     }
 }
