@@ -92,7 +92,8 @@ public class WorldManager: MonoBehaviour
         float flood_increment
     )
     {
-        MapData = new(levelData, mapSizeOffset, flood_increment);
+        MapData = ScriptableObject.CreateInstance<MapData>();
+        MapData.LoadData(levelData, mapSizeOffset, flood_increment);
         SetupWorld();
     }
 

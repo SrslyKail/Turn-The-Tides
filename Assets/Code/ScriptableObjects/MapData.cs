@@ -25,7 +25,7 @@ namespace TurnTheTides
             }
         }
 
-        public MapData(
+        public void LoadData(
             TextAsset dataFile,
             int map_size_offset,
             float flood_increment
