@@ -57,7 +57,7 @@ namespace TurnTheTides
         {
             if (Instance != null && Instance != this)
             {
-                if (Application.isEditor)
+                if (Application.isEditor && !Application.isPlaying)
                 {
                     DestroyImmediate(gameObject);
                 }
@@ -70,10 +70,12 @@ namespace TurnTheTides
 
         public void BuildMap(MapData mapData)
         {
+            Debug.Log("BuildMap Entered????");
             //Delete all the current children
             for (int i = gameObject.transform.childCount; i > 0; --i)
-            {
-                DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
+            { 
+                DestroyImmediate(gameObject.transform.GetChild(0).gameObject); //Change to destroy? No, Destroy really breaks the water levels.
+                Debug.Log("Clearing existing child");
             }
 
             floodIncrement = mapData.floodIncrement;
@@ -88,6 +90,7 @@ namespace TurnTheTides
         /// </summary>
         private void CreateHexTileGrid(MapData mapData)
         {
+            Debug.Log("Creating Hex Tile Grid");
             //All tiles should be the same size, so we can use 1 to set the defaults.
             Bounds tileBounds = prefabs[0]
                 .GetComponentInChildren<MeshRenderer>()
@@ -128,6 +131,8 @@ namespace TurnTheTides
                             y / mapSizeOffset * heightOffset),
                         Quaternion.identity);
 
+                    
+
                     //Cleanup for terrain type. Ocean elevation should be 0.
                     double dataElevation = pointData
                         .TerrainType.Equals(TerrainType.Ocean)
@@ -146,7 +151,14 @@ namespace TurnTheTides
 
                     //Set the name and parent.
                     newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
-                    newTile.transform.SetParent(gameObject.transform);
+                    Debug.Log("Tranform.setParent is angy");
+                    Debug.Log("newTile: " + newTile);
+                    Debug.Log("newTile parent before: " + newTile.transform.parent);
+                    Debug.Log("newTile.transform before: " + newTile.transform);
+                    Debug.Log("gameobject.transform: " + gameObject.transform);
+                    GridManager gridManager = GridManager.GetInstance();
+                    newTile.transform.SetParent(gridManager.transform);
+                    Debug.Log("Prefab parent after setting: " + newTile.transform.parent);
                     rowList.Add(newTile);
                 }
 

@@ -41,6 +41,8 @@ public class WorldManager: MonoBehaviour
         }
     }
 
+
+
     private void Awake()
     {
         SingletonCheck();
@@ -53,7 +55,7 @@ public class WorldManager: MonoBehaviour
         }
 
         PollutionLevel = 0;
-        if(MapData != null)
+        if (MapData != null)
         {
             gridManager.BuildMap(MapData);
         }
@@ -62,8 +64,12 @@ public class WorldManager: MonoBehaviour
     private void CreateNewGridManager()
     {
         GameObject gridManagerPrefab = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
-        PrefabUtility.InstantiatePrefab(gridManagerPrefab);
+        Debug.Log("Instantiating the grid manager is angy");
+        //PrefabUtility.InstantiatePrefab(gridManagerPrefab); //This line is causing two errors: Dereferencing NULL PPtr! and Prefab was destroyed during instantiation. Are you calling DestroyImmediate() on the root GameObject?
+        GameObject instantiatedGridManager = Instantiate(gridManagerPrefab);
         gridManager = gridManagerPrefab.GetComponent<GridManager>();
+
+        Debug.Log("Destroying happens before this?");
     }
 
     private void SingletonCheck()
@@ -92,9 +98,13 @@ public class WorldManager: MonoBehaviour
         float flood_increment
     )
     {
+        Debug.Log("CreateNewLevel Script entered");
         MapData = ScriptableObject.CreateInstance<MapData>();
+        Debug.Log("MapData created");
         MapData.LoadData(levelData, mapSizeOffset, flood_increment);
+        Debug.Log("MapData loaded");
         SetupWorld();
+        Debug.Log("World Set Up");
     }
 
     /// <summary>
@@ -104,8 +114,10 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Refresh Game")]
     public void SetupWorld()
     {
+        Debug.Log("SetupWorld Entered");
         if (MapData == null)
         {
+            Debug.Log("MapData was null");
             EditorUtility.DisplayDialog(
                 "No map data",
                 "No map data has been given to the World Manager.",
@@ -114,7 +126,10 @@ public class WorldManager: MonoBehaviour
         }
         else
         {
+            Debug.Log("MapData was not null");
             GridManager.BuildMap(MapData);
+            Debug.Log("This is unreachable?");
+
         }
 
     }

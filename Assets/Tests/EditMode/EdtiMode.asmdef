@@ -4,7 +4,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scripts"
+        "Scripts",
+        "TTT.SO",
+        "TTT.Managers",
+        "TTT.Terrain"
     ],
     "includePlatforms": [
         "Editor"
