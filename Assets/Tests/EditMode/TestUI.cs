@@ -107,4 +107,53 @@ public class TestUI
         yield return null;
         Assert.Pass();
     }
+
+    /// <summary>
+    /// Tests that the water level indicator can have its sea-level set to a certain value.
+    /// 
+    /// NOTE: This does not test the actual UI element, but rather the internal logic of the WaterLevelIndicator.
+    /// </summary>
+    [Test]
+    public void TestWaterLevelIndicatorSetSeaLevel()
+    {
+        GameObject uiContainer = new();
+        WaterLevelIndicator waterLevelIndicator = uiContainer.AddComponent<WaterLevelIndicator>();
+        Slider slider = uiContainer.AddComponent<Slider>();
+        waterLevelIndicator.slider = slider;
+        GameObject waterLevelLabelObject = new GameObject();
+        Text waterLevelLabel = waterLevelLabelObject.AddComponent<Text>();
+        GameObject waterLevelIncreaseLabelObject = new GameObject();
+        Text waterLevelIncreaseLabel = waterLevelIncreaseLabelObject.AddComponent<Text>();
+        waterLevelIndicator.waterLevelLabel = waterLevelLabel;
+        waterLevelIndicator.waterLevelIncreaseLabel = waterLevelIncreaseLabel;
+        waterLevelIndicator.SetSeaLevel(0, 100, 50);
+
+        Assert.AreEqual(0.5f, waterLevelIndicator.GetSeaLevel());
+        Assert.AreEqual(50, waterLevelIndicator.GetSeaLevelInMetres());
+    }
+
+    /// <summary>
+    /// Tests that the water level indicator can return the current sea level increase.
+    /// 
+    /// Also tests that the water level increase label is set correctly.
+    /// </summary>
+    [Test]
+    public void TestWaterLevelIndicatorSetSeaLevelIncrease()
+    {
+        GameObject uiContainer = new();
+        WaterLevelIndicator waterLevelIndicator = uiContainer.AddComponent<WaterLevelIndicator>();
+        Slider slider = uiContainer.AddComponent<Slider>();
+        waterLevelIndicator.slider = slider;
+        GameObject waterLevelLabelObject = new GameObject();
+        Text waterLevelLabel = waterLevelLabelObject.AddComponent<Text>();
+        GameObject waterLevelIncreaseLabelObject = new GameObject();
+        Text waterLevelIncreaseLabel = waterLevelIncreaseLabelObject.AddComponent<Text>();
+        waterLevelIndicator.waterLevelLabel = waterLevelLabel;
+        waterLevelIndicator.waterLevelIncreaseLabel = waterLevelIncreaseLabel;
+
+        waterLevelIndicator.SetSeaLevelIncrease(0.5f);
+
+        Assert.AreEqual(0.5f, waterLevelIndicator.GetSeaLevelIncrease());
+        Assert.AreEqual("+0.5m", waterLevelIncreaseLabel.text);
+    }
 }
