@@ -11,7 +11,7 @@ public class WorldManager: MonoBehaviour
     private double _pollutionLevel;
     public double PollutionLevel
     {
-        get => _pollutionLevel; private set => _pollutionLevel = value;
+        get => _pollutionLevel; set => _pollutionLevel = value;
     }
     public readonly double PollutionMax = double.MaxValue;
 
@@ -58,6 +58,11 @@ public class WorldManager: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Creates a new GridManager and gets a reference to it.
+    /// TODO CB: This should be removed; the GridManager should be responsible for creating itself with a static function if it needs to.
+    ///         I also realize this is my own function. I'll handle refactoring this.
+    /// </summary>
     private void CreateNewGridManager()
     {
         GameObject gridManagerPrefab = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
@@ -66,11 +71,22 @@ public class WorldManager: MonoBehaviour
         gridManager = instantiatedGridManager.GetComponent<GridManager>();
     }
 
+    /// <summary>
+    /// Get a specific tile from the current hex grid.
+    /// </summary>
+    /// <param name="row">The 'y' coordinate of the tile you want to access.</param>
+    /// <param name="col">The 'x' coordinate of the tile you want to access.</param>
+    /// <returns>A GameObject encapsulating all the hextile information.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">If either Row or Col are too low or high.</exception>
     public GameObject GetTile(int row, int col)
     {
         return gridManager.GetTile(row, col);
     }
 
+    /// <summary>
+    /// Helper function to setup the Singleton logic for this class.
+    /// Should be called during Awake.
+    /// </summary>
     private void SingletonCheck()
     {
         if (_instance == null)
@@ -84,6 +100,12 @@ public class WorldManager: MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Create a new level to play on.
+    /// </summary>
+    /// <param name="levelData">a JSON containing the data for the hexgrid.</param>
+    /// <param name="mapSizeOffset">A scaler for the total map size. Effectively only uses every n tiles in each row and column.</param>
+    /// <param name="flood_increment">The base amount you want the waters to rise by each flood action.</param>
     public void CreateNewLevel(
         TextAsset levelData,
         int mapSizeOffset,
@@ -96,8 +118,7 @@ public class WorldManager: MonoBehaviour
     }
 
     /// <summary>
-    /// Resets the logic for the map, destroying all child objects, 
-    /// regenerating geoData if needed, and creating the hexgrid.
+    /// Resets the runtime variables for the currently loaded level and resets the map to its default state.
     /// </summary>
     [ContextMenu("Refresh Game")]
     public void SetupWorld()
@@ -117,22 +138,17 @@ public class WorldManager: MonoBehaviour
         }
     }
 
-    public void IncreasePollution(double amount)
-    {
-        PollutionLevel += amount;
-    }
-
-    public void DecreasePollution(double amount)
-    {
-        PollutionLevel -= amount;
-    }
-
+    /// <summary>
+    /// Enact all logic needed to go to the next turn.
+    /// Should flood the map if the pollution has passed the threshold,
+    /// track new pollution freed by any potential tile destruction, and 
+    /// then add new pollution from the existing tiles.
+    /// </summary>
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
-        //double newPollution = gridManager.Flood(floodIncrement);
         double newPollution = gridManager.Flood();
-        newPollution += gridManager.CalculateNewPollution();
+        newPollution += gridManager.CalculatePollutionPerTurn();
         PollutionLevel += newPollution;
         Debug.Log($"New pollution: {PollutionLevel}");
     }

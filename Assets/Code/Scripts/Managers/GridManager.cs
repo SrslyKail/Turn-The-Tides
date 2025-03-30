@@ -1,3 +1,4 @@
+using Codice.CM.Client.Differences;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,11 @@ namespace TurnTheTides
     /// <summary>
     /// Object to manage the state of the grid.
     /// Responsible for generating the map and tracking the bounds.
+    /// 
+    /// GridManager should be a singleton, so do not instanciate it directly.
+    /// All interactions with the GridManager should go through the WorldManager.
+    /// If you need data that isn't available via the WorldManager, let Corey know to add it.
+    /// 
     /// Made by Corey Buchan
     /// </summary>
     [ExecuteAlways]
@@ -20,13 +26,16 @@ namespace TurnTheTides
         private List<GameObject> prefabs;
         private List<List<GameObject>> tiles;
         private static GridManager _instance;
+        /// <summary>
+        /// Get the current instance of the GridManager. 
+        /// Will create one if one does not exist.
+        /// </summary>
         public static GridManager Instance
         {
             get
             {
                 if (_instance == null)
                 {
-
                     GridManager found = FindFirstObjectByType(typeof(GridManager), FindObjectsInactive.Include) as GridManager;
 
                     if (found == null)
@@ -47,46 +56,56 @@ namespace TurnTheTides
             }
         }
         
+        // CB: TODO Remove this. The WorldManager should be telling the GridManager how much to flood by so we
+        //      can use pollution calculations in the future.
         private float floodIncrement;
         private static readonly int[] adjacency = new int[3] { -1, 0, 1 };
 
-
+        /// <summary>
+        /// Think of "Awake" and "Start" as creating a new object.
+        /// But monobehaviors shouldn't be created with 'new' so we can use this in its place.
+        /// </summary>
         private void Start()
         {
             if (Instance != null && Instance != this)
             {
                 Helper.SmartDestroy(gameObject);
-                //if (Application.isEditor && !Application.isPlaying)
-                //{
-                //    DestroyImmediate(gameObject);
-                //}
-                //else
-                //{
-                //    Destroy(gameObject);
-                //}
             }
         }
 
+        /// <summary>
+        /// Get a specific tile from the current hex grid.
+        /// </summary>
+        /// <param name="row">The 'y' coordinate of the tile you want to access.</param>
+        /// <param name="col">The 'x' coordinate of the tile you want to access.</param>
+        /// <returns>A GameObject encapsulating all the hextile information.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If either Row or Col are too low or high.</exception>
         public GameObject GetTile(int row, int col)
         {
-            if (row >= tiles.Count)
+            if (row < 0 || row >= tiles.Count)
             {
                 throw new ArgumentOutOfRangeException($"{row} is out of range {tiles.Count}");
             }
-            else if (col >= tiles[row].Count)
+            else if (col < 0 || col >= tiles[row].Count)
             {
                 throw new ArgumentOutOfRangeException($"{col} is out of range {tiles[row].Count}");
             }
+
             return tiles[row][col];
         }
 
+        /// <summary>
+        /// Builds the map using the given mapData.
+        /// Also resets any specific runtime variables,
+        /// destroys all existing tiles, and creates new water meshes.
+        /// </summary>
+        /// <param name="mapData">The data to build the map from.</param>
         public void BuildMap(MapData mapData)
         {
             //Delete all the current children
             for (int i = transform.childCount; i > 0; --i)
             {
                 Helper.SmartDestroy(transform.GetChild(0).gameObject);
-                //DestroyImmediate(); //Change to destroy? No, Destroy really breaks the water levels.
                 Debug.Log("Clearing existing child");
             }
 
@@ -98,8 +117,9 @@ namespace TurnTheTides
         }
 
         /// <summary>
-        /// Using all gathered data, create the hexgrid.
+        /// Creates the map to play the game on using the passed in map data.
         /// </summary>
+        /// <param name="mapData">A MapData object that stores the data required to make the grid.</param>
         private void CreateHexTileGrid(MapData mapData)
         {
             Debug.Log("Creating Hex Tile Grid");
@@ -116,7 +136,6 @@ namespace TurnTheTides
             //Offset for hexagons to sit together in staggered rows
             float heightOffset = 3f / 4f * tileHeight;
             bool offset = false;
-            Debug.Log($"Width: {tileWidth}, Height:{tileHeight}");
 
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
@@ -145,7 +164,7 @@ namespace TurnTheTides
 
                     
 
-                    //Cleanup for terrain type. Ocean elevation should be 0.
+                    //Cleanup for terrain type. Ocean elevation should be 0 to start.
                     double dataElevation = pointData
                         .TerrainType.Equals(TerrainType.Ocean)
                         ? 0d
@@ -196,6 +215,10 @@ namespace TurnTheTides
             throw new ArgumentException($"Could not find prefab for type {type}");
         }
 
+        /// <summary>
+        /// Flood the world.
+        /// </summary>
+        /// <returns>The amount of pollution freed by destroying tiles during the flood.</returns>
         public float Flood()
         {
             float freedPollution = 0f;
@@ -204,14 +227,12 @@ namespace TurnTheTides
             // Use a set to ensure it doesnt contain duplicates.
             List<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
-                .Select(ocean => { return ocean.gameObject; }).ToList();
+                .Select(ocean => { return ocean.gameObject; })
+                .ToList();
 
             //Increment the elevation for each of the ocean tiles.
-            foreach (GameObject tile in oceanTiles)
-            {
-                tile.GetComponent<Ocean>().Elevation += floodIncrement;
-            }
-
+            oceanTiles.ForEach(tile => tile.GetComponent<Ocean>().Elevation += floodIncrement);
+            
             Queue checkQueue = new(oceanTiles);
             while (checkQueue.Count != 0)
             {
@@ -241,6 +262,7 @@ namespace TurnTheTides
                                 if (!checkDetails.TryGetComponent<Ocean>(out _) &&
                                     checkDetails.Elevation < details.Elevation)
                                 {
+                                    // TODO CB: Make the tile release its stored pollution.
                                     freedPollution += 0;
                                     GameObject newTile = Instantiate(oceanTile);
 
@@ -279,19 +301,26 @@ namespace TurnTheTides
             return freedPollution;
         }
 
-        public float CalculateNewPollution()
+        /// <summary>
+        /// Calculates how much pollution the current map will create each turn.
+        /// </summary>
+        /// <returns></returns>
+        public float CalculatePollutionPerTurn()
         {
-            float newPollution = 0;
-            List<HexTile> children = transform.GetComponentsInChildren<HexTile>().ToList();
-            foreach (HexTile tile in children)
-            {
-                newPollution += Geopoint.PollutionMapping.GetValueOrDefault(tile.Terrain, 0);
-                ;
-            }
+            return transform.GetComponentsInChildren<HexTile>()
+                .Sum(tile => Geopoint.PollutionMapping.GetValueOrDefault(tile.Terrain, 0));
 
-            return newPollution;
         }
 
+        /// <summary>
+        /// "Merge" all the water tiles that are connected on the map.
+        /// 
+        /// Does a BFS on all the ocean tiles in the map to find the ones
+        /// that are adjacent, deactivates all but one, and merges their meshes.
+        /// 
+        /// This enables us us, in the future, use a single mesh deformation or 
+        /// texture for the water.
+        /// </summary>
         public void MergeWaterTiles()
         {
             // Get all the ocean tiles.
@@ -305,10 +334,17 @@ namespace TurnTheTides
             foreach (List<GameObject> tree in oceanTrees)
             {
                 //Combine the meshes for all the found connected ocean tiles.
-                CombineMeshes(tree);
+                CombineOceanMeshes(tree);
             }
         }
 
+        //CB: TODO - Make this a generic function so we can do BFS on other tile types.
+
+        /// <summary>
+        /// Run a BFS on the ocean tiles to create lists of adjacent ocean tiles.
+        /// </summary>
+        /// <param name="oceanTiles">A Set of all ocean tiles to search over.</param>
+        /// <returns>A list of lists representing the adjacent ocean tiles.</returns>
         private List<List<GameObject>> BFS_OceanTiles(HashSet<GameObject> oceanTiles)
         {
             //A Hash set that contains all the "visited" water files.
@@ -336,6 +372,15 @@ namespace TurnTheTides
             return trees;
         }
 
+        // CB: TODO - Make this take a gameobject as the starting tile rather than an row/col.
+
+        /// <summary>
+        /// A helper function for the BFS function. Generates a single "tree" from the map.
+        /// </summary>
+        /// <param name="row">The y index of the starting tile.</param>
+        /// <param name="col">the x index of the starting tile.</param>
+        /// <param name="oldVisited"></param>
+        /// <returns></returns>
         private HashSet<GameObject> BFS_OceanTiles_Helper(int row, int col, HashSet<GameObject> oldVisited)
         {
             GameObject startTile = tiles[row][col];
@@ -391,7 +436,12 @@ namespace TurnTheTides
 
             return currVisited;
         }
-        private void CombineMeshes(List<GameObject> toCombine)
+
+        /// <summary>
+        /// Combines the meshes of the passed in ocean tiles.
+        /// </summary>
+        /// <param name="toCombine">A list of ocean tiles to combine.</param>
+        private void CombineOceanMeshes(List<GameObject> toCombine)
         {
             //Convert the has to an array so we can index
             MeshFilter[] meshFilters = toCombine
@@ -423,11 +473,17 @@ namespace TurnTheTides
 
             //Reactivate the parent.
             oceanParent.SetActive(true);
+            //re-deactivate the scaler.
             oceanParent.GetComponent<HexTile>().DirtScaler.SetActive(false);
+            //Update the mesh and collider.
             oceanParent.GetComponent<MeshFilter>().mesh = mesh;
+            oceanParent.GetComponent<MeshCollider>().sharedMesh = mesh;
+            //Update the scale
             oceanParent.transform.localScale += new Vector3(0, HexTile.height_scale_unit, 0);
-            Material mat = Resources.Load("WaterMaterial") as Material;
-            oceanParent.GetComponent<MeshRenderer>().material = mat;
+
+            //CB: Loading the resource every time we run this function is probably a massive waste, but it works for now.
+            oceanParent.GetComponent<MeshRenderer>().material = Resources.Load("WaterMaterial") as Material;
+            
         }
     }
 }
