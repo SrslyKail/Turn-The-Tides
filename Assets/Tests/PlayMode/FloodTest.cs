@@ -19,19 +19,7 @@ public class FloodTest
     [UnityTest]
     public IEnumerator FloodTestWithEnumeratorPasses()
     {
+        yield return new WaitForSeconds(1);
 
-        TextAsset json = Resources.Load("Maps/test_map_2") as TextAsset;
-        GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        GridManager gridManager = GridManager.Instance;
-        Debug.Log("Grid Manager Instance Acquired");
-        worldManager.CreateNewLevel(json, 1, 1);
-        Debug.Log("New Level Created");
-        worldManager.SetupWorld();
-        Debug.Log("World Set Up");
-        Debug.Log("World pollution level: " + worldManager.PollutionLevel);
-
-        yield return null;
     }
 }

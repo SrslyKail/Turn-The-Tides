@@ -45,7 +45,7 @@ public class WorldManager: MonoBehaviour
     {
         SingletonCheck();
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         if (gridManager == null)
         {
@@ -66,7 +66,7 @@ public class WorldManager: MonoBehaviour
     private void CreateNewGridManager()
     {
         GameObject gridManagerPrefab = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
-        //PrefabUtility.InstantiatePrefab(gridManagerPrefab); //This line is causing two errors: Dereferencing NULL PPtr! and Prefab was destroyed during instantiation. Are you calling DestroyImmediate() on the root GameObject?
+        PrefabUtility.InstantiatePrefab(gridManagerPrefab); //This line is causing two errors: Dereferencing NULL PPtr! and Prefab was destroyed during instantiation. Are you calling DestroyImmediate() on the root GameObject?
         GameObject instantiatedGridManager = Instantiate(gridManagerPrefab);
         gridManager = instantiatedGridManager.GetComponent<GridManager>();
     }
