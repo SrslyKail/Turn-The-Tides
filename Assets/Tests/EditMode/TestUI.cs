@@ -13,7 +13,7 @@ public class TestUI
     public void TestPollutionMeterSetProgress()
     {
         GameObject uiContainer = new();
-        PollutionMeter pollutionMeter = new();
+        PollutionMeter pollutionMeter = uiContainer.AddComponent<PollutionMeter>();
         Slider pollutionMeterSlider = uiContainer.AddComponent<Slider>();
         pollutionMeter.ProgressSlider = pollutionMeterSlider;
         pollutionMeter.SetProgress(0.5f);
@@ -28,7 +28,7 @@ public class TestUI
     public void TestPollutionMeterGetProgress()
     {
         GameObject uiContainer = new();
-        PollutionMeter pollutionMeter = new();
+        PollutionMeter pollutionMeter = uiContainer.AddComponent<PollutionMeter>();
         Slider pollutionMeterSlider = uiContainer.AddComponent<Slider>();
         pollutionMeter.ProgressSlider = pollutionMeterSlider;
 
@@ -36,4 +36,18 @@ public class TestUI
         Assert.AreEqual(0.69f, pollutionMeter.GetProgress());
     }
 
+
+    /// <summary>
+    /// Tests that the next-turn button can be disabled.
+    /// </summary>
+    [Test]
+    public void TestNextTurnButtonDisabled()
+    {
+        GameObject uiContainer = new();
+        NextTurnButton nextTurnButton = uiContainer.AddComponent<NextTurnButton>();
+        Button button = uiContainer.AddComponent<Button>();
+        nextTurnButton.button = button;
+        nextTurnButton.SetButtonEnabled(false);
+        Assert.AreEqual(false, button.interactable);
+    }
 }
