@@ -1,25 +1,39 @@
 using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class TestUI
 {
+
+
     /// <summary>
-    /// Test that the pollution meter can be set to a specific value and that the value is stored correctly
-    /// Important because this is what the user sees to know how much pollution they have
+    /// Tests that the pollution meter can set its internal slider to a given value.
     /// </summary>
-    [TestCase]
+    [Test]
     public void TestPollutionMeterSetProgress()
     {
+        GameObject uiContainer = new();
+        PollutionMeter pollutionMeter = new();
+        Slider pollutionMeterSlider = uiContainer.AddComponent<Slider>();
+        pollutionMeter.ProgressSlider = pollutionMeterSlider;
+        pollutionMeter.SetProgress(0.5f);
+        Assert.AreEqual(0.5f, pollutionMeterSlider.value);
         //The progress slider should be set to the expected value
     }
 
     /// <summary>
-    /// Test that the pollution meter can return the current value
-    /// Important because the user sees this value to know how much pollution they have
+    /// Tests that the pollution meter can return the current value of its internal slider.
     /// </summary>
-    [TestCase]
+    [Test]
     public void TestPollutionMeterGetProgress()
     {
-        //The progress slider should return the expected value
+        GameObject uiContainer = new();
+        PollutionMeter pollutionMeter = new();
+        Slider pollutionMeterSlider = uiContainer.AddComponent<Slider>();
+        pollutionMeter.ProgressSlider = pollutionMeterSlider;
+
+        pollutionMeterSlider.value = 0.69f;
+        Assert.AreEqual(0.69f, pollutionMeter.GetProgress());
     }
 
 }
