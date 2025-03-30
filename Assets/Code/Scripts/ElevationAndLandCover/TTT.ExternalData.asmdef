@@ -1,0 +1,16 @@
+{
+    "name": "TTT.ExternalData",
+    "rootNamespace": "",
+    "references": [
+        "GUID:632d8110d26af9e4ea1c213ccc5148e2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

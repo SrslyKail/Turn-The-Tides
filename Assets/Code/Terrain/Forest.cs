@@ -4,7 +4,7 @@
     /// Tile to track features unique to a Forest.
     /// Made by Corey Buchan
     /// </summary>
-    internal class ForestTile: LandTile
+    public class ForestTile: LandTile
     {
         protected override void SetPollution()
         {

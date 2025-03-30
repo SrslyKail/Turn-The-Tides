@@ -10,7 +10,7 @@ namespace TurnTheTides
     /// Made by Corey Buchan.
     /// </summary>
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-    internal abstract class HexTile: MonoBehaviour
+    public abstract class HexTile: MonoBehaviour
     {
         public static readonly float height_pos_unit = 0.1f;
         public static readonly float height_scale_unit = 1f;

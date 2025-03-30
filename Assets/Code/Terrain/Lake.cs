@@ -4,7 +4,7 @@
     /// Represents an inland body of fresh water.
     /// Made by Corey Buchan.
     /// </summary>
-    internal class Lake: Water
+    public class Lake: Water
     {
         public override TerrainType Terrain => TerrainType.Lake;
     }

@@ -5,7 +5,7 @@
     /// Allows us to store all land terrain in the same collections.
     /// Made by Corey Buchan.
     /// </summary>
-    internal class LandTile: HexTile
+    public class LandTile: HexTile
     {
         protected override void SetPollution()
         {
