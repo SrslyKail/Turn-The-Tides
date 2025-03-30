@@ -31,6 +31,16 @@ public class WaterLevelIndicator : MonoBehaviour
         waterLevelIncreaseLabel.gameObject.SetActive(_seaLevelIncrease > 0f);
     }
 
+    public float GetSeaLevel()
+    {
+        return _currentSeaLevel;
+    }
+
+    public float GetSeaLevelInMetres()
+    {
+        return _currentSeaLevelMetres;
+    }
+
     private void Update()
     {
         _displayedSeaLevel = Mathf.Lerp(_displayedSeaLevel, _currentSeaLevel, MeterUpdateSpeed * Time.deltaTime);
