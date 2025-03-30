@@ -1,3 +1,4 @@
+using System;
 using TurnTheTides;
 using UnityEditor;
 using UnityEngine;
@@ -70,6 +71,11 @@ public class WorldManager: MonoBehaviour
         gridManager = gridManagerPrefab.GetComponent<GridManager>();
 
         Debug.Log("Destroying happens before this?");
+    }
+
+    public GameObject GetTile(int row, int col)
+    {
+        return gridManager.GetTile(row, col);
     }
 
     private void SingletonCheck()

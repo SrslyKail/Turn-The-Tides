@@ -45,13 +45,10 @@ namespace TurnTheTides
                 return _instance;
             }
         }
+        
         private float floodIncrement;
         private static readonly int[] adjacency = new int[3] { -1, 0, 1 };
 
-        public static GridManager GetInstance()
-        {
-            return Instance;
-        }
 
         private void Awake()
         {
@@ -66,6 +63,19 @@ namespace TurnTheTides
                     Destroy(gameObject);
                 }
             }
+        }
+
+        public GameObject GetTile(int row, int col)
+        {
+            if(row >= tiles.Count)
+            {
+                throw new ArgumentOutOfRangeException($"{row} is out of range {tiles.Count}");
+            }
+            else if (col >= tiles[row].Count)
+            {
+                throw new ArgumentOutOfRangeException($"{col} is out of range {tiles[row].Count}");
+            }
+            return tiles[row][col];
         }
 
         public void BuildMap(MapData mapData)
@@ -156,7 +166,7 @@ namespace TurnTheTides
                     Debug.Log("newTile parent before: " + newTile.transform.parent);
                     Debug.Log("newTile.transform before: " + newTile.transform);
                     Debug.Log("gameobject.transform: " + gameObject.transform);
-                    GridManager gridManager = GridManager.GetInstance();
+                    GridManager gridManager = GridManager.Instance;
                     newTile.transform.SetParent(gridManager.transform);
                     Debug.Log("Prefab parent after setting: " + newTile.transform.parent);
                     rowList.Add(newTile);

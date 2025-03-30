@@ -24,7 +24,7 @@ public class FloodTest
         GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
         PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
         WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        GridManager gridManager = GridManager.GetInstance();
+        GridManager gridManager = GridManager.Instance;
         Debug.Log("Grid Manager Instance Acquired");
         worldManager.CreateNewLevel(json, 1, 1);
         Debug.Log("New Level Created");
