@@ -7,24 +7,23 @@ public class WorldManager: MonoBehaviour
 {
     private static WorldManager _instance;
 
+    [SerializeField]
+    private double _pollutionLevel;
     public double PollutionLevel
     {
         get => _pollutionLevel; private set => _pollutionLevel = value;
     }
-
     public readonly double PollutionMax = double.MaxValue;
 
+    [SerializeField]
+    private MapData data;
     public MapData MapData
     {
         get => data; set => data = value;
     }
-    [SerializeField]
-    private double _pollutionLevel;
+
     [SerializeField]
     private GridManager gridManager;
-    [SerializeField]
-    private MapData data;
-
     public GridManager GridManager
     {
         get
@@ -42,9 +41,7 @@ public class WorldManager: MonoBehaviour
         }
     }
 
-
-
-    private void Awake()
+    private void Start()
     {
         SingletonCheck();
 
@@ -55,7 +52,6 @@ public class WorldManager: MonoBehaviour
             CreateNewGridManager();
         }
 
-        PollutionLevel = 0;
         if (MapData != null)
         {
             gridManager.BuildMap(MapData);
@@ -65,12 +61,9 @@ public class WorldManager: MonoBehaviour
     private void CreateNewGridManager()
     {
         GameObject gridManagerPrefab = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
-        Debug.Log("Instantiating the grid manager is angy");
         //PrefabUtility.InstantiatePrefab(gridManagerPrefab); //This line is causing two errors: Dereferencing NULL PPtr! and Prefab was destroyed during instantiation. Are you calling DestroyImmediate() on the root GameObject?
         GameObject instantiatedGridManager = Instantiate(gridManagerPrefab);
-        gridManager = gridManagerPrefab.GetComponent<GridManager>();
-
-        Debug.Log("Destroying happens before this?");
+        gridManager = instantiatedGridManager.GetComponent<GridManager>();
     }
 
     public GameObject GetTile(int row, int col)
@@ -87,30 +80,19 @@ public class WorldManager: MonoBehaviour
 
         if (_instance != null && _instance != this)
         {
-            if (Application.isEditor)
-            {
-                DestroyImmediate(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Helper.SmartDestroy(gameObject);
         }
     }
-
+    
     public void CreateNewLevel(
         TextAsset levelData,
         int mapSizeOffset,
         float flood_increment
     )
     {
-        Debug.Log("CreateNewLevel Script entered");
         MapData = ScriptableObject.CreateInstance<MapData>();
-        Debug.Log("MapData created");
         MapData.LoadData(levelData, mapSizeOffset, flood_increment);
-        Debug.Log("MapData loaded");
         SetupWorld();
-        Debug.Log("World Set Up");
     }
 
     /// <summary>
@@ -120,10 +102,8 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Refresh Game")]
     public void SetupWorld()
     {
-        Debug.Log("SetupWorld Entered");
         if (MapData == null)
         {
-            Debug.Log("MapData was null");
             EditorUtility.DisplayDialog(
                 "No map data",
                 "No map data has been given to the World Manager.",
@@ -132,17 +112,9 @@ public class WorldManager: MonoBehaviour
         }
         else
         {
-            Debug.Log("MapData was not null");
             GridManager.BuildMap(MapData);
-            Debug.Log("This is unreachable?");
-
+            PollutionLevel = 0;
         }
-
-    }
-
-    public static WorldManager GetInstance()
-    {
-        return _instance;
     }
 
     public void IncreasePollution(double amount)

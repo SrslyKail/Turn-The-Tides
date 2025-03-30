@@ -31,7 +31,8 @@ namespace TurnTheTides
 
                     if (found == null)
                     {
-                        found = new();
+                        GameObject newManager = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
+                        found = newManager.GetComponent<GridManager>();
                     }
 
                     if(found.enabled == false)
@@ -50,24 +51,25 @@ namespace TurnTheTides
         private static readonly int[] adjacency = new int[3] { -1, 0, 1 };
 
 
-        private void Awake()
+        private void Start()
         {
             if (Instance != null && Instance != this)
             {
-                if (Application.isEditor && !Application.isPlaying)
-                {
-                    DestroyImmediate(gameObject);
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
+                Helper.SmartDestroy(gameObject);
+                //if (Application.isEditor && !Application.isPlaying)
+                //{
+                //    DestroyImmediate(gameObject);
+                //}
+                //else
+                //{
+                //    Destroy(gameObject);
+                //}
             }
         }
 
         public GameObject GetTile(int row, int col)
         {
-            if(row >= tiles.Count)
+            if (row >= tiles.Count)
             {
                 throw new ArgumentOutOfRangeException($"{row} is out of range {tiles.Count}");
             }
@@ -80,11 +82,11 @@ namespace TurnTheTides
 
         public void BuildMap(MapData mapData)
         {
-            Debug.Log("BuildMap Entered????");
             //Delete all the current children
-            for (int i = gameObject.transform.childCount; i > 0; --i)
-            { 
-                DestroyImmediate(gameObject.transform.GetChild(0).gameObject); //Change to destroy? No, Destroy really breaks the water levels.
+            for (int i = transform.childCount; i > 0; --i)
+            {
+                Helper.SmartDestroy(transform.GetChild(0).gameObject);
+                //DestroyImmediate(); //Change to destroy? No, Destroy really breaks the water levels.
                 Debug.Log("Clearing existing child");
             }
 
@@ -166,9 +168,8 @@ namespace TurnTheTides
                     Debug.Log("newTile parent before: " + newTile.transform.parent);
                     Debug.Log("newTile.transform before: " + newTile.transform);
                     Debug.Log("gameobject.transform: " + gameObject.transform);
-                    GridManager gridManager = GridManager.Instance;
-                    newTile.transform.SetParent(gridManager.transform);
-                    Debug.Log("Prefab parent after setting: " + newTile.transform.parent);
+                    //GridManager gridManager = GridManager.Instance;
+                    newTile.transform.SetParent(this.transform);
                     rowList.Add(newTile);
                 }
 
@@ -257,8 +258,8 @@ namespace TurnTheTides
 
                                     newTile.transform.localScale = oceanTile.transform.localScale;
                                     newTile.name = $"Flooded {checkDetails.landUseLabel}";
-
-                                    DestroyImmediate(toCheck);
+                                    Helper.SmartDestroy(toCheck);
+                                    //DestroyImmediate(toCheck);
                                     newTile.SetActive(true);
 
                                     tiles[check_row][check_col] = newTile;
