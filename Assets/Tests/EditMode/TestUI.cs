@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class TestUI
 {
 
-
     /// <summary>
     /// Tests that the pollution meter can set its internal slider to a given value.
     /// </summary>
@@ -106,6 +105,29 @@ public class TestUI
         nextTurnButton.OnClick();
         yield return null;
         Assert.Pass();
+    }
+
+    /// <summary>
+    /// Tests that the GameUI object can recieve next-turn button click events and transmit them further.
+    /// </summary>
+    [UnityTest]
+    public IEnumerator TestGameUiTransmitsNextTurnRequestEvent()
+    {
+        GameObject uiContainer = new();
+        GameUI gameUI = uiContainer.AddComponent<GameUI>();
+        NextTurnButton nextTurnButton = uiContainer.AddComponent<NextTurnButton>();
+        Button button = uiContainer.AddComponent<Button>();
+        nextTurnButton.button = button;
+        gameUI.nextTurnButton = nextTurnButton;
+        gameUI.NextTurnRequestedEvent = new UnityEvent();
+        gameUI.NextTurnRequestedEvent.AddListener(() => { Assert.Pass(); });
+
+        nextTurnButton.OnButtonClicked = new UnityEvent();
+        nextTurnButton.OnButtonClicked.AddListener(() => { gameUI.OnNextTurnRequested(); });
+        nextTurnButton.OnClick();
+
+        yield return null;
+        Assert.Fail();
     }
 
     /// <summary>
