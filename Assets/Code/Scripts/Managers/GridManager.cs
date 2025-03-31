@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -33,23 +34,10 @@ namespace TurnTheTides
         public static GridManager Instance
         {
             get
-            {
+            {  
                 if (_instance == null)
                 {
-                    GridManager found = FindFirstObjectByType(typeof(GridManager), FindObjectsInactive.Include) as GridManager;
-
-                    if (found == null)
-                    {
-                        GameObject newManager = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
-                        found = newManager.GetComponent<GridManager>();
-                    }
-
-                    if(found.enabled == false)
-                    {
-                        found.enabled = true;
-                    }
-
-                    _instance = found;
+                    _instance = Helper.FindOrCreateSingleton<GridManager>("Prefabs/Managers/GridManager");
                 }
 
                 return _instance;
