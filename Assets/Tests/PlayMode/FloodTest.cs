@@ -15,10 +15,6 @@ public class FloodTest
     {
         TextAsset json = Resources.Load("Maps/test_map_3") as TextAsset;
         WorldManager worldManager = WorldManager.Instance;
-        //GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        //PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        //WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        //GridManager gridManager = GridManager.Instance;
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
 
@@ -36,6 +32,5 @@ public class FloodTest
 
         Assert.IsTrue(testHexTile == null);
         Assert.IsFalse(testHexTile2 == null);
-
     }
 }

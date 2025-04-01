@@ -26,8 +26,6 @@ public class HexTileTest
 
         Assert.AreEqual(testHexTile.landUseLabel, "Glaciers and Snow");
         Assert.AreEqual(testHexTile2.landUseLabel, "Mining");
-
-
     }
 
     [Test]
@@ -35,10 +33,6 @@ public class HexTileTest
     {
         TextAsset json = Resources.Load("Maps/test_map_2") as TextAsset;
         WorldManager worldManager = WorldManager.Instance;
-        //GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        //PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        //WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        //GridManager gridManager = GridManager.Instance;
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
 

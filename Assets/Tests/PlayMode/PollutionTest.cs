@@ -13,11 +13,8 @@ public class PollutionTest
     [Test]
     public void PerTurnPollutionAmountTest()
     {
-
         TextAsset json = Resources.Load("Maps/test_map_3") as TextAsset;
-        GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
+        WorldManager worldManager = WorldManager.Instance;
         GridManager gridManager = GridManager.Instance;
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
@@ -44,10 +41,8 @@ public class PollutionTest
     {
 
         TextAsset json = Resources.Load("Maps/test_map_3") as TextAsset;
-        GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        GridManager gridManager = GridManager.Instance;
+        WorldManager worldManager = WorldManager.Instance;
+
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
         double oldPollution = worldManager.PollutionLevel;
@@ -64,12 +59,9 @@ public class PollutionTest
     [Test]
     public void PollutionDecreaseTest()
     {
-
         TextAsset json = Resources.Load("Maps/test_map_4") as TextAsset;
-        GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        GridManager gridManager = GridManager.Instance;
+        WorldManager worldManager = WorldManager.Instance;
+
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
         double oldPollution = worldManager.PollutionLevel;
