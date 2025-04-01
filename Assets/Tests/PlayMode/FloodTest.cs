@@ -7,19 +7,35 @@ using UnityEngine.TestTools;
 
 public class FloodTest
 {
-    // A Test behaves as an ordinary method
+    /// <summary>
+    /// Tests that a low elevation is consumed when the flood consumes it, and that a higher elevation tile is not.
+    /// </summary>
     [Test]
-    public void FloodTestSimplePasses()
+    public void FloodingTest()
     {
+        TextAsset json = Resources.Load("Maps/test_map_3") as TextAsset;
+        WorldManager worldManager = WorldManager.Instance;
+        //GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
+        //PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
+        //WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
+        //GridManager gridManager = GridManager.Instance;
+        worldManager.CreateNewLevel(json, 1, 1);
+        worldManager.SetupWorld();
 
-    }
+        GameObject testTile = worldManager.GetTile(0, 0);
+        GameObject testTile2 = worldManager.GetTile(1, 0);
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator FloodTestWithEnumeratorPasses()
-    {
-        yield return new WaitForSeconds(1);
+        HexTile testHexTile = testTile.GetComponent<HexTile>();
+        HexTile testHexTile2 = testTile2.GetComponent<HexTile>();
+
+        Assert.NotNull(testHexTile);
+        Assert.NotNull(testHexTile2);
+
+        worldManager.NextTurn();
+        worldManager.NextTurn();
+
+        Assert.IsTrue(testHexTile == null);
+        Assert.IsFalse(testHexTile2 == null);
 
     }
 }
