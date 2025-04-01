@@ -9,6 +9,7 @@ namespace TurnTheTides
     /// </summary>
     public class Ocean: Water
     {
+        private static readonly int MESH_HEIGHT_OFFSET = 1;
         public override TerrainType Terrain => TerrainType.Ocean;
 
         public override float Elevation
@@ -18,7 +19,7 @@ namespace TurnTheTides
             {
                 base._elevation = value;
 
-                double evaluated = ClampElevation(value);
+                double evaluated = ClampElevation(value + MESH_HEIGHT_OFFSET);
 
                 Vector3 scaler = transform.localScale;
                 if (value > 0)
