@@ -70,7 +70,7 @@ public class WorldManager: MonoBehaviour
 
         if (MapData != null)
         {
-            gridManager.BuildMap(MapData);
+            GridManager.BuildMap(MapData);
         }
     }
 
@@ -83,7 +83,7 @@ public class WorldManager: MonoBehaviour
     /// <exception cref="ArgumentOutOfRangeException">If either Row or Col are too low or high.</exception>
     public GameObject GetTile(int row, int col)
     {
-        return gridManager.GetTile(row, col);
+        return GridManager.GetTile(row, col);
     }
 
     /// <summary>
@@ -150,9 +150,9 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
-        double newPollution = gridManager.Flood();
-        newPollution += gridManager.CalculatePollutionPerTurn();
+        double newPollution = GridManager.Flood();
+        newPollution += GridManager.CalculatePollutionPerTurn();
         PollutionLevel += newPollution;
-        Debug.Log($"New pollution: {PollutionLevel}");
+        //Debug.Log($"New pollution: {PollutionLevel}");
     }
 }

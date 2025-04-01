@@ -94,7 +94,7 @@ namespace TurnTheTides
             for (int i = transform.childCount; i > 0; --i)
             {
                 Helper.SmartDestroy(transform.GetChild(0).gameObject);
-                Debug.Log("Clearing existing child");
+                //Debug.Log("Clearing existing child");
             }
 
             floodIncrement = mapData.floodIncrement;
@@ -110,7 +110,7 @@ namespace TurnTheTides
         /// <param name="mapData">A MapData object that stores the data required to make the grid.</param>
         private void CreateHexTileGrid(MapData mapData)
         {
-            Debug.Log("Creating Hex Tile Grid");
+            //Debug.Log("Creating Hex Tile Grid");
             //All tiles should be the same size, so we can use 1 to set the defaults.
             Bounds tileBounds = prefabs[0]
                 .GetComponentInChildren<MeshRenderer>()
@@ -170,11 +170,11 @@ namespace TurnTheTides
 
                     //Set the name and parent.
                     newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
-                    Debug.Log("Tranform.setParent is angy");
-                    Debug.Log("newTile: " + newTile);
-                    Debug.Log("newTile parent before: " + newTile.transform.parent);
-                    Debug.Log("newTile.transform before: " + newTile.transform);
-                    Debug.Log("gameobject.transform: " + gameObject.transform);
+                    //Debug.Log("Tranform.setParent is angy");
+                    //Debug.Log("newTile: " + newTile);
+                    //Debug.Log("newTile parent before: " + newTile.transform.parent);
+                    //Debug.Log("newTile.transform before: " + newTile.transform);
+                    //Debug.Log("gameobject.transform: " + gameObject.transform);
                     //GridManager gridManager = GridManager.Instance;
                     newTile.transform.SetParent(this.transform);
                     rowList.Add(newTile);
