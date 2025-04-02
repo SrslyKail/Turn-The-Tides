@@ -1,11 +1,32 @@
 using System;
 using TurnTheTides;
 using UnityEditor;
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WorldManager: MonoBehaviour
 {
     private static WorldManager _instance;
+    public static WorldManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                WorldManager found = Helper.FindOrCreateSingleton<WorldManager>("Prefabs/Managers/WorldManager");
+
+                if (found.enabled == false)
+                {
+                    found.enabled = true;
+                }
+
+                _instance = found;
+            }
+
+            return _instance;
+        }
+    }
 
     [SerializeField]
     private double _pollutionLevel;
@@ -30,7 +51,7 @@ public class WorldManager: MonoBehaviour
         {
             if (gridManager == null)
             {
-                CreateNewGridManager();
+                gridManager = GridManager.Instance;
             }
 
             return gridManager;
@@ -47,28 +68,10 @@ public class WorldManager: MonoBehaviour
 
         //DontDestroyOnLoad(gameObject);
 
-        if (gridManager == null)
-        {
-            CreateNewGridManager();
-        }
-
         if (MapData != null)
         {
-            gridManager.BuildMap(MapData);
+            GridManager.BuildMap(MapData);
         }
-    }
-
-    /// <summary>
-    /// Creates a new GridManager and gets a reference to it.
-    /// TODO CB: This should be removed; the GridManager should be responsible for creating itself with a static function if it needs to.
-    ///         I also realize this is my own function. I'll handle refactoring this.
-    /// </summary>
-    private void CreateNewGridManager()
-    {
-        GameObject gridManagerPrefab = Resources.Load("Prefabs/Managers/GridManager") as GameObject;
-        PrefabUtility.InstantiatePrefab(gridManagerPrefab); //This line is causing two errors: Dereferencing NULL PPtr! and Prefab was destroyed during instantiation. Are you calling DestroyImmediate() on the root GameObject?
-        GameObject instantiatedGridManager = Instantiate(gridManagerPrefab);
-        gridManager = instantiatedGridManager.GetComponent<GridManager>();
     }
 
     /// <summary>
@@ -80,7 +83,7 @@ public class WorldManager: MonoBehaviour
     /// <exception cref="ArgumentOutOfRangeException">If either Row or Col are too low or high.</exception>
     public GameObject GetTile(int row, int col)
     {
-        return gridManager.GetTile(row, col);
+        return GridManager.GetTile(row, col);
     }
 
     /// <summary>
@@ -147,9 +150,9 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
-        double newPollution = gridManager.Flood();
-        newPollution += gridManager.CalculatePollutionPerTurn();
+        double newPollution = GridManager.Flood();
+        newPollution += GridManager.CalculatePollutionPerTurn();
         PollutionLevel += newPollution;
-        Debug.Log($"New pollution: {PollutionLevel}");
+        //Debug.Log($"New pollution: {PollutionLevel}");
     }
 }

@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "TTT.SO",
-        "TTT.Managers"
+        "TTT.Managers",
+        "TTT.Terrain"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

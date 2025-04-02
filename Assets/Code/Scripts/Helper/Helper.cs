@@ -37,5 +37,26 @@ namespace TurnTheTides
                 Destroy(otherObject);
             }
         }
+
+        /// <summary>
+        /// Searches the scene to see if an object of type T already exists. If it doesn't, it will attempt to load and instanciate a prefab from the given path.
+        /// <para>
+        /// A prefab is required for this function to work, as all singletons should have a prefab assigned to them.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="T">A class reference to the singleton type.</typeparam>
+        /// <param name="prefabPath">A path to the prefab we may need to instanciate.</param>
+        /// <returns>A reference to the object of type T; either pre-existing or newly created.</returns>
+        public static T FindOrCreateSingleton<T>(string prefabPath) where T: class
+        {
+            if (FindFirstObjectByType(typeof(T), FindObjectsInactive.Include) is not T found)
+            {
+                GameObject newObj = Resources.Load(prefabPath) as GameObject;
+                GameObject inst = Instantiate(newObj);
+                found = inst.GetComponent<T>();
+            }
+
+            return found;
+        }
     }
 }
