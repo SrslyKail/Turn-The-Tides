@@ -54,6 +54,7 @@ namespace TurnTheTides
         {
             if (Instance != null && Instance != this)
             {
+                DestroyAllChildTiles();
                 Helper.SmartDestroy(gameObject);
             }
         }
@@ -87,17 +88,22 @@ namespace TurnTheTides
         /// <param name="mapData">The data to build the map from.</param>
         public void BuildMap(MapData mapData)
         {
-            //Delete all the current children
-            for (int i = transform.childCount; i > 0; --i)
-            {
-                Helper.SmartDestroy(transform.GetChild(0).gameObject);
-            }
+            DestroyAllChildTiles();
 
             floodIncrement = mapData.floodIncrement;
             tiles = new();
             //Make the map
             CreateHexTileGrid(mapData);
             MergeWaterTiles();
+        }
+
+        private void DestroyAllChildTiles()
+        {
+            //Delete all the current children
+            for (int i = transform.childCount; i > 0; --i)
+            {
+                Helper.SmartDestroy(transform.GetChild(0).gameObject);
+            }
         }
 
         /// <summary>
@@ -136,7 +142,6 @@ namespace TurnTheTides
                 {
 
                     //Get the data from [row][item]
-                    print(mapData.GeoData);
                     Geopoint pointData = mapData.GeoData.data[y][x];
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
