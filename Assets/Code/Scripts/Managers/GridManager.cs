@@ -449,6 +449,7 @@ namespace TurnTheTides
             }
 
             Mesh mesh = new();
+            mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             mesh.CombineMeshes(combine);
             mesh.name = "Ocean";
             mesh.RecalculateNormals();

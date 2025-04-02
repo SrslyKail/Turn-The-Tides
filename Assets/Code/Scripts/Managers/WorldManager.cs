@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TurnTheTides;
 using UnityEngine;
 
@@ -152,5 +153,60 @@ public class WorldManager: MonoBehaviour
         newPollution += GridManager.CalculatePollutionPerTurn();
         PollutionLevel += newPollution;
         //Debug.Log($"New pollution: {PollutionLevel}");
+    }
+
+
+    bool flooding = false;
+    Coroutine floodCoroutine;
+
+    /// <summary>
+    /// Coroutine for cycling next turn for simulation purposes.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator FloodCoroutine()
+    {
+        Debug.Log("Flood coroutine starts");
+
+        while (flooding)
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+            Debug.Log("Flooding");
+
+            NextTurn();
+        }
+
+        Debug.Log("Flood coroutine stops");
+    }
+
+    /// <summary>
+    /// Function to start the flooding coroutine.
+    /// </summary>
+    [ContextMenu("Start Flooding")]
+    public void StartFlooding()
+    {
+        if (!flooding)
+        {
+            flooding = true;
+            floodCoroutine = StartCoroutine(FloodCoroutine());
+            Debug.Log("Flooding has started.");
+        }
+    }
+
+    /// <summary>
+    /// Function to stop the flooding coroutine.
+    /// </summary>
+    [ContextMenu("Stop Flooding")]
+    public void StopFlooding()
+    {
+        if (flooding)
+        {
+            flooding = false;
+            if (floodCoroutine != null)
+            {
+                StopCoroutine(floodCoroutine);
+                floodCoroutine = null;
+                Debug.Log("Flooding has stopped.");
+            }
+        }
     }
 }
