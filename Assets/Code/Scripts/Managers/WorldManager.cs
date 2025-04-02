@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TurnTheTides;
 using UnityEngine;
 
@@ -65,11 +66,31 @@ public class WorldManager: MonoBehaviour
     public static int turn_count = start_year;
     private static float waterElevation = 0;
 
-    private static GameUI gameUI;
+    private static GameUI _gameUI;
+    public static GameUI GameUI
+    {
+        get
+        {
+            if (_gameUI == null)
+            {
+                GameUI found = Helper.FindOrCreateSingleton<GameUI>("Prefabs/Managers/GameUI");
+
+                if (found.enabled == false)
+                {
+                    found.enabled = true;
+                }
+
+                _gameUI = found;
+            }
+
+            return _gameUI;
+        }
+    }
+
+
 
     private void Start()
     {
-        gameUI = FindFirstObjectByType<GameUI>();
         SingletonCheck();
 
         //DontDestroyOnLoad(gameObject);
@@ -145,8 +166,8 @@ public class WorldManager: MonoBehaviour
             GridManager.BuildMap(MapData);
             PollutionLevel = 0;
             turn_count = start_year;
-            gameUI.MaxSeaLevel = 70f;
-            gameUI.SeaLevelIncrement = MapData.floodIncrement;
+            GameUI.MaxSeaLevel = 70f;
+            GameUI.SeaLevelIncrement = MapData.floodIncrement;
             UpdateGUI();
         }
     }
@@ -166,17 +187,32 @@ public class WorldManager: MonoBehaviour
         PollutionLevel += newPollution;
         turn_count++;
         UpdateGUI();
-
     }
 
     private void UpdateGUI()
     {
-        gameUI.turnCounterText.SetTurnText(turn_count);
-        gameUI.CurrentSeaLevel = waterElevation;
+        GameUI.turnCounterText.SetTurnText(turn_count);
+        GameUI.CurrentSeaLevel = waterElevation;
     }
 
     bool flooding = false;
     Coroutine floodCoroutine;
+
+
+    [ContextMenu("Toggle Flooding")]
+    public void ToggleFlood()
+    {
+        flooding = !flooding;
+        if (flooding)
+        {
+            StartFlooding();
+        }
+        else
+        {
+            StopFlooding();
+        }
+    }
+
 
     /// <summary>
     /// Coroutine for cycling next turn for simulation purposes.
@@ -184,48 +220,33 @@ public class WorldManager: MonoBehaviour
     /// <returns></returns>
     public IEnumerator FloodCoroutine()
     {
-        Debug.Log("Flood coroutine starts");
 
         while (flooding)
         {
             yield return new WaitForSecondsRealtime(0.1f);
-            Debug.Log("Flooding");
 
             NextTurn();
         }
-
-        Debug.Log("Flood coroutine stops");
     }
 
     /// <summary>
     /// Function to start the flooding coroutine.
     /// </summary>
     [ContextMenu("Start Flooding")]
-    public void StartFlooding()
+    private void StartFlooding()
     {
-        if (!flooding)
-        {
-            flooding = true;
-            floodCoroutine = StartCoroutine(FloodCoroutine());
-            Debug.Log("Flooding has started.");
-        }
+        flooding = true;
+        floodCoroutine = StartCoroutine(FloodCoroutine());
     }
 
     /// <summary>
     /// Function to stop the flooding coroutine.
     /// </summary>
     [ContextMenu("Stop Flooding")]
-    public void StopFlooding()
+    private void StopFlooding()
     {
-        if (flooding)
-        {
-            flooding = false;
-            if (floodCoroutine != null)
-            {
-                StopCoroutine(floodCoroutine);
-                floodCoroutine = null;
-                Debug.Log("Flooding has stopped.");
-            }
-        }
+        flooding = false;
+        StopCoroutine(floodCoroutine);
+        floodCoroutine = null;
     }
 }

@@ -55,10 +55,13 @@ public class GameUI : MonoBehaviour
     /// </summary>
     [Header("Next Turn Button")]
     public bool NextTurnButtonEnabled = true;
+
     /// <summary>
     /// Event invoked when the next turn is requested.
     /// </summary>
     public UnityEvent NextTurnRequestedEvent;
+
+    public UnityEvent ToggleFloodEvent;
 
     /// <summary>
     /// Called when the next turn is requested.
@@ -67,6 +70,11 @@ public class GameUI : MonoBehaviour
     {
         //Debug.Log("Next turn requested");
         NextTurnRequestedEvent.Invoke();
+    }
+
+    public void OnToggleFloodRequest()
+    {
+        ToggleFloodEvent.Invoke();
     }
 
     // Update is called once per frame
