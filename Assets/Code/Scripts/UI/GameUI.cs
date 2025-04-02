@@ -23,6 +23,8 @@ public class GameUI : MonoBehaviour
     /// </summary>
     public NextTurnButton nextTurnButton;
 
+    public TurnCounterText turnCounterText;
+
     /// <summary>
     /// The progress of the pollution meter. A value of 0 represents no pollution, while a value of 1 represents maximum pollution.
     /// </summary>
@@ -53,10 +55,13 @@ public class GameUI : MonoBehaviour
     /// </summary>
     [Header("Next Turn Button")]
     public bool NextTurnButtonEnabled = true;
+
     /// <summary>
     /// Event invoked when the next turn is requested.
     /// </summary>
     public UnityEvent NextTurnRequestedEvent;
+
+    public UnityEvent ToggleFloodEvent;
 
     /// <summary>
     /// Called when the next turn is requested.
@@ -65,6 +70,11 @@ public class GameUI : MonoBehaviour
     {
         //Debug.Log("Next turn requested");
         NextTurnRequestedEvent.Invoke();
+    }
+
+    public void OnToggleFloodRequest()
+    {
+        ToggleFloodEvent.Invoke();
     }
 
     // Update is called once per frame

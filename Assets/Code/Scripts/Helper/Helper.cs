@@ -32,9 +32,13 @@ namespace TurnTheTides
             {
                 DestroyImmediate(otherObject);
             }
-            else
+            else if(Application.isPlaying)
             {
                 Destroy(otherObject);
+            }
+            else
+            {
+                throw new UnityException("Smart Destroy does not contain logic for the current play mode.");
             }
         }
 

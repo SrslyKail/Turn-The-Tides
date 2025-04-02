@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TurnTheTides;
-using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class WorldManager: MonoBehaviour
 {
+    public static readonly int start_year = 2025;
     private static WorldManager _instance;
     public static WorldManager Instance
     {
@@ -63,15 +63,40 @@ public class WorldManager: MonoBehaviour
         }
     }
 
+    public static int turn_count = start_year;
+    private static float waterElevation = 0;
+
+    private static GameUI _gameUI;
+    public static GameUI GameUI
+    {
+        get
+        {
+            if (_gameUI == null)
+            {
+                GameUI found = Helper.FindOrCreateSingleton<GameUI>("Prefabs/Managers/GameUI");
+
+                if (found.enabled == false)
+                {
+                    found.enabled = true;
+                }
+
+                _gameUI = found;
+            }
+
+            return _gameUI;
+        }
+    }
+
+
+
     private void Start()
     {
         SingletonCheck();
 
         //DontDestroyOnLoad(gameObject);
-
         if (MapData != null)
         {
-            GridManager.BuildMap(MapData);
+            this.GridManager.BuildMap(MapData);
         }
     }
 
@@ -129,16 +154,21 @@ public class WorldManager: MonoBehaviour
     {
         if (MapData == null)
         {
-            EditorUtility.DisplayDialog(
-                "No map data",
-                "No map data has been given to the World Manager.",
-                "Close"
-                );
+            //CB: TODO: Figure out how to make a runtime popup.
+            //EditorUtility.DisplayDialog(
+            //    "No map data",
+            //    "No map data has been given to the World Manager.",
+            //    "Close"
+            //    );
         }
         else
         {
             GridManager.BuildMap(MapData);
             PollutionLevel = 0;
+            turn_count = start_year;
+            GameUI.MaxSeaLevel = 70f;
+            GameUI.SeaLevelIncrement = MapData.floodIncrement;
+            UpdateGUI();
         }
     }
 
@@ -151,15 +181,38 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
+        waterElevation += MapData.floodIncrement;
         double newPollution = GridManager.Flood();
         newPollution += GridManager.CalculatePollutionPerTurn();
         PollutionLevel += newPollution;
-        //Debug.Log($"New pollution: {PollutionLevel}");
+        turn_count++;
+        UpdateGUI();
     }
 
+    private void UpdateGUI()
+    {
+        GameUI.turnCounterText.SetTurnText(turn_count);
+        GameUI.CurrentSeaLevel = waterElevation;
+    }
 
     bool flooding = false;
     Coroutine floodCoroutine;
+
+
+    [ContextMenu("Toggle Flooding")]
+    public void ToggleFlood()
+    {
+        flooding = !flooding;
+        if (flooding)
+        {
+            StartFlooding();
+        }
+        else
+        {
+            StopFlooding();
+        }
+    }
+
 
     /// <summary>
     /// Coroutine for cycling next turn for simulation purposes.
@@ -167,48 +220,33 @@ public class WorldManager: MonoBehaviour
     /// <returns></returns>
     public IEnumerator FloodCoroutine()
     {
-        Debug.Log("Flood coroutine starts");
 
         while (flooding)
         {
             yield return new WaitForSecondsRealtime(0.1f);
-            Debug.Log("Flooding");
 
             NextTurn();
         }
-
-        Debug.Log("Flood coroutine stops");
     }
 
     /// <summary>
     /// Function to start the flooding coroutine.
     /// </summary>
     [ContextMenu("Start Flooding")]
-    public void StartFlooding()
+    private void StartFlooding()
     {
-        if (!flooding)
-        {
-            flooding = true;
-            floodCoroutine = StartCoroutine(FloodCoroutine());
-            Debug.Log("Flooding has started.");
-        }
+        flooding = true;
+        floodCoroutine = StartCoroutine(FloodCoroutine());
     }
 
     /// <summary>
     /// Function to stop the flooding coroutine.
     /// </summary>
     [ContextMenu("Stop Flooding")]
-    public void StopFlooding()
+    private void StopFlooding()
     {
-        if (flooding)
-        {
-            flooding = false;
-            if (floodCoroutine != null)
-            {
-                StopCoroutine(floodCoroutine);
-                floodCoroutine = null;
-                Debug.Log("Flooding has stopped.");
-            }
-        }
+        flooding = false;
+        StopCoroutine(floodCoroutine);
+        floodCoroutine = null;
     }
 }
