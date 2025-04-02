@@ -30,12 +30,10 @@ namespace TurnTheTides
         {
             if (Application.isEditor)
             {
-                Debug.Log("Destroying; assuming IsEditor");
                 DestroyImmediate(otherObject);
             }
             else if(Application.isPlaying)
             {
-                Debug.Log("Destroying; assuming IsPlaying");
                 Destroy(otherObject);
             }
             else

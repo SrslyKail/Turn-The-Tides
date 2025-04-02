@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class WorldManager: MonoBehaviour
 {
+    public static readonly int start_year = 2025;
     private static WorldManager _instance;
     public static WorldManager Instance
     {
@@ -61,8 +62,14 @@ public class WorldManager: MonoBehaviour
         }
     }
 
+    public static int turn_count = start_year;
+    private static float waterElevation = 0;
+
+    private static GameUI gameUI;
+
     private void Start()
     {
+        gameUI = FindFirstObjectByType<GameUI>();
         SingletonCheck();
 
         //DontDestroyOnLoad(gameObject);
@@ -137,6 +144,10 @@ public class WorldManager: MonoBehaviour
         {
             GridManager.BuildMap(MapData);
             PollutionLevel = 0;
+            turn_count = start_year;
+            gameUI.MaxSeaLevel = 70f;
+            gameUI.SeaLevelIncrement = MapData.floodIncrement;
+            UpdateGUI();
         }
     }
 
@@ -149,12 +160,20 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
+        waterElevation += MapData.floodIncrement;
         double newPollution = GridManager.Flood();
         newPollution += GridManager.CalculatePollutionPerTurn();
         PollutionLevel += newPollution;
-        //Debug.Log($"New pollution: {PollutionLevel}");
+        turn_count++;
+        UpdateGUI();
+
     }
 
+    private void UpdateGUI()
+    {
+        gameUI.turnCounterText.SetTurnText(turn_count);
+        gameUI.CurrentSeaLevel = waterElevation;
+    }
 
     bool flooding = false;
     Coroutine floodCoroutine;

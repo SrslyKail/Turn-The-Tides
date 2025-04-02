@@ -23,6 +23,8 @@ public class GameUI : MonoBehaviour
     /// </summary>
     public NextTurnButton nextTurnButton;
 
+    public TurnCounterText turnCounterText;
+
     /// <summary>
     /// The progress of the pollution meter. A value of 0 represents no pollution, while a value of 1 represents maximum pollution.
     /// </summary>
