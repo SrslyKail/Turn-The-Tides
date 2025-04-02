@@ -41,6 +41,14 @@ namespace TurnTheTides
             }
         }
 
+        private void Awake()
+        {
+            if (_dataFile != null)
+            {
+                ProcessDataFile();
+            }
+        }
+
         /// <summary>
         /// Effectively the constructor for the MapData. 
         /// <para>

@@ -1,9 +1,7 @@
 using System;
 using TurnTheTides;
-using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class WorldManager: MonoBehaviour
 {
@@ -67,10 +65,9 @@ public class WorldManager: MonoBehaviour
         SingletonCheck();
 
         //DontDestroyOnLoad(gameObject);
-
         if (MapData != null)
         {
-            GridManager.BuildMap(MapData);
+            this.GridManager.BuildMap(MapData);
         }
     }
 
@@ -128,11 +125,12 @@ public class WorldManager: MonoBehaviour
     {
         if (MapData == null)
         {
-            EditorUtility.DisplayDialog(
-                "No map data",
-                "No map data has been given to the World Manager.",
-                "Close"
-                );
+            //CB: TODO: Figure out how to make a runtime popup.
+            //EditorUtility.DisplayDialog(
+            //    "No map data",
+            //    "No map data has been given to the World Manager.",
+            //    "Close"
+            //    );
         }
         else
         {
