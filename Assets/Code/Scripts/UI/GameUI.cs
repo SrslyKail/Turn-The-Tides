@@ -1,7 +1,7 @@
 using System;
+using TurnTheTides;
 using UnityEngine;
 using UnityEngine.Events;
-using TurnTheTides;
 
 /// <summary>
 /// Container component for the in-game GUI.
@@ -45,7 +45,15 @@ public class GameUI : MonoBehaviour
     /// </summary>
     public NextTurnButton nextTurnButton;
 
+    /// <summary>
+    /// The reference to the turn counter text component.
+    /// </summary>
     public TurnCounterText turnCounterText;
+
+    /// <summary>
+    /// The reference to the tile info panel component.
+    /// </summary>
+    public TileInfoPanel tileInfoPanel;
 
     /// <summary>
     /// The progress of the pollution meter. A value of 0 represents no pollution, while a value of 1 represents maximum pollution.
@@ -77,6 +85,9 @@ public class GameUI : MonoBehaviour
     /// </summary>
     [Header("Next Turn Button")]
     public bool NextTurnButtonEnabled = true;
+
+    [Header("Tile Info Panel")]
+    public bool TileInfoPanelVisible = true;
 
     /// <summary>
     /// Event invoked when the next turn is requested.
@@ -123,5 +134,15 @@ public class GameUI : MonoBehaviour
         waterLevelIndicator.SetSeaLevel(MinSeaLevel, MaxSeaLevel, CurrentSeaLevel);
         waterLevelIndicator.SetSeaLevelIncrease(SeaLevelIncrement);
         nextTurnButton.SetButtonEnabled(NextTurnButtonEnabled);
+    }
+
+    public void UpdateTileInfoPanel(HexTile tile)
+    {
+        if (tileInfoPanel == null)
+        {
+            return;
+        }
+
+        tileInfoPanel.UpdateTileInfo(tile);
     }
 }
