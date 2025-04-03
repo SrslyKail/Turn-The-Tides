@@ -1,3 +1,4 @@
+using TurnTheTides;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -62,6 +63,14 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public void DeselectCurrentObject()
+    {
+        if (selectedObject != null)
+        {
+            selectedObject.GetComponent<Renderer>().material.color = selectedMeshColor;
+            selectedObject = null;
+        }
+    }
     private void MoveMarker(Vector3 delta)
     {
         // get transform as if x-rotation was 0
@@ -101,10 +110,7 @@ public class CameraController : MonoBehaviour
     private void SelectObject(GameObject target)
     {
         // If we have already selected an object, deselect it
-        if (selectedObject != null)
-        {
-            selectedObject.GetComponent<Renderer>().material.color = selectedMeshColor;
-        }
+        DeselectCurrentObject();
 
         // Set the selected object to the object that was hit
         selectedObject = target;
@@ -112,6 +118,8 @@ public class CameraController : MonoBehaviour
 
         // Change the color of the selected object
         target.GetComponent<Renderer>().material.color = Color.red;
+
+        GameUi.UpdateTileInfoPanel(selectedObject.GetComponent<HexTile>());
     }
 
     private void SelectObjectAtMousePosition()
@@ -188,6 +196,8 @@ public class CameraController : MonoBehaviour
         zoomLevel = DefaultZoomLevel;
 
         SyncCameraToMarker();
+
+        GameUi = GameUI.Instance;
     }
 
     // Update is called once per frame
