@@ -9,12 +9,11 @@ public class TurnCounterText : MonoBehaviour
     private TMP_Text textAsset;
     public void SetTurnText(int turn)
     {
-        textAsset.SetText(turn.ToString());
+        transform.GetComponent<TMP_Text>().SetText(turn.ToString());
     }
 
     public void Awake()
     {
-        textAsset = transform.GetComponent<TMP_Text>();
         SetTurnText(2025);
     }
 
