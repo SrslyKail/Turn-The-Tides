@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TurnTheTides;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class WorldManager: MonoBehaviour
@@ -85,9 +86,11 @@ public class WorldManager: MonoBehaviour
 
             return _gameUI;
         }
+        private set
+        {
+            _gameUI = value;
+        }
     }
-
-
 
     private void Start()
     {
@@ -97,6 +100,14 @@ public class WorldManager: MonoBehaviour
         if (MapData != null)
         {
             this.GridManager.BuildMap(MapData);
+        }
+        if(GridManager == null)
+        {
+            GridManager = GridManager.Instance;
+        }
+        if(GameUI == null)
+        {
+            GameUI = GameUI.Instance;
         }
     }
 

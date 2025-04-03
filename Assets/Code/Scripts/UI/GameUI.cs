@@ -1,12 +1,34 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using TurnTheTides;
 
 /// <summary>
 /// Container component for the in-game GUI.
 /// </summary>
 public class GameUI : MonoBehaviour
 {
+    private static GameUI _instance;
+    public static GameUI Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameUI found = Helper.FindOrCreateSingleton<GameUI>("Prefabs/Managers/GameUI");
+
+                if (found.enabled == false)
+                {
+                    found.enabled = true;
+                }
+
+                _instance = found;
+            }
+
+            return _instance;
+        }
+    }
+
     /// <summary>
     /// The reference to the pollution meter component.
     /// </summary>
@@ -62,6 +84,23 @@ public class GameUI : MonoBehaviour
     public UnityEvent NextTurnRequestedEvent;
 
     public UnityEvent ToggleFloodEvent;
+
+    public void Start()
+    {
+        SingletonCheck();
+    }
+    private void SingletonCheck()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
+        if (_instance != null && _instance != this)
+        {
+            Helper.SmartDestroy(gameObject);
+        }
+    }
 
     /// <summary>
     /// Called when the next turn is requested.
