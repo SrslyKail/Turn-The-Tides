@@ -87,7 +87,7 @@ public class GameUI : MonoBehaviour
     public bool NextTurnButtonEnabled = true;
 
     [Header("Tile Info Panel")]
-    public bool TileInfoPanelVisible = true;
+    public bool TileInfoPanelActive = true;
 
     /// <summary>
     /// Event invoked when the next turn is requested.
@@ -127,15 +127,6 @@ public class GameUI : MonoBehaviour
         ToggleFloodEvent.Invoke();
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        pollutionMeter.SetProgress(PollutionProgress);
-        waterLevelIndicator.SetSeaLevel(MinSeaLevel, MaxSeaLevel, CurrentSeaLevel);
-        waterLevelIndicator.SetSeaLevelIncrease(SeaLevelIncrement);
-        nextTurnButton.SetButtonEnabled(NextTurnButtonEnabled);
-    }
-
     public void UpdateTileInfoPanel(HexTile tile)
     {
         if (tileInfoPanel == null)
@@ -143,6 +134,44 @@ public class GameUI : MonoBehaviour
             return;
         }
 
+        TileInfoPanelActive = true;
         tileInfoPanel.UpdateTileInfo(tile);
+    }
+
+    public void HideTileInfoPanel()
+    {
+        if (tileInfoPanel == null)
+        {
+            return;
+        }
+        TileInfoPanelActive = false;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        pollutionMeter.SetProgress(PollutionProgress);
+        waterLevelIndicator.SetSeaLevel(MinSeaLevel, MaxSeaLevel, CurrentSeaLevel);
+        waterLevelIndicator.SetSeaLevelIncrease(SeaLevelIncrement);
+        nextTurnButton.SetButtonEnabled(NextTurnButtonEnabled);
+        MoveTileInfo(TileInfoPanelActive);
+    }
+
+    private void MoveTileInfo(bool active)
+    {
+        if (tileInfoPanel == null)
+        {
+            return;
+        }
+
+        RectTransform rectTransform = tileInfoPanel.GetComponent<RectTransform>();
+        Vector3 newPos = rectTransform.anchoredPosition;
+        Vector2 panelSize = rectTransform.sizeDelta;
+
+        float halfWidth = panelSize.x / 2;
+
+        newPos.x = Mathf.Lerp(newPos.x, active ? -halfWidth : halfWidth, Time.deltaTime * 10f);
+
+        rectTransform.anchoredPosition = newPos;
     }
 }
