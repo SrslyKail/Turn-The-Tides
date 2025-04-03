@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using TurnTheTides;
 using UnityEngine;
-using UnityEngine.Events;
 
 
-public class WorldManager: MonoBehaviour
+public class WorldManager : MonoBehaviour
 {
     public static readonly int start_year = 2025;
     private static WorldManager _instance;
@@ -99,16 +97,24 @@ public class WorldManager: MonoBehaviour
         //DontDestroyOnLoad(gameObject);
         if (MapData != null)
         {
-            this.GridManager.BuildMap(MapData);
+            GridManager.BuildMap(MapData);
         }
-        if(GridManager == null)
+        if (GridManager == null)
         {
             GridManager = GridManager.Instance;
         }
-        if(GameUI == null)
+        if (GameUI == null)
         {
             GameUI = GameUI.Instance;
         }
+
+        ConnectGameUIEvents();
+    }
+
+    private void ConnectGameUIEvents()
+    {
+        GameUI.NextTurnRequestedEvent.AddListener(NextTurn);
+        GameUI.ToggleFloodEvent.AddListener(ToggleFlood);
     }
 
     /// <summary>
@@ -139,7 +145,7 @@ public class WorldManager: MonoBehaviour
             Helper.SmartDestroy(gameObject);
         }
     }
-    
+
     /// <summary>
     /// Create a new level to play on.
     /// </summary>

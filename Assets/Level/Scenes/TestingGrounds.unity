@@ -2463,8 +2463,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5164289022696200566, guid: f1a7b5472045e124b87ea242badfdb81, type: 3}
+      propertyPath: ToggleFloodEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164289022696200566, guid: f1a7b5472045e124b87ea242badfdb81, type: 3}
       propertyPath: NextTurnRequestedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5164289022696200566, guid: f1a7b5472045e124b87ea242badfdb81, type: 3}
       propertyPath: NextTurnRequestedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
