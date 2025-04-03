@@ -5,6 +5,11 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+/// <summary>
+/// !!!Deprecated!!!
+/// Data is collected through a python script instead.
+/// Ben made this.
+/// </summary>
 public class ElevationPoint
 {
     public double Altitude { get; set; }

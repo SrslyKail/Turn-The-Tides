@@ -3,18 +3,19 @@ using NUnit.Framework;
 using TurnTheTides;
 using UnityEngine;
 using UnityEngine.TestTools;
-
+/// <summary>
+/// Ben made these.
+/// </summary>
 public class HexTileTest
 {
+    /// <summary>
+    /// Tests that hex tile labels are appropriate and accessible.
+    /// </summary>
     [Test]
     public void GetHexLabel()
     {
         TextAsset json = Resources.Load("Maps/test_map_2") as TextAsset;
         WorldManager worldManager = WorldManager.Instance;
-        //GameObject WorldManagerPrefab = Resources.Load("Prefabs/Managers/WorldManager") as GameObject;
-        //PrefabUtility.InstantiatePrefab(WorldManagerPrefab);
-        //WorldManager worldManager = WorldManagerPrefab.GetComponent<WorldManager>();
-        //GridManager gridManager = GridManager.Instance;
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
 
@@ -28,6 +29,9 @@ public class HexTileTest
         Assert.AreEqual(testHexTile2.landUseLabel, "Mining");
     }
 
+    /// <summary>
+    /// Tests that tile elevation is appropriate and accessible.
+    /// </summary>
     [Test]
     public void GetElevation()
     {
