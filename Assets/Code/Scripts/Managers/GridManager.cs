@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -22,7 +23,7 @@ namespace TurnTheTides
     {
         [SerializeField]
         private List<GameObject> prefabs;
-        private List<List<GameObject>> tiles;
+        private readonly List<List<GameObject>> tiles = new();
         private static GridManager _instance;
         /// <summary>
         /// Get the current instance of the GridManager. 
@@ -91,7 +92,7 @@ namespace TurnTheTides
             DestroyAllChildTiles();
 
             floodIncrement = mapData.floodIncrement;
-            tiles = new();
+            
             //Make the map
             CreateHexTileGrid(mapData);
             MergeWaterTiles();
@@ -99,10 +100,12 @@ namespace TurnTheTides
 
         private void DestroyAllChildTiles()
         {
+            tiles.Clear();
+            IEnumerable<Transform> children = transform.Cast<Transform>().ToList();
             //Delete all the current children
-            for (int i = transform.childCount; i > 0; --i)
+            foreach (Transform child in children)
             {
-                Helper.SmartDestroy(transform.GetChild(0).gameObject);
+                Helper.SmartDestroy(child.gameObject);
             }
         }
 
@@ -264,7 +267,6 @@ namespace TurnTheTides
                                     newTile.transform.localScale = oceanTile.transform.localScale;
                                     newTile.name = $"Flooded {checkDetails.landUseLabel}";
                                     Helper.SmartDestroy(toCheck);
-                                    //DestroyImmediate(toCheck);
                                     newTile.SetActive(true);
 
                                     tiles[check_row][check_col] = newTile;
