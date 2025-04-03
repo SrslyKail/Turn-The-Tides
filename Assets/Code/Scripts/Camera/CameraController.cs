@@ -69,6 +69,8 @@ public class CameraController : MonoBehaviour
         {
             selectedObject.GetComponent<Renderer>().material.color = selectedMeshColor;
             selectedObject = null;
+
+            GameUi.HideTileInfoPanel();
         }
     }
     private void MoveMarker(Vector3 delta)
@@ -109,6 +111,18 @@ public class CameraController : MonoBehaviour
 
     private void SelectObject(GameObject target)
     {
+        // If the target is the same as the selected object, deselect it and return
+        if (target == selectedObject)
+        {
+            DeselectCurrentObject();
+            return;
+        }
+        // If the target is not a HexTile, return
+        if (target.GetComponent<HexTile>() == null)
+        {
+            return;
+        }
+
         // If we have already selected an object, deselect it
         DeselectCurrentObject();
 
