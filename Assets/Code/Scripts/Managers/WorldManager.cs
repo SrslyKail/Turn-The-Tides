@@ -210,6 +210,7 @@ public class WorldManager : MonoBehaviour
     {
         GameUI.turnCounterText.SetTurnText(turn_count);
         GameUI.CurrentSeaLevel = waterElevation;
+        GameUI.UpdateTileInfoPanel();
     }
 
     bool flooding = false;
