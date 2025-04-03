@@ -71,6 +71,7 @@ public class CameraController : MonoBehaviour
             selectedObject = null;
 
             GameUi.HideTileInfoPanel();
+            GameUi.ClearTileInfoPanel();
         }
     }
     private void MoveMarker(Vector3 delta)

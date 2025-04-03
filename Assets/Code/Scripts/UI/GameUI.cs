@@ -127,6 +127,16 @@ public class GameUI : MonoBehaviour
         ToggleFloodEvent.Invoke();
     }
 
+    public void UpdateTileInfoPanel()
+    {
+        if (tileInfoPanel == null)
+        {
+            return;
+        }
+        TileInfoPanelActive = true;
+        tileInfoPanel.UpdateTileInfo();
+    }
+
     public void UpdateTileInfoPanel(HexTile tile)
     {
         if (tileInfoPanel == null)
@@ -138,13 +148,25 @@ public class GameUI : MonoBehaviour
         tileInfoPanel.UpdateTileInfo(tile);
     }
 
-    public void HideTileInfoPanel()
+    public void ClearTileInfoPanel()
     {
         if (tileInfoPanel == null)
         {
             return;
         }
         TileInfoPanelActive = false;
+        tileInfoPanel.ClearTileInfo();
+    }
+
+    public void HideTileInfoPanel()
+    {
+        if (tileInfoPanel == null)
+        {
+            return;
+        }
+
+        TileInfoPanelActive = false;
+        tileInfoPanel.ClearTileInfo();
     }
 
     // Update is called once per frame
