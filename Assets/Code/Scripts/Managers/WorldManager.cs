@@ -216,10 +216,8 @@ public class WorldManager : MonoBehaviour
 
             MusicManager.CurrentMusicCategory = MusicManager.MusicCategory.MainGame;
             MusicManager.CurrentBoardState = MusicManager.BoardState.NewBoard;
-            if (!Application.isEditor)
-            {
-                MusicManager.PlayMusic();
-            }
+            MusicManager.PlayMusic();
+
         }
     }
 
@@ -239,13 +237,10 @@ public class WorldManager : MonoBehaviour
         turn_count++;
         UpdateGUI();
 
-        if (!Application.isEditor)
+        if (MusicManager.CurrentBoardState == MusicManager.BoardState.NewBoard)
         {
-            if (MusicManager.CurrentBoardState == MusicManager.BoardState.NewBoard)
-            {
-                MusicManager.CurrentBoardState = MusicManager.BoardState.LowPollution;
-                MusicManager.PlayMusic();
-            }
+            MusicManager.CurrentBoardState = MusicManager.BoardState.LowPollution;
+            MusicManager.PlayMusic();
         }
     }
 
