@@ -3,7 +3,6 @@ using System.Collections;
 using TurnTheTides;
 using UnityEngine;
 
-
 public class WorldManager : MonoBehaviour
 {
     bool flooding = false;
@@ -92,21 +91,21 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    private static MusicManager MusicManager;
-    public static MusicManager Music
+    private static MusicManager _musicManager;
+    public static MusicManager MusicManager
     {
         get
         {
-            if (MusicManager == null)
+            if (_musicManager == null)
             {
-                MusicManager = MusicManager.Instance;
+                _musicManager = MusicManager.Instance;
             }
 
-            return MusicManager;
+            return _musicManager;
         }
         private set
         {
-            MusicManager = value;
+            _musicManager = value;
         }
     }
 
@@ -125,6 +124,7 @@ public class WorldManager : MonoBehaviour
 
         if(MapData == null)
         {
+            
             CreateNewLevel(
                 Resources.Load<TextAsset>("Maps/lowerMainland"),
                 2,
