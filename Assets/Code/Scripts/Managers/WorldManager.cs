@@ -90,6 +90,29 @@ public class WorldManager : MonoBehaviour
         }
     }
 
+    private static MusicManager MusicManager;
+    public static MusicManager Music
+    {
+        get
+        {
+            if (MusicManager == null)
+            {
+                MusicManager found = Helper.FindOrCreateSingleton<MusicManager>("Prefabs/Managers/MusicManager");
+                if (found.enabled == false)
+                {
+                    found.enabled = true;
+                }
+                MusicManager = found;
+            }
+            return MusicManager;
+        }
+        private set
+        {
+            MusicManager = value;
+        }
+    }
+
+
     private void Start()
     {
         SingletonCheck();
@@ -106,6 +129,10 @@ public class WorldManager : MonoBehaviour
         if (GameUI == null)
         {
             GameUI = GameUI.Instance;
+        }
+        if (MusicManager == null)
+        {
+            MusicManager = MusicManager.Instance;
         }
 
         ConnectGameUIEvents();
@@ -186,6 +213,13 @@ public class WorldManager : MonoBehaviour
             GameUI.MaxSeaLevel = 70f;
             GameUI.SeaLevelIncrement = MapData.floodIncrement;
             UpdateGUI();
+
+            MusicManager.CurrentMusicCategory = MusicManager.MusicCategory.MainGame;
+            MusicManager.CurrentBoardState = MusicManager.BoardState.NewBoard;
+            if (!Application.isEditor)
+            {
+                MusicManager.PlayMusic();
+            }
         }
     }
 
@@ -204,6 +238,15 @@ public class WorldManager : MonoBehaviour
         PollutionLevel += newPollution;
         turn_count++;
         UpdateGUI();
+
+        if (!Application.isEditor)
+        {
+            if (MusicManager.CurrentBoardState == MusicManager.BoardState.NewBoard)
+            {
+                MusicManager.CurrentBoardState = MusicManager.BoardState.LowPollution;
+                MusicManager.PlayMusic();
+            }
+        }
     }
 
     private void UpdateGUI()
