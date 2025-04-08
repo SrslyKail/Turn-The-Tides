@@ -1,0 +1,16 @@
+{
+    "name": "TTT.Events",
+    "rootNamespace": "",
+    "references": [
+        "GUID:838291f5ea1d40e4ba4c4603dfc2bd86"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

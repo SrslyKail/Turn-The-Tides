@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using System;
 
 public class TestUI
 {
@@ -119,11 +120,10 @@ public class TestUI
         Button button = uiContainer.AddComponent<Button>();
         nextTurnButton.button = button;
         gameUI.nextTurnButton = nextTurnButton;
-        gameUI.NextTurnRequestedEvent = new UnityEvent();
-        gameUI.NextTurnRequestedEvent.AddListener(() => { Assert.Pass(); });
+        TTTEvents.NextTurnRequestedEvent += (object sender, EventArgs e) => { Assert.Pass(); };
 
         nextTurnButton.OnButtonClicked = new UnityEvent();
-        nextTurnButton.OnButtonClicked.AddListener(() => { gameUI.OnNextTurnRequested(); });
+        nextTurnButton.OnButtonClicked.AddListener(() => { TTTEvents.NextTurnRequestedEvent.Invoke(this, EventArgs.Empty); });
         nextTurnButton.OnClick();
 
         yield return null;

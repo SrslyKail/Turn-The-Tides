@@ -1,26 +1,11 @@
+using System;
 using TurnTheTides;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-
-    public enum MusicCategory
-    {
-        MainMenu,
-        MainGame,
-        GameOver
-    }
-
-    public enum BoardState
-    {
-        None,
-        NewBoard,
-        LowPollution,
-        ModeratePollution,
-        HighPollution
-    }
-
     private static MusicManager _instance;
+
     public static MusicManager Instance
     {
         get
@@ -32,15 +17,13 @@ public class MusicManager : MonoBehaviour
                 {
                     found.enabled = true;
                 }
+
                 _instance = found;
             }
+
             return _instance;
         }
     }
-
-    public MusicCategory CurrentMusicCategory = MusicCategory.MainMenu;
-
-    public BoardState CurrentBoardState = BoardState.None;
 
     public bool PlayOnAwake = false;
 
@@ -58,11 +41,14 @@ public class MusicManager : MonoBehaviour
     public void Start()
     {
         SingletonCheck();
+        TTTEvents.ChangeBoardState += UpdateAudioPlayer;
         if (PlayOnAwake)
         {
             PlayMusic();
         }
     }
+
+
     private void SingletonCheck()
     {
         if (_instance == null)
@@ -76,47 +62,37 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    private void UpdateAudioPlayer()
+    private void UpdateAudioPlayer(object sender, EventArgs e)
     {
-        AudioPlayer.loop = (CurrentMusicCategory != MusicCategory.GameOver);
+        BoardStateEventArgs args = (BoardStateEventArgs)e;
+        // Loop audio if we're not at game over
+        AudioPlayer.loop = args.NewBoardState != BoardState.GameOver;
 
-        if (CurrentMusicCategory != MusicCategory.MainGame)
+        switch (args.NewBoardState)
         {
-            CurrentBoardState = BoardState.None;
-        }
-
-        switch (CurrentMusicCategory)
-        {
-            case MusicCategory.GameOver:
+            case BoardState.GameOver:
                 AudioPlayer.clip = GameOverMusic;
                 break;
-            case MusicCategory.MainMenu:
+            case BoardState.MainMenu:
                 AudioPlayer.clip = MainMenuMusic;
                 break;
-            case MusicCategory.MainGame:
-                switch (CurrentBoardState)
-                {
-                    case BoardState.NewBoard:
-                        AudioPlayer.clip = NewBoardMusic;
-                        break;
-                    case BoardState.LowPollution:
-                        AudioPlayer.clip = LowPollutionMusic;
-                        break;
-                    case BoardState.ModeratePollution:
-                        AudioPlayer.clip = ModeratePollutionMusic;
-                        break;
-                    case BoardState.HighPollution:
-                        AudioPlayer.clip = HighPollutionMusic;
-                        break;
-                    default:
-                        Debug.LogWarning("No music for this board state.");
-                        break;
-                }
+            case BoardState.NewBoard:
+                AudioPlayer.clip = NewBoardMusic;
+                break;
+            case BoardState.LowPollution:
+                AudioPlayer.clip = LowPollutionMusic;
+                break;
+            case BoardState.ModeratePollution:
+                AudioPlayer.clip = ModeratePollutionMusic;
+                break;
+            case BoardState.HighPollution:
+                AudioPlayer.clip = HighPollutionMusic;
                 break;
             default:
-                Debug.LogWarning("No music for this category.");
+                Debug.LogWarning("No music for this board state.");
                 break;
         }
+        PlayMusic();
     }
 
     public void PlayMusic()
@@ -125,7 +101,7 @@ public class MusicManager : MonoBehaviour
         {
             AudioPlayer.Stop();
         }
-        UpdateAudioPlayer();
+
         AudioPlayer.Play();
     }
 

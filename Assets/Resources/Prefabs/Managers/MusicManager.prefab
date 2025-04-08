@@ -142,9 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8449842b1556d4593fa586cf08b2e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentMusicCategory: 1
-  CurrentBoardState: 1
-  PlayOnAwake: 0
+  PlayOnAwake: 1
   MainMenuMusic: {fileID: 8300000, guid: 88e452b5e11ab334484baabb39094dec, type: 3}
   NewBoardMusic: {fileID: 8300000, guid: a65a892043f07f041b6002ae6798ea19, type: 3}
   LowPollutionMusic: {fileID: 8300000, guid: 26ba768bc76500943a5a5e8c447e188a, type: 3}

@@ -47,9 +47,9 @@ public class PollutionTest
 
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
-        double oldPollution = worldManager.PollutionLevel;
+        double oldPollution = worldManager.PollutionTotal;
         worldManager.NextTurn();
-        double newPollution = worldManager.PollutionLevel;
+        double newPollution = worldManager.PollutionTotal;
 
         Assert.True(newPollution > oldPollution);
 
@@ -66,9 +66,9 @@ public class PollutionTest
 
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
-        double oldPollution = worldManager.PollutionLevel;
+        double oldPollution = worldManager.PollutionTotal;
         worldManager.NextTurn();
-        double newPollution = worldManager.PollutionLevel;
+        double newPollution = worldManager.PollutionTotal;
 
         Assert.True(newPollution < oldPollution);
 

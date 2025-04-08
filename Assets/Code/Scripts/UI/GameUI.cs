@@ -1,5 +1,6 @@
 using System;
 using TurnTheTides;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -89,16 +90,10 @@ public class GameUI : MonoBehaviour
     [Header("Tile Info Panel")]
     public bool TileInfoPanelActive = true;
 
-    /// <summary>
-    /// Event invoked when the next turn is requested.
-    /// </summary>
-    public UnityEvent NextTurnRequestedEvent;
-
-    public UnityEvent ToggleFloodEvent;
-
     public void Start()
     {
         SingletonCheck();
+        
     }
     private void SingletonCheck()
     {
@@ -111,20 +106,6 @@ public class GameUI : MonoBehaviour
         {
             Helper.SmartDestroy(gameObject);
         }
-    }
-
-    /// <summary>
-    /// Called when the next turn is requested.
-    /// </summary>
-    public void OnNextTurnRequested()
-    {
-        //Debug.Log("Next turn requested");
-        NextTurnRequestedEvent.Invoke();
-    }
-
-    public void OnToggleFloodRequest()
-    {
-        ToggleFloodEvent.Invoke();
     }
 
     public void UpdateTileInfoPanel()
@@ -157,7 +138,7 @@ public class GameUI : MonoBehaviour
         TileInfoPanelActive = false;
         tileInfoPanel.ClearTileInfo();
     }
-
+    
     public void HideTileInfoPanel()
     {
         if (tileInfoPanel == null)

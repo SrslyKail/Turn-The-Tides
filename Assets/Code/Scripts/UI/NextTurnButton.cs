@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -41,13 +42,13 @@ public class NextTurnButton : MonoBehaviour
     {
         if (ButtonEnabled)
         {
-            //Debug.Log("Next turn button clicked");
+            Debug.Log("Next turn button clicked");
             OnButtonClicked?.Invoke();
         }
     }
 
     void Start()
     {
-        OnButtonClicked ??= new UnityEvent();
+        OnButtonClicked.AddListener(() => { TTTEvents.NextTurnRequestedEvent.Invoke(this, EventArgs.Empty); });
     }
 }
