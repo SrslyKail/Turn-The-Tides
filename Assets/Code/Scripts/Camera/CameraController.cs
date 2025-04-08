@@ -158,10 +158,9 @@ public class CameraController : MonoBehaviour
     private void SelectObjectAtMarker()
     {
         // raycast downwards from immediately above the marker
-        RaycastHit hit;
         Vector3 raycastOrigin = markerPosition + Vector3.up;
         Vector3 raycastDirection = Vector3.down;
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out RaycastHit hit))
         {
             Debug.Log("Selecting object at marker");
             // if raycast hits a GameObject, select it
@@ -173,10 +172,9 @@ public class CameraController : MonoBehaviour
     private void MoveMarkerPositionToSurface()
     {
         // raycast from the sky downwards
-        RaycastHit hit;
         Vector3 raycastOrigin = markerPosition + (Vector3.up * VerticalTrackingStartingHeightOffset);
         Vector3 raycastDirection = Vector3.down;
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, VerticalTrackingMaxScanDistance))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out RaycastHit hit, VerticalTrackingMaxScanDistance))
         {
             // if raycast hits a HexTile, set marker's y position to HexTile's elevation
             GameObject hitObject = hit.collider.gameObject;
@@ -189,7 +187,11 @@ public class CameraController : MonoBehaviour
 
     private void SyncCameraToMarker()
     {
-        transform.SetPositionAndRotation(markerPosition + transform.forward * -DistanceFromMarker, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0));
+        transform.SetPositionAndRotation(
+            markerPosition + (transform.forward * -DistanceFromMarker),
+            Quaternion.Euler(transform.rotation.eulerAngles.x,
+            transform.rotation.eulerAngles.y,
+            0));
     }
 
     private void InterpolateCameraFovToZoomLevel()

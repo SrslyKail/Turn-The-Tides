@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    public static readonly int start_year = 2025;
+    bool flooding = false;
+    IEnumerator floodCoroutine;
+    public static readonly int start_year = System.DateTime.Today.Year;
     private static WorldManager _instance;
     public static WorldManager Instance
     {
@@ -30,7 +32,7 @@ public class WorldManager : MonoBehaviour
 
     [SerializeField]
     private double _pollutionLevel;
-    public double PollutionLevel
+    public double PollutionTotal
     {
         get => _pollutionLevel; set => _pollutionLevel = value;
     }
@@ -97,13 +99,9 @@ public class WorldManager : MonoBehaviour
         {
             if (MusicManager == null)
             {
-                MusicManager found = Helper.FindOrCreateSingleton<MusicManager>("Prefabs/Managers/MusicManager");
-                if (found.enabled == false)
-                {
-                    found.enabled = true;
-                }
-                MusicManager = found;
+                MusicManager = MusicManager.Instance;
             }
+
             return MusicManager;
         }
         private set
@@ -112,36 +110,38 @@ public class WorldManager : MonoBehaviour
         }
     }
 
+    private BoardState boardState = BoardState.None;
 
     private void Start()
     {
         SingletonCheck();
+        floodCoroutine = FloodCoroutine();
 
-        //DontDestroyOnLoad(gameObject);
-        if (MapData != null)
-        {
-            GridManager.BuildMap(MapData);
-        }
-        if (GridManager == null)
-        {
-            GridManager = GridManager.Instance;
-        }
-        if (GameUI == null)
-        {
-            GameUI = GameUI.Instance;
-        }
-        if (MusicManager == null)
-        {
-            MusicManager = MusicManager.Instance;
-        }
+        Helper.FindOrCreateSingleton<TTTEvents>("Prefabs/Managers/EventManager");
+
+        DontDestroyOnLoad(gameObject);
 
         ConnectGameUIEvents();
+
+        if(MapData == null)
+        {
+            CreateNewLevel(
+                Resources.Load<TextAsset>("Maps/lowerMainland"),
+                2,
+                0.8f
+            );
+        }
+        else
+        {
+            SetupWorld();
+        }
     }
 
     private void ConnectGameUIEvents()
     {
-        GameUI.NextTurnRequestedEvent.AddListener(NextTurn);
-        GameUI.ToggleFloodEvent.AddListener(ToggleFlood);
+        TTTEvents.NextTurnRequestedEvent += OnNextTurn;
+        TTTEvents.FloodEvent += OnFlood;
+        TTTEvents.ToggleFloodEvent += OnToggleFlood;
     }
 
     /// <summary>
@@ -208,17 +208,27 @@ public class WorldManager : MonoBehaviour
         else
         {
             GridManager.BuildMap(MapData);
-            PollutionLevel = 0;
+            PollutionTotal = 0;
             turn_count = start_year;
             GameUI.MaxSeaLevel = 70f;
             GameUI.SeaLevelIncrement = MapData.floodIncrement;
             UpdateGUI();
-
-            MusicManager.CurrentMusicCategory = MusicManager.MusicCategory.MainGame;
-            MusicManager.CurrentBoardState = MusicManager.BoardState.NewBoard;
-            MusicManager.PlayMusic();
-
+            UpdateWorldState(BoardState.NewBoard);
         }
+    }
+
+    public void UpdateWorldState(BoardState newState)
+    {
+        boardState = newState;
+        TTTEvents.ChangeBoardState.Invoke(this, new BoardStateEventArgs() {
+            NewBoardState = boardState
+        });
+    }
+
+    [ContextMenu("Next Turn")]
+    public void NextTurn()
+    {
+        TTTEvents.NextTurnRequestedEvent.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -227,21 +237,36 @@ public class WorldManager : MonoBehaviour
     /// track new pollution freed by any potential tile destruction, and 
     /// then add new pollution from the existing tiles.
     /// </summary>
-    [ContextMenu("Next Turn")]
-    public void NextTurn()
+    private void OnNextTurn(object sender, EventArgs e)
     {
-        waterElevation += MapData.floodIncrement;
-        double newPollution = GridManager.Flood();
-        newPollution += GridManager.CalculatePollutionPerTurn();
-        PollutionLevel += newPollution;
+        Flood();
         turn_count++;
         UpdateGUI();
 
-        if (MusicManager.CurrentBoardState == MusicManager.BoardState.NewBoard)
+    }
+
+    public void Flood()
+    {
+        waterElevation += MapData.floodIncrement;
+
+        TTTEvents.FloodEvent.Invoke(this, new FloodEventArgs
         {
-            MusicManager.CurrentBoardState = MusicManager.BoardState.LowPollution;
-            MusicManager.PlayMusic();
-        }
+            FloodIncrement = waterElevation
+        });
+    }
+
+    private void OnFlood(object sender, EventArgs e)
+    {
+        double newPollution = GridManager.Flood();
+        newPollution += GridManager.CalculatePollutionPerTurn();
+        PollutionTotal += newPollution;
+        UpdatePollutionState();
+    }
+
+    public void UpdatePollutionState()
+    {
+        //Logic to check the pollution levels vs the 
+        //PollutionTotal and set the board state accordingly
     }
 
     private void UpdateGUI()
@@ -251,12 +276,13 @@ public class WorldManager : MonoBehaviour
         GameUI.UpdateTileInfoPanel();
     }
 
-    bool flooding = false;
-    Coroutine floodCoroutine;
-
-
     [ContextMenu("Toggle Flooding")]
     public void ToggleFlood()
+    {
+        TTTEvents.ToggleFloodEvent.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnToggleFlood(object sender, EventArgs e)
     {
         flooding = !flooding;
         if (flooding)
@@ -274,7 +300,7 @@ public class WorldManager : MonoBehaviour
     /// Coroutine for cycling next turn for simulation purposes.
     /// </summary>
     /// <returns></returns>
-    public IEnumerator FloodCoroutine()
+    private IEnumerator FloodCoroutine()
     {
 
         while (flooding)
@@ -292,7 +318,7 @@ public class WorldManager : MonoBehaviour
     private void StartFlooding()
     {
         flooding = true;
-        floodCoroutine = StartCoroutine(FloodCoroutine());
+        StartCoroutine(floodCoroutine);
     }
 
     /// <summary>
@@ -303,6 +329,5 @@ public class WorldManager : MonoBehaviour
     {
         flooding = false;
         StopCoroutine(floodCoroutine);
-        floodCoroutine = null;
     }
 }
