@@ -240,14 +240,19 @@ public class WorldManager : MonoBehaviour
 
     public void UpdateWorldState(BoardState newState)
     {
-        this.boardState = newState;
-        object send = this;
+        if(boardState != newState)
+        {
+            this.boardState = newState;
 
-        TTTEvents.ChangeBoardState.Invoke(
-            send,
-            new BoardStateEventArgs(){
+            TTTEvents.ChangeBoardState.Invoke(
+            this,
+            new BoardStateEventArgs()
+            {
                 NewBoardState = newState
             });
+        }
+
+        
     }
 
     [ContextMenu("Next Turn")]
@@ -265,6 +270,22 @@ public class WorldManager : MonoBehaviour
     private void OnNextTurn(object sender, EventArgs e)
     {
         Flood();
+        
+        float ratio = GridManager.GetFloodedRatio();
+        Debug.Log($"Current ratio: {ratio}");
+        if (ratio > 0.2)
+        {
+            UpdateWorldState(BoardState.HighPollution);
+        }
+        else if(ratio > 0.1)
+        {
+            UpdateWorldState(BoardState.ModeratePollution);
+        }
+        else if(ratio > 0.04)
+        {
+            UpdateWorldState(BoardState.LowPollution);
+        }
+
         turn_count++;
         UpdateGUI();
     }
@@ -282,13 +303,11 @@ public class WorldManager : MonoBehaviour
     private void OnChangeBoardState(object send, EventArgs e)
     {
         BoardStateEventArgs args = e as BoardStateEventArgs;
-        if(args.NewBoardState != BoardState.Loading)
+        if(args.NewBoardState == BoardState.Loading)
         {
-            return;
-        }
-
-        SetupWorld();
-        UpdateWorldState(BoardState.NewBoard);
+            SetupWorld();
+            UpdateWorldState(BoardState.NewBoard);
+        }        
     }
 
     private void OnLoadCustomMap(object sender, EventArgs e)
