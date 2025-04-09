@@ -116,6 +116,7 @@ public class WorldManager : MonoBehaviour
     private BoardState boardState = BoardState.None;
     private int mapSizeOffset = 2;
     private float floodIncrement = 0.08f;
+    private bool isCustomMap = false;
 
     private void OnMapScaleChange(object sender, EventArgs e)
     {
@@ -158,6 +159,7 @@ public class WorldManager : MonoBehaviour
         TTTEvents.MapScaleChangeEvent += OnMapScaleChange;
         TTTEvents.CreateNewMap += OnCreateNewMap;
         TTTEvents.ChangeBoardState += OnChangeBoardState;
+        TTTEvents.LoadCustomMap += OnLoadCustomMap;
     }
 
     /// <summary>
@@ -204,7 +206,7 @@ public class WorldManager : MonoBehaviour
             }
         }
  
-        GridManager.BuildMap(MapData);
+        GridManager.BuildMap(MapData, isCustomMap);
         PollutionTotal = 0;
         turn_count = start_year;
         GameUI.MaxSeaLevel = 70f;
@@ -288,6 +290,12 @@ public class WorldManager : MonoBehaviour
         SetupWorld();
         UpdateWorldState(BoardState.NewBoard);
     }
+
+    private void OnLoadCustomMap(object sender, EventArgs e)
+    {
+        isCustomMap = true;
+    }
+
 
     private void OnFlood(object sender, EventArgs e)
     {

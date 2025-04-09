@@ -83,7 +83,11 @@ public class TTTEvents: MonoBehaviour
 
     public static EventHandler CreateNewMap;
 
+    public static EventHandler LoadCustomMap;
+
     public static EventHandler FinishCreatingMap;
+
+    public static EventHandler AssignLocationFlags;
 
     /// <summary>
     /// Global "Quit the game" function.
