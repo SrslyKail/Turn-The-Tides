@@ -25,8 +25,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public bool PlayOnAwake = false;
-
     [Header("Audio Sources")]
     public AudioClip MainMenuMusic;
     public AudioClip NewBoardMusic;
@@ -40,15 +38,13 @@ public class MusicManager : MonoBehaviour
 
     public void Start()
     {
+        DontDestroyOnLoad(this);
         SingletonCheck();
+        AudioPlayer.clip = MainMenuMusic;
         TTTEvents.ChangeBoardState += UpdateAudioPlayer;
-        if (PlayOnAwake)
-        {
-            PlayMusic();
-        }
+
+        PlayMusic();
     }
-
-
     private void SingletonCheck()
     {
         if (_instance == null)
@@ -88,10 +84,13 @@ public class MusicManager : MonoBehaviour
             case BoardState.HighPollution:
                 AudioPlayer.clip = HighPollutionMusic;
                 break;
+            case BoardState.Loading:
+                break; // Keeping playing the current music.
             default:
                 Debug.LogWarning("No music for this board state.");
                 break;
         }
+
         PlayMusic();
     }
 

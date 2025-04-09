@@ -7,12 +7,12 @@ namespace TurnTheTides
     {
         None,
         MainMenu,
-        MainGame,
-        GameOver,
+        Loading,
         NewBoard,
         LowPollution,
         ModeratePollution,
-        HighPollution
+        HighPollution,
+        GameOver
     }
     
 

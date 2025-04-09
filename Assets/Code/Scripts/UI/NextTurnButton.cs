@@ -42,7 +42,6 @@ public class NextTurnButton : MonoBehaviour
     {
         if (ButtonEnabled)
         {
-            Debug.Log("Next turn button clicked");
             OnButtonClicked?.Invoke();
         }
     }

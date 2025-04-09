@@ -1,13 +1,22 @@
-using UnityEngine.Events;
-using System.Collections;
 using UnityEngine;
 using System;
-using UnityEngine.EventSystems;
 using TurnTheTides;
 
 public class FloodEventArgs: EventArgs
 {
     public float FloodIncrement { get; set; }
+}
+
+public class NewMapEventArgs: EventArgs
+{
+    public TextAsset DataFile { get; set; }
+    public int MapScale { get; set; }
+    public float FloodAmount { get; set; }
+}
+
+public class MapScaleEventArgs: EventArgs
+{
+    public int MapScale { get; set; }
 }
 
 public class BoardStateEventArgs: EventArgs
@@ -17,25 +26,29 @@ public class BoardStateEventArgs: EventArgs
 
 public class TTTEvents: MonoBehaviour
 {
-
     private static TTTEvents _instance;
-    /// <summary>
-    /// Get the current instance of the GridManager. 
-    /// Will create one if one does not exist.
-    /// </summary>
     public static TTTEvents Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = Helper.FindOrCreateSingleton<TTTEvents>("Prefabs/Managers/TTTEvents");
+                TTTEvents found = Helper.FindOrCreateSingleton<TTTEvents>("Prefabs/Managers/EventManager");
+
+                if (found.enabled == false)
+                {
+                    found.enabled = true;
+                }
+
+                _instance = found;
             }
 
             return _instance;
         }
     }
-
+    /// <summary>
+    /// Invoked when a tile is clicked.
+    /// </summary>
     public static EventHandler TileClickEvent;
 
     /// <summary>
@@ -43,13 +56,43 @@ public class TTTEvents: MonoBehaviour
     /// </summary>
     public static EventHandler NextTurnRequestedEvent;
 
+    /// <summary>
+    /// Invoked when ToggleFlood is called
+    /// </summary>
     public static EventHandler ToggleFloodEvent;
 
+    /// <summary>
+    /// Called when a flood is happening
+    /// </summary>
     public static EventHandler FloodEvent;
 
+    /// <summary>
+    /// Called when the Board State changes
+    /// </summary>
     public static EventHandler ChangeBoardState;
 
-    private void Start()
+    /// <summary>
+    /// Called when the Map Scale changes in the Main Menu
+    /// </summary>
+    public static EventHandler MapScaleChangeEvent;
+
+    /// <summary>
+    /// Called when the FloodIncrement is set in the Main Menu
+    /// </summary>
+    public static EventHandler FloodIncrementChangeEvent;
+
+    public static EventHandler CreateNewMap;
+
+    public static EventHandler FinishCreatingMap;
+
+    /// <summary>
+    /// Global "Quit the game" function.
+    /// </summary>
+    public static void QuitGame()
+    {
+        Application.Quit();
+    }
+    private void Awake()
     {
         DontDestroyOnLoad(this);
     }

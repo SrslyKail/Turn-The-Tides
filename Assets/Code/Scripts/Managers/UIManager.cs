@@ -25,15 +25,51 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    GameObject MainMenuGuiPrefab;
+    [SerializeField]
+    GameObject LoadingGuiPrefab;
+    [SerializeField]
+    GameObject GameGuiPrefab;
+
+    GameObject MainMenuGui;
+    GameObject LoadingGui;
+    GameObject GameGui;
+
+    private void Awake()
     {
-        
+        TTTEvents.ChangeBoardState += OnChangeBoardState;
+        MainMenuGui = Instantiate(MainMenuGuiPrefab);
+        LoadingGui = Instantiate(LoadingGuiPrefab);
+        LoadingGui.SetActive(false);
+        GameGui = Instantiate(GameGuiPrefab);
+        GameGui.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnChangeBoardState(object sender, EventArgs e)
     {
-        
+        BoardStateEventArgs args = e as BoardStateEventArgs;
+        switch (args.NewBoardState)
+        {
+            case BoardState.MainMenu: {
+                LoadingGui.SetActive(false);
+                GameGui.SetActive(false);
+                MainMenuGui.SetActive(true);
+                break;
+            }
+            case BoardState.Loading: {
+                LoadingGui.SetActive(true);
+                GameGui.SetActive(false);
+                MainMenuGui.SetActive(false);
+                break;
+            }
+            case BoardState.NewBoard: {
+                LoadingGui.SetActive(false);
+                GameGui.SetActive(true);
+                MainMenuGui.SetActive(false);
+                break;
+            }
+            default: break;
+        }
     }
 }

@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    bool flooding = false;
-    IEnumerator floodCoroutine;
-    public static readonly int start_year = System.DateTime.Today.Year;
     private static WorldManager _instance;
     public static WorldManager Instance
     {
@@ -28,24 +25,22 @@ public class WorldManager : MonoBehaviour
             return _instance;
         }
     }
-
-    [SerializeField]
-    private double _pollutionLevel;
-    public double PollutionTotal
-    {
-        get => _pollutionLevel; set => _pollutionLevel = value;
-    }
-    public readonly double PollutionMax = double.MaxValue;
-
+    
+    [Header("References")]
     [SerializeField]
     private MapData data;
+    [SerializeField]
+    private GridManager gridManager;
+    [SerializeField]
+    private GameUI _gameUI;
+    [SerializeField]
+    private MusicManager _musicManager;
+
     public MapData MapData
     {
         get => data; set => data = value;
     }
-
-    [SerializeField]
-    private GridManager gridManager;
+    
     public GridManager GridManager
     {
         get
@@ -63,11 +58,7 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    public static int turn_count = start_year;
-    private static float waterElevation = 0;
-
-    private static GameUI _gameUI;
-    public static GameUI GameUI
+    public GameUI GameUI
     {
         get
         {
@@ -91,8 +82,7 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    private static MusicManager _musicManager;
-    public static MusicManager MusicManager
+    public MusicManager MusicManager
     {
         get
         {
@@ -109,14 +99,41 @@ public class WorldManager : MonoBehaviour
         }
     }
 
+
+    [Header("Gameplay Variables")]
+    [SerializeField]
+    private double _pollutionLevel;
+    private bool flooding = false;
+    IEnumerator floodCoroutine;
+    public static readonly int start_year = System.DateTime.Today.Year;
+    public double PollutionTotal
+    {
+        get => _pollutionLevel; set => _pollutionLevel = value;
+    }
+    public readonly double PollutionMax = double.MaxValue;
+    public static int turn_count = start_year;
+    private static float waterElevation = 0;
     private BoardState boardState = BoardState.None;
+    private int mapSizeOffset = 1;
+    private float floodIncrement = 0.08f;
+
+    private void OnMapScaleChange(object sender, EventArgs e)
+    {
+        MapScaleEventArgs args = e as MapScaleEventArgs;
+        mapSizeOffset = args.MapScale;
+    }
+
+    private void OnFloodIncrementChange(object sender, EventArgs e)
+    {
+        FloodEventArgs args = e as FloodEventArgs;
+        floodIncrement = args.FloodIncrement;
+    }
 
     private void Start()
     {
         SingletonCheck();
         floodCoroutine = FloodCoroutine();
-
-        Helper.FindOrCreateSingleton<TTTEvents>("Prefabs/Managers/EventManager");
+        MusicManager = MusicManager.Instance;
 
         DontDestroyOnLoad(gameObject);
 
@@ -124,16 +141,11 @@ public class WorldManager : MonoBehaviour
 
         if(MapData == null)
         {
-            
             CreateNewLevel(
                 Resources.Load<TextAsset>("Maps/lowerMainland"),
                 2,
                 0.8f
             );
-        }
-        else
-        {
-            SetupWorld();
         }
     }
 
@@ -142,6 +154,10 @@ public class WorldManager : MonoBehaviour
         TTTEvents.NextTurnRequestedEvent += OnNextTurn;
         TTTEvents.FloodEvent += OnFlood;
         TTTEvents.ToggleFloodEvent += OnToggleFlood;
+        TTTEvents.FloodIncrementChangeEvent += OnFloodIncrementChange;
+        TTTEvents.MapScaleChangeEvent += OnMapScaleChange;
+        TTTEvents.CreateNewMap += OnCreateNewMap;
+        TTTEvents.ChangeBoardState += OnChangeBoardState;
     }
 
     /// <summary>
@@ -174,6 +190,37 @@ public class WorldManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Resets the runtime variables for the currently loaded level and resets the map to its default state.
+    /// </summary>
+    [ContextMenu("Refresh Game")]
+    public void SetupWorld()
+    {
+        while (MapData == null)
+        {
+            LoadExternalJson externalLoader = new();
+            if(externalLoader.TryGetDataJson(out TextAsset textAsset))
+            {
+                CreateNewLevel(textAsset, mapSizeOffset, floodIncrement);
+            }
+        }
+ 
+        GridManager.BuildMap(MapData);
+        PollutionTotal = 0;
+        turn_count = start_year;
+        GameUI.MaxSeaLevel = 70f;
+        GameUI.SeaLevelIncrement = MapData.floodIncrement;
+        UpdateGUI();
+        UpdateWorldState(BoardState.NewBoard);
+    }
+
+    private void OnCreateNewMap(object sender, EventArgs e)
+    {
+        NewMapEventArgs args = e as NewMapEventArgs;
+        CreateNewLevel(args.DataFile, args.MapScale, args.FloodAmount);
+        TTTEvents.FinishCreatingMap.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Create a new level to play on.
     /// </summary>
     /// <param name="levelData">a JSON containing the data for the hexgrid.</param>
@@ -187,42 +234,18 @@ public class WorldManager : MonoBehaviour
     {
         MapData = ScriptableObject.CreateInstance<MapData>();
         MapData.LoadData(levelData, mapSizeOffset, flood_increment);
-        SetupWorld();
-    }
-
-    /// <summary>
-    /// Resets the runtime variables for the currently loaded level and resets the map to its default state.
-    /// </summary>
-    [ContextMenu("Refresh Game")]
-    public void SetupWorld()
-    {
-        if (MapData == null)
-        {
-            //CB: TODO: Figure out how to make a runtime popup.
-            //EditorUtility.DisplayDialog(
-            //    "No map data",
-            //    "No map data has been given to the World Manager.",
-            //    "Close"
-            //    );
-        }
-        else
-        {
-            GridManager.BuildMap(MapData);
-            PollutionTotal = 0;
-            turn_count = start_year;
-            GameUI.MaxSeaLevel = 70f;
-            GameUI.SeaLevelIncrement = MapData.floodIncrement;
-            UpdateGUI();
-            UpdateWorldState(BoardState.NewBoard);
-        }
     }
 
     public void UpdateWorldState(BoardState newState)
     {
-        boardState = newState;
-        TTTEvents.ChangeBoardState.Invoke(this, new BoardStateEventArgs() {
-            NewBoardState = boardState
-        });
+        this.boardState = newState;
+        object send = this;
+
+        TTTEvents.ChangeBoardState.Invoke(
+            send,
+            new BoardStateEventArgs(){
+                NewBoardState = newState
+            });
     }
 
     [ContextMenu("Next Turn")]
@@ -242,7 +265,6 @@ public class WorldManager : MonoBehaviour
         Flood();
         turn_count++;
         UpdateGUI();
-
     }
 
     public void Flood()
@@ -253,6 +275,18 @@ public class WorldManager : MonoBehaviour
         {
             FloodIncrement = waterElevation
         });
+    }
+
+    private void OnChangeBoardState(object send, EventArgs e)
+    {
+        BoardStateEventArgs args = e as BoardStateEventArgs;
+        if(args.NewBoardState != BoardState.Loading)
+        {
+            return;
+        }
+
+        SetupWorld();
+        UpdateWorldState(BoardState.NewBoard);
     }
 
     private void OnFlood(object sender, EventArgs e)
@@ -269,6 +303,7 @@ public class WorldManager : MonoBehaviour
         //PollutionTotal and set the board state accordingly
     }
 
+    // TODO: Turn this into an event for the GUI.
     private void UpdateGUI()
     {
         GameUI.turnCounterText.SetTurnText(turn_count);
@@ -294,7 +329,6 @@ public class WorldManager : MonoBehaviour
             StopFlooding();
         }
     }
-
 
     /// <summary>
     /// Coroutine for cycling next turn for simulation purposes.

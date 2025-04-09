@@ -4,7 +4,7 @@ using System.Windows.Forms.VisualStyles;
 using System.Threading;
 using System.IO;
 
-public class LoadExternalJson: MonoBehaviour
+public class LoadExternalJson
 {
 
     private readonly SFB.ExtensionFilter[] extensions = new[]
@@ -26,10 +26,6 @@ public class LoadExternalJson: MonoBehaviour
         return true;
     }
 
-    private void Awake()
-    {
-        SelectFile();
-    }
 
     private string[] SelectFile()
     {
