@@ -114,7 +114,7 @@ public class WorldManager : MonoBehaviour
     public static int turn_count = start_year;
     private static float waterElevation = 0;
     private BoardState boardState = BoardState.None;
-    private int mapSizeOffset = 1;
+    private int mapSizeOffset = 2;
     private float floodIncrement = 0.08f;
 
     private void OnMapScaleChange(object sender, EventArgs e)
@@ -143,8 +143,8 @@ public class WorldManager : MonoBehaviour
         {
             CreateNewLevel(
                 Resources.Load<TextAsset>("Maps/lowerMainland"),
-                2,
-                0.8f
+                mapSizeOffset,
+                floodIncrement
             );
         }
     }
