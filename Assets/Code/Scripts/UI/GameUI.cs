@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 using TurnTheTides;
 using UnityEditor;
 using UnityEngine;
@@ -176,5 +177,10 @@ public class GameUI : MonoBehaviour
         newPos.x = Mathf.Lerp(newPos.x, active ? -halfWidth : halfWidth, Time.deltaTime * 10f);
 
         rectTransform.anchoredPosition = newPos;
+    }
+
+    public void OnExitClick()
+    {
+        TTTEvents.QuitGame();
     }
 }
