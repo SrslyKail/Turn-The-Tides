@@ -61,6 +61,9 @@ namespace TurnTheTides
             new(1, 0),
             new(0, -1)
         };
+        public int startingWaterTiles = 0;
+        public int floodedTiles;
+        public int totalTiles;
 
         /// <summary>
         /// Think of "Awake" and "Start" as creating a new object.
@@ -94,6 +97,12 @@ namespace TurnTheTides
             }
 
             return tiles[row][col];
+        }
+
+        public float GetFloodedRatio()
+        {
+            Debug.Log($"{floodedTiles} / {totalTiles}");
+            return (float)floodedTiles / totalTiles;
         }
 
         /// <summary>
@@ -195,6 +204,10 @@ namespace TurnTheTides
 
                 offset = !offset;
             }
+
+            totalTiles = tiles.Sum((List<GameObject> row) => { return row.Count; });
+            startingWaterTiles = transform.GetComponentsInChildren<Ocean>(true).ToList().Count;
+            Debug.Log($"Starting water tiles: {startingWaterTiles}");
         }
 
         /// <summary>
@@ -223,7 +236,6 @@ namespace TurnTheTides
         public float Flood()
         {
             float freedPollution = 0f;
-
             
             List<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
@@ -325,7 +337,7 @@ namespace TurnTheTides
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; })
                 .ToHashSet();
-
+            floodedTiles = oceanTiles.Count - startingWaterTiles;
             List<List<GameObject>> oceanTrees = BFS_OceanTiles(oceanTiles);
             foreach (List<GameObject> tree in oceanTrees)
             {
