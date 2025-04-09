@@ -2,7 +2,8 @@
     "name": "TTT.ExternalData",
     "rootNamespace": "",
     "references": [
-        "GUID:632d8110d26af9e4ea1c213ccc5148e2"
+        "GUID:632d8110d26af9e4ea1c213ccc5148e2",
+        "GUID:7be6033fa31f0ef4694f186dd8945b94"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
