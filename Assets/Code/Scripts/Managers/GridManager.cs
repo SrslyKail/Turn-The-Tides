@@ -155,6 +155,7 @@ namespace TurnTheTides
             float heightOffset = 3f / 4f * tileHeight;
             bool offset = false;
 
+            //Tiles for location labels to be glued on to for the default map, add more or remove some. It's up to you, I guess...
             Dictionary<Vector2Int, string> locationDictionary = new Dictionary<Vector2Int, string>
             {
                 { new Vector2Int(19, 11), "Delta" },
@@ -219,6 +220,7 @@ namespace TurnTheTides
                     newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
                     newTile.transform.SetParent(this.transform);
 
+                    //Here's where the labels are glued on.
                     Vector2Int tilePos = new Vector2Int(x / mapSizeOffset, y / mapSizeOffset);
                     if (!isCustomMap && locationDictionary.TryGetValue(tilePos, out string label))
                     {

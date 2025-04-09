@@ -1,10 +1,11 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Manages (glues) text flags to game objects (hex tiles
+/// </summary>
 public class TextFlagManager : MonoBehaviour
 {
-    //public GameObject textFlagPrefab; // Drag the prefab into this slot in the Inspector
-
     public static void AttachTextFlag(GameObject targetObject, string message, GameObject textFlagPrefab)
     {
         // Create the flag and parent it to the target
