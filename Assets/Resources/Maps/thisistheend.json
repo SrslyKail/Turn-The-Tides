@@ -1,0 +1,6162 @@
+[
+    {
+        "0": [
+            {
+                "latitude": 0,
+                "longitude": 0,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 1,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 2,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 3,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 4,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 5,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 6,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 7,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 8,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 9,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 10,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 11,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 12,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 13,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 14,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 15,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 16,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 17,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 18,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 19,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 20,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 21,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 22,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 23,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 24,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 25,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 26,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 27,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 28,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 29,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 30,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 31,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 32,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 33,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 34,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 35,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 36,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 37,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 38,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 39,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 40,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 41,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 42,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 43,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 44,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 0,
+                "longitude": 45,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "1": [
+            {
+                "latitude": 1,
+                "longitude": 0,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 1,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 2,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 3,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 4,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 5,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 6,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 7,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 8,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 10,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 11,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 12,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 13,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 14,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 15,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 16,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 17,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 18,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 19,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 20,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 21,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 22,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 23,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 25,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 26,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 27,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 28,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 29,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 30,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 31,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 32,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 33,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 34,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 35,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 36,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 37,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 38,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 39,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 40,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 41,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 42,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 43,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 44,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 1,
+                "longitude": 45,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "2": [
+            {
+                "latitude": 2,
+                "longitude": 0,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 1,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 2,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 3,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 4,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 5,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 6,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 7,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 8,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 12,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 13,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 16,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 17,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 19,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 20,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 21,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 22,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 27,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 28,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 30,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 31,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 32,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 33,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 34,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 35,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 36,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 38,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 39,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 40,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 41,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 42,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 43,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 44,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 2,
+                "longitude": 45,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "3": [
+            {
+                "latitude": 3,
+                "longitude": 0,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 1,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 2,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 3,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 4,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 6,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 7,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 8,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 11,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 12,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 13,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 16,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 17,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 19,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 20,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 21,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 27,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 28,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 29,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 30,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 31,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 32,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 33,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 35,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 36,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 37,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 38,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 39,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 40,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 41,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 42,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 43,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 44,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 3,
+                "longitude": 45,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "4": [
+            {
+                "latitude": 4,
+                "longitude": 0,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 1,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 2,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 3,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 4,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 5,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 6,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 7,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 8,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 9,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 12,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 13,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 16,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 17,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 20,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 21,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 24,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 27,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 28,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 30,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 31,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 33,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 34,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 35,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 36,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 37,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 38,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 39,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 40,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 41,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 42,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 43,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 44,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 4,
+                "longitude": 45,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "5": [
+            {
+                "latitude": 5,
+                "longitude": 0,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 1,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 2,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 3,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 4,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 5,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 6,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 7,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 8,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 9,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 12,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 13,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 15,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 16,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 17,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 20,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 21,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 23,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 24,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 27,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 28,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 30,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 31,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 32,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 33,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 34,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 35,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 36,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 37,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 38,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 39,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 40,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 41,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 42,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 43,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 44,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 5,
+                "longitude": 45,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "6": [
+            {
+                "latitude": 6,
+                "longitude": 0,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 1,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 2,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 3,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 4,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 5,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 6,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 7,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 8,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 12,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 13,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 16,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 17,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 20,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 21,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 24,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 27,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 28,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 30,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 31,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 32,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 33,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 34,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 35,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 36,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 37,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 38,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 39,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 40,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 41,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 42,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 43,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 44,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 6,
+                "longitude": 45,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "7": [
+            {
+                "latitude": 7,
+                "longitude": 0,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 1,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 2,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 3,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 4,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 5,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 6,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 7,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 8,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 10,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 12,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 13,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 16,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 17,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 19,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 20,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 21,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 23,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 24,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 27,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 30,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 31,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 32,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 33,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 34,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 35,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 36,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 37,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 39,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 40,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 41,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 42,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 43,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 44,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 7,
+                "longitude": 45,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "8": [
+            {
+                "latitude": 8,
+                "longitude": 0,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 1,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 2,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 3,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 4,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 5,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 6,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 7,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 8,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 10,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 11,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 12,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 13,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 14,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 16,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 17,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 19,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 20,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 21,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 24,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 27,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 28,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 30,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 31,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 32,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 33,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 34,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 35,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 36,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 37,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 38,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 39,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 40,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 41,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 42,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 43,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 44,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 8,
+                "longitude": 45,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "9": [
+            {
+                "latitude": 9,
+                "longitude": 0,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 1,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 2,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 3,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 4,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 5,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 6,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 7,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 8,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 9,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 10,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 11,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 12,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 13,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 14,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 15,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 16,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 17,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 18,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 19,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 20,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 21,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 22,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 23,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 24,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 25,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 26,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 27,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 28,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 29,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 30,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 31,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 32,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 34,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 35,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 36,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 37,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 38,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 39,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 40,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 41,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 42,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 43,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 44,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 9,
+                "longitude": 45,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "10": [
+            {
+                "latitude": 10,
+                "longitude": 0,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 1,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 2,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 3,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 4,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 5,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 6,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 7,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 8,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 9,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 10,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 11,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 12,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 13,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 14,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 15,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 16,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 17,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 18,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 19,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 20,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 21,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 22,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 23,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 24,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 25,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 26,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 27,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 28,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 29,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 30,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 31,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 32,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 33,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 34,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 35,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 36,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 37,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 38,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 39,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 40,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 41,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 42,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 43,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 44,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 10,
+                "longitude": 45,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "11": [
+            {
+                "latitude": 11,
+                "longitude": 0,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 1,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 2,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 3,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 4,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 5,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 6,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 7,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 8,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 9,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 10,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 11,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 12,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 13,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 14,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 15,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 16,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 17,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 18,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 19,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 20,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 21,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 22,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 23,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 24,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 25,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 26,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 27,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 29,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 30,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 31,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 32,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 33,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 34,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 35,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 36,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 37,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 38,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 39,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 40,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 41,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 42,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 43,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 44,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 11,
+                "longitude": 45,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "12": [
+            {
+                "latitude": 12,
+                "longitude": 0,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 1,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 2,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 3,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 4,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 6,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 7,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 8,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 9,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 12,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 13,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 16,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 17,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 20,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 21,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 22,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 23,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 26,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 27,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 30,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 31,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 35,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 36,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 39,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 41,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 42,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 43,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 44,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 12,
+                "longitude": 45,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "13": [
+            {
+                "latitude": 13,
+                "longitude": 0,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 1,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 2,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 3,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 4,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 6,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 7,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 8,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 9,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 12,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 13,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 16,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 17,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 20,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 21,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 22,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 25,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 26,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 27,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 30,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 31,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 34,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 35,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 36,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 39,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 41,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 42,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 43,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 44,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 13,
+                "longitude": 45,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "14": [
+            {
+                "latitude": 14,
+                "longitude": 0,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 1,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 2,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 3,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 4,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 6,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 7,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 8,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 9,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 12,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 13,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 16,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 17,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 18,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 20,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 21,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 22,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 25,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 26,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 27,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 30,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 31,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 35,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 36,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 39,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 41,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 42,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 43,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 44,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 14,
+                "longitude": 45,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "15": [
+            {
+                "latitude": 15,
+                "longitude": 0,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 1,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 2,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 3,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 4,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 6,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 7,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 8,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 9,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 12,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 13,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 15,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 16,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 17,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 18,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 20,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 21,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 25,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 26,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 27,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 30,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 31,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 35,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 36,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 39,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 41,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 42,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 43,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 44,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 15,
+                "longitude": 45,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "16": [
+            {
+                "latitude": 16,
+                "longitude": 0,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 1,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 2,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 3,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 4,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 6,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 7,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 8,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 9,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 12,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 13,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 16,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 17,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 18,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 20,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 21,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 22,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 24,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 25,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 26,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 27,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 30,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 31,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 35,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 36,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 39,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 41,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 42,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 43,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 44,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 16,
+                "longitude": 45,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "17": [
+            {
+                "latitude": 17,
+                "longitude": 0,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 1,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 2,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 3,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 4,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 6,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 7,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 8,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 9,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 12,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 13,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 16,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 17,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 18,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 19,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 20,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 21,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 24,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 25,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 26,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 27,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 30,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 31,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 32,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 35,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 36,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 39,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 41,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 42,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 43,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 44,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 17,
+                "longitude": 45,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "18": [
+            {
+                "latitude": 18,
+                "longitude": 0,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 1,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 2,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 3,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 4,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 6,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 7,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 8,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 9,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 12,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 13,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 16,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 17,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 18,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 19,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 20,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 21,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 23,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 24,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 25,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 26,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 27,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 30,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 31,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 32,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 35,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 36,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 39,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 41,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 42,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 43,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 44,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 18,
+                "longitude": 45,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "19": [
+            {
+                "latitude": 19,
+                "longitude": 0,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 1,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 2,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 3,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 4,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 5,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 6,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 7,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 8,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 9,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 10,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 11,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 12,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 13,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 14,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 15,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 16,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 17,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 18,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 19,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 20,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 21,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 22,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 23,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 24,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 25,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 27,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 28,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 29,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 30,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 31,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 32,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 33,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 34,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 35,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 36,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 37,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 38,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 39,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 40,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 41,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 42,
+                "landUseLabel": "Old Forest",
+                "elevation": 1.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 43,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 44,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 19,
+                "longitude": 45,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "20": [
+            {
+                "latitude": 20,
+                "longitude": 0,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 1,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 2,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 3,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 4,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 5,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 6,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 7,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 8,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 9,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 10,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 11,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 12,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 13,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 14,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 15,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 16,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 17,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 18,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 19,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 20,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 21,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 22,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 23,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 24,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 25,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 26,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 27,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 28,
+                "landUseLabel": "Estuaries",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 29,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 30,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 31,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 32,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 33,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 34,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 35,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 36,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 37,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 38,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 39,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 40,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 41,
+                "landUseLabel": "Residential Agriculture Mixtures",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 42,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 43,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 44,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 20,
+                "longitude": 45,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            }
+        ]
+    },
+    {
+        "21": [
+            {
+                "latitude": 21,
+                "longitude": 0,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 1,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 2,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 3,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 4,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 5,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 6,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 7,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 8,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 9,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 10,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 11,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 12,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 13,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 14,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 15,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 16,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 17,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 18,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 19,
+                "landUseLabel": "Wetlands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 20,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 21,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 22,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 23,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 24,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 25,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 26,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 27,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 28,
+                "landUseLabel": "Young Forest",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 29,
+                "landUseLabel": "Alpine",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 30,
+                "landUseLabel": "Range Lands",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 31,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 32,
+                "landUseLabel": "Recently Logged",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 33,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 34,
+                "landUseLabel": "Salt Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 35,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 36,
+                "landUseLabel": "Mining",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 37,
+                "landUseLabel": "Urban",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 38,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 39,
+                "landUseLabel": "Recently Burned",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 40,
+                "landUseLabel": "Agriculture",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 41,
+                "landUseLabel": "Fresh Water",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 42,
+                "landUseLabel": "Barren Surfaces",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 43,
+                "landUseLabel": "Recreation Activities",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 44,
+                "landUseLabel": "Sub alpine Avalanche Chutes",
+                "elevation": 0.0
+            },
+            {
+                "latitude": 21,
+                "longitude": 45,
+                "landUseLabel": "Old Forest",
+                "elevation": 0.0
+            }
+        ]
+    }
+]

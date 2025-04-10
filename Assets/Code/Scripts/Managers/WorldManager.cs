@@ -35,6 +35,8 @@ public class WorldManager : MonoBehaviour
     private GameUI _gameUI;
     [SerializeField]
     private MusicManager _musicManager;
+    [SerializeField]
+    private TextAsset defaultMap;
 
     public MapData MapData
     {
@@ -223,7 +225,6 @@ public class WorldManager : MonoBehaviour
     {
         NewMapEventArgs args = e as NewMapEventArgs;
         CreateNewLevel(args.DataFile, args.MapScale, args.FloodAmount);
-        
     }
 
     /// <summary>
@@ -240,6 +241,7 @@ public class WorldManager : MonoBehaviour
     {
         MapData = ScriptableObject.CreateInstance<MapData>();
         MapData.LoadData(levelData, mapSizeOffset, flood_increment);
+        isCustomMap = !levelData.Equals(defaultMap);
         TTTEvents.FinishCreatingMap.Invoke(this, EventArgs.Empty);
     }
 
