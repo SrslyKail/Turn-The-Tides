@@ -53,6 +53,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnSelectFile()
     {
+        ResultsText.text = "";
         LoadExternalJson externalLoader = new();
         if (externalLoader.TryGetDataJson(out TextAsset textAsset))
         {
@@ -66,6 +67,7 @@ public class MainMenu : MonoBehaviour
         HomeMenu.SetActive(false);
         OptionsMenu.SetActive(true);
         CreateMapButton.enabled = false;
+        ResultsText.text = "";
     }
 
     public void ToHome()
