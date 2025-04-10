@@ -53,7 +53,7 @@ public class WaterLevelIndicator : MonoBehaviour
     public void SetSeaLevelIncrease(float increase)
     {
         _seaLevelIncrease = increase;
-        waterLevelIncreaseLabel.text = $"+{_seaLevelIncrease:F1}m";
+        waterLevelIncreaseLabel.text = $"+{_seaLevelIncrease:F2}m";
 
         waterLevelIncreaseLabel.gameObject.SetActive(_seaLevelIncrease > 0f);
     }
@@ -90,6 +90,6 @@ public class WaterLevelIndicator : MonoBehaviour
         _displayedSeaLevel = Mathf.Lerp(_displayedSeaLevel, _currentSeaLevel, MeterUpdateSpeed * Time.deltaTime);
         _displayedSeaLevelMetres = Mathf.Lerp(_displayedSeaLevelMetres, _currentSeaLevelMetres, MeterUpdateSpeed * Time.deltaTime);
         slider.value = _displayedSeaLevel;
-        waterLevelLabel.text = $"{_displayedSeaLevelMetres:F1}m";
+        waterLevelLabel.text = $"{_displayedSeaLevelMetres:F2}m";
     }
 }

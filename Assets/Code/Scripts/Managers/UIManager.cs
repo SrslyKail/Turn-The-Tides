@@ -41,8 +41,12 @@ public class UIManager : MonoBehaviour
         TTTEvents.ChangeBoardState += OnChangeBoardState;
         MainMenuGui = Instantiate(MainMenuGuiPrefab);
         LoadingGui = Instantiate(LoadingGuiPrefab);
-        LoadingGui.SetActive(false);
         GameGui = Instantiate(GameGuiPrefab);
+    }
+
+    private void Start()
+    {
+        LoadingGui.SetActive(false);
         GameGui.SetActive(false);
     }
 

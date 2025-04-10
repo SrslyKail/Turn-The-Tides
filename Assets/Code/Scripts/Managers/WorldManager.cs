@@ -142,11 +142,12 @@ public class WorldManager : MonoBehaviour
 
         if(MapData == null)
         {
-            CreateNewLevel(
-                Resources.Load<TextAsset>("Maps/lowerMainland"),
-                mapSizeOffset,
-                floodIncrement
-            );
+            TTTEvents.CreateNewMap(this, new NewMapEventArgs()
+            {
+                DataFile = Resources.Load<TextAsset>("Maps/lowerMainland"),
+                MapScale = mapSizeOffset,
+                FloodAmount = floodIncrement
+            });
         }
     }
 
@@ -202,15 +203,18 @@ public class WorldManager : MonoBehaviour
             LoadExternalJson externalLoader = new();
             if(externalLoader.TryGetDataJson(out TextAsset textAsset))
             {
-                CreateNewLevel(textAsset, mapSizeOffset, floodIncrement);
+                TTTEvents.CreateNewMap(this, new NewMapEventArgs()
+                {
+                    DataFile = textAsset,
+                    MapScale = mapSizeOffset,
+                    FloodAmount = floodIncrement
+                });
             }
         }
  
         GridManager.BuildMap(MapData, isCustomMap);
         PollutionTotal = 0;
         turn_count = start_year;
-        GameUI.MaxSeaLevel = 70f;
-        GameUI.SeaLevelIncrement = MapData.floodIncrement;
         UpdateGUI();
         UpdateWorldState(BoardState.NewBoard);
     }
@@ -219,7 +223,7 @@ public class WorldManager : MonoBehaviour
     {
         NewMapEventArgs args = e as NewMapEventArgs;
         CreateNewLevel(args.DataFile, args.MapScale, args.FloodAmount);
-        TTTEvents.FinishCreatingMap.Invoke(this, EventArgs.Empty);
+        
     }
 
     /// <summary>
@@ -236,6 +240,7 @@ public class WorldManager : MonoBehaviour
     {
         MapData = ScriptableObject.CreateInstance<MapData>();
         MapData.LoadData(levelData, mapSizeOffset, flood_increment);
+        TTTEvents.FinishCreatingMap.Invoke(this, EventArgs.Empty);
     }
 
     public void UpdateWorldState(BoardState newState)

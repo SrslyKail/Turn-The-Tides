@@ -91,10 +91,17 @@ public class GameUI : MonoBehaviour
     [Header("Tile Info Panel")]
     public bool TileInfoPanelActive = true;
 
-    public void Start()
+    public void Awake()
     {
         SingletonCheck();
-        
+        TTTEvents.CreateNewMap += OnCreateNewMap;
+    }
+
+    public void OnCreateNewMap(object sender, EventArgs e)
+    {
+        NewMapEventArgs args = e as NewMapEventArgs;
+        SeaLevelIncrement = args.FloodAmount;
+        waterLevelIndicator.SetSeaLevelIncrease(SeaLevelIncrement);
     }
     private void SingletonCheck()
     {
