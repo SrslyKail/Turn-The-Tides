@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -18,12 +19,13 @@ namespace TurnTheTides
     /// 
     /// Made by Corey Buchan
     /// </summary>
-    public class GridManager: MonoBehaviour
+    public class GridManager : MonoBehaviour
     {
         [SerializeField]
         private List<GameObject> prefabs;
         private readonly List<List<GameObject>> tiles = new();
         private static GridManager _instance;
+        [SerializeField] private GameObject textLabelPrefab;
         /// <summary>
         /// Get the current instance of the GridManager. 
         /// Will create one if one does not exist.
@@ -31,7 +33,7 @@ namespace TurnTheTides
         public static GridManager Instance
         {
             get
-            {  
+            {
                 if (_instance == null)
                 {
                     _instance = Helper.FindOrCreateSingleton<GridManager>("Prefabs/Managers/GridManager");
@@ -40,7 +42,7 @@ namespace TurnTheTides
                 return _instance;
             }
         }
-        
+
         // CB: TODO Remove this. The WorldManager should be telling the GridManager how much to flood by so we
         //      can use pollution calculations in the future.
         private float floodIncrement;
@@ -50,7 +52,7 @@ namespace TurnTheTides
             new(0, -1),
             new(1, 1),
             new(1, 0),
-            new(1, -1) 
+            new(1, -1)
         };
         private static readonly Point[] even_adjacency = new Point[6]
         {
@@ -111,14 +113,14 @@ namespace TurnTheTides
         /// destroys all existing tiles, and creates new water meshes.
         /// </summary>
         /// <param name="mapData">The data to build the map from.</param>
-        public void BuildMap(MapData mapData)
+        public void BuildMap(MapData mapData, bool isCustomMap)
         {
             DestroyAllChildTiles();
 
             floodIncrement = mapData.floodIncrement;
-            
+
             //Make the map
-            CreateHexTileGrid(mapData);
+            CreateHexTileGrid(mapData, isCustomMap);
             MergeWaterTiles();
         }
 
@@ -137,7 +139,7 @@ namespace TurnTheTides
         /// Creates the map to play the game on using the passed in map data.
         /// </summary>
         /// <param name="mapData">A MapData object that stores the data required to make the grid.</param>
-        private void CreateHexTileGrid(MapData mapData)
+        private void CreateHexTileGrid(MapData mapData, bool isCustomMap)
         {
             //All tiles should be the same size, so we can use 1 to set the defaults.
             Bounds tileBounds = prefabs[0]
@@ -153,6 +155,24 @@ namespace TurnTheTides
             float heightOffset = 3f / 4f * tileHeight;
             bool offset = false;
 
+            //Tiles for location labels to be glued on to for the default map, add more or remove some. It's up to you, I guess...
+            Dictionary<Vector2Int, string> locationDictionary = new Dictionary<Vector2Int, string>
+            {
+                { new Vector2Int(19, 11), "Delta" },
+                { new Vector2Int(13, 18), "Richmond" },
+                { new Vector2Int(14, 28), "Vancouver" },
+                { new Vector2Int(25, 25), "Burnaby" },
+                { new Vector2Int(36, 17), "Surrey" },
+                { new Vector2Int(38, 28), "Coquitlam" },
+                { new Vector2Int(49, 23), "Maple Ridge" },
+                { new Vector2Int(47, 12), "Langley" },
+                { new Vector2Int(37, 3),  "White Rock" },
+                { new Vector2Int(71, 5),  "Abbotsford" },
+                { new Vector2Int(99, 18), "Chilliwack" },
+                { new Vector2Int(137, 42),"Hope" }
+            };
+
+           
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
             int mapSizeOffset = mapData.mapSizeOffset;
@@ -178,7 +198,7 @@ namespace TurnTheTides
                             y / mapSizeOffset * heightOffset),
                         Quaternion.identity);
 
-                    
+
 
                     //Cleanup for terrain type. Ocean elevation should be 0 to start.
                     double dataElevation = pointData
@@ -199,6 +219,16 @@ namespace TurnTheTides
                     //Set the name and parent.
                     newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
                     newTile.transform.SetParent(this.transform);
+
+                    //Here's where the labels are glued on.
+                    Vector2Int tilePos = new Vector2Int(x / mapSizeOffset, y / mapSizeOffset);
+                    if (!isCustomMap && locationDictionary.TryGetValue(tilePos, out string label))
+                    {
+                        if (textLabelPrefab != null)
+                        {
+                            TextFlagManager.AttachTextFlag(newTile, label, textLabelPrefab);
+                        }
+                    }
                     rowList.Add(newTile);
                 }
 
@@ -236,7 +266,6 @@ namespace TurnTheTides
         public float Flood()
         {
             float freedPollution = 0f;
-            
             List<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; })
@@ -244,7 +273,7 @@ namespace TurnTheTides
 
             //Increment the elevation for each of the ocean tiles.
             oceanTiles.ForEach(tile => tile.GetComponent<Ocean>().Elevation += floodIncrement);
-            
+
             Queue checkQueue = new(oceanTiles);
 
             while (checkQueue.Count != 0)
@@ -253,7 +282,7 @@ namespace TurnTheTides
                 HexTile details = oceanTile.GetComponent<HexTile>();
                 int start_row = details.y_index;
                 int start_col = details.x_index;
-                foreach(Point adj in odd_adjacency)
+                foreach (Point adj in odd_adjacency)
                 {
                     int check_row = adj.Y + start_row;
                     int check_col = adj.X + start_col;
@@ -449,7 +478,7 @@ namespace TurnTheTides
         /// <param name="toCombine">A list of ocean tiles to combine.</param>
         private void CombineOceanMeshes(List<GameObject> toCombine)
         {
-            if(toCombine.Count <= 1)
+            if (toCombine.Count <= 1)
             {
                 return;
             }
@@ -499,7 +528,7 @@ namespace TurnTheTides
 
             //CB: Loading the resource every time we run this function is probably a massive waste, but it works for now.
             oceanParent.GetComponent<MeshRenderer>().material = Resources.Load("WaterMaterial") as Material;
-            
+
         }
     }
 }
