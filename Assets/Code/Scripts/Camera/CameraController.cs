@@ -1,3 +1,4 @@
+using System;
 using TurnTheTides;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -54,6 +55,32 @@ public class CameraController : MonoBehaviour
     private GameObject selectedObject;
     private Color selectedMeshColor;
 
+    private bool canMove = false;
+    private void Awake()
+    {
+        TTTEvents.ChangeBoardState += OnBoardStateChange;
+    }
+
+    private void OnBoardStateChange(object sender, EventArgs e)
+    {
+        BoardStateEventArgs args = e as BoardStateEventArgs;
+        switch (args.NewBoardState)
+        {
+            case BoardState.None:
+            case BoardState.Loading:
+            case BoardState.MainMenu:
+            {
+                canMove = false;
+                break;
+            }
+            default:
+            {
+                canMove = true;
+                break;
+            }
+        }
+    }
+
     public void OnSelectButtonPressed(InputAction.CallbackContext context)
     {
         // if button is pressed (not released), select object at marker
@@ -76,38 +103,50 @@ public class CameraController : MonoBehaviour
     }
     private void MoveMarker(Vector3 delta)
     {
-        // get transform as if x-rotation was 0
-        Vector3 forward = transform.forward;
-        forward.y = 0;
-        forward.Normalize();
-        Vector3 right = transform.right;
-        right.y = 0;
-        right.Normalize();
+        if(canMove)
+        {
+            // get transform as if x-rotation was 0
+            Vector3 forward = transform.forward;
+            forward.y = 0;
+            forward.Normalize();
+            Vector3 right = transform.right;
+            right.y = 0;
+            right.Normalize();
 
-        markerPosition += MovementSpeed * Time.fixedDeltaTime * ((delta.x * right) + (delta.y * forward));
+            markerPosition += MovementSpeed * Time.fixedDeltaTime * ((delta.x * right) + (delta.y * forward));
+        }
+        
     }
 
     private void RotateCamera(Vector2 delta)
     {
-        cameraRotation.x -= delta.y * (RotationSpeed * Time.fixedDeltaTime);
-        cameraRotation.y += delta.x * (RotationSpeed * Time.fixedDeltaTime);
-
-        // clamp vertical rotation
-        cameraRotation.x = Mathf.Clamp(cameraRotation.x, RotationVerticalBounds.x, RotationVerticalBounds.y);
-
-        // clamp horizontal rotation
-        if (RotationUseHorizontalBounds)
+        if(canMove)
         {
-            cameraRotation.y = Mathf.Clamp(cameraRotation.y, RotationHorizontalBounds.x, RotationHorizontalBounds.y);
-        }
+            cameraRotation.x -= delta.y * (RotationSpeed * Time.fixedDeltaTime);
+            cameraRotation.y += delta.x * (RotationSpeed * Time.fixedDeltaTime);
 
-        transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+            // clamp vertical rotation
+            cameraRotation.x = Mathf.Clamp(cameraRotation.x, RotationVerticalBounds.x, RotationVerticalBounds.y);
+
+            // clamp horizontal rotation
+            if (RotationUseHorizontalBounds)
+            {
+                cameraRotation.y = Mathf.Clamp(cameraRotation.y, RotationHorizontalBounds.x, RotationHorizontalBounds.y);
+            }
+
+            transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+        }
+        
     }
 
     private void ZoomCamera(float delta)
     {
-        zoomLevel += delta;
-        zoomLevel = Mathf.Clamp(zoomLevel, ZoomBounds.x, ZoomBounds.y);
+        if(canMove)
+        {
+            zoomLevel += delta;
+            zoomLevel = Mathf.Clamp(zoomLevel, ZoomBounds.x, ZoomBounds.y);
+        }
+        
     }
 
     private void SelectObject(GameObject target)
