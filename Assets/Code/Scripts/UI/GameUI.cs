@@ -1,12 +1,11 @@
 using System;
-using System.Windows.Forms;
 using TurnTheTides;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// Container component for the in-game GUI.
+/// 
+/// Written by Gurjeet Bhangoo, ported to a singleton by Corey Buchan.
 /// </summary>
 public class GameUI : MonoBehaviour
 {
@@ -88,12 +87,24 @@ public class GameUI : MonoBehaviour
     [Header("Next Turn Button")]
     public bool NextTurnButtonEnabled = true;
 
+    /// <summary>
+    /// Whether the tile info panel is shown on screen.
+    /// </summary>
     [Header("Tile Info Panel")]
     public bool TileInfoPanelActive = true;
 
+    /// <summary>
+    /// The starting year in the simulation.
+    /// </summary>
     private static readonly int _startYear = System.DateTime.Today.Year;
+    /// <summary>
+    /// The current turn count in the simulation.
+    /// </summary>
     private static int _turnCount = _startYear;
 
+    /// <summary>
+    /// Called once before the application starts.
+    /// </summary>
     private void Awake()
     {
         SingletonCheck();
@@ -103,11 +114,21 @@ public class GameUI : MonoBehaviour
         TTTEvents.CreateNewMap += OnCreateMap;
     }
 
+    /// <summary>
+    /// Called when the game map is created.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnCreateMap(object sender, EventArgs e)
     {
         _turnCount = _startYear;
     }
 
+    /// <summary>
+    /// Called when the board is flooded.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnFlood(object sender, EventArgs e)
     {
         FloodEventArgs args = e as FloodEventArgs;
@@ -115,18 +136,31 @@ public class GameUI : MonoBehaviour
         UpdateTileInfoPanel();
     }
 
+    /// <summary>
+    /// Called when the current turn is ended and the next turn is started.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnNextTurn(object sender, EventArgs e)
     {
         _turnCount++;
         turnCounterText.SetTurnText(_turnCount);
     }
 
+    /// <summary>
+    /// Called when a new map is created.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnCreateNewMap(object sender, EventArgs e)
     {
         NewMapEventArgs args = e as NewMapEventArgs;
         SeaLevelIncrement = args.FloodAmount;
         waterLevelIndicator.SetSeaLevelIncrease(SeaLevelIncrement);
     }
+    /// <summary>
+    /// Checks if the singleton instance of this class is null. If it is, it sets the instance to this object. If not, it destroys this object.
+    /// </summary>
     private void SingletonCheck()
     {
         if (_instance == null)
@@ -140,6 +174,9 @@ public class GameUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the tile info panel with the current tile information.
+    /// </summary>
     public void UpdateTileInfoPanel()
     {
         if (tileInfoPanel == null)
@@ -150,6 +187,10 @@ public class GameUI : MonoBehaviour
         tileInfoPanel.UpdateTileInfo();
     }
 
+    /// <summary>
+    /// Updates the tile info panel with the specified tile information.
+    /// </summary>
+    /// <param name="tile"></param>
     public void UpdateTileInfoPanel(HexTile tile)
     {
         if (tileInfoPanel == null)
@@ -161,6 +202,9 @@ public class GameUI : MonoBehaviour
         tileInfoPanel.UpdateTileInfo(tile);
     }
 
+    /// <summary>
+    /// Clears the tile info panel.
+    /// </summary>
     public void ClearTileInfoPanel()
     {
         if (tileInfoPanel == null)
@@ -170,7 +214,10 @@ public class GameUI : MonoBehaviour
         TileInfoPanelActive = false;
         tileInfoPanel.ClearTileInfo();
     }
-    
+
+    /// <summary>
+    /// Hides the tile info panel.
+    /// </summary>
     public void HideTileInfoPanel()
     {
         if (tileInfoPanel == null)
@@ -182,7 +229,9 @@ public class GameUI : MonoBehaviour
         tileInfoPanel.ClearTileInfo();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Called once per frame, once all other updates have been called.
+    /// </summary>
     void LateUpdate()
     {
         pollutionMeter.SetProgress(PollutionProgress);
@@ -192,6 +241,10 @@ public class GameUI : MonoBehaviour
         MoveTileInfo(TileInfoPanelActive);
     }
 
+    /// <summary>
+    /// Animates the tile info panel to move on and off screen, depending on whether it is active or not.
+    /// </summary>
+    /// <param name="active"></param>
     private void MoveTileInfo(bool active)
     {
         if (tileInfoPanel == null)
@@ -210,6 +263,9 @@ public class GameUI : MonoBehaviour
         rectTransform.anchoredPosition = newPos;
     }
 
+    /// <summary>
+    /// Called when the exit button is clicked.
+    /// </summary>
     public void OnExitClick()
     {
         TTTEvents.QuitGame();
