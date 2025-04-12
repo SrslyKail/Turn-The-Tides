@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace TurnTheTides
 {
+    /// <summary>
+    /// Class to hold all the potential data of a single point from the raw geolocation data.
+    /// </summary>
     public class Geopoint
     {
         private static readonly Dictionary<string, TerrainType> LandUseMapping = new()
@@ -70,6 +73,9 @@ namespace TurnTheTides
             }
         }
     }
+    /// <summary>
+    /// Class to hold the data for the entire map, so we can convert it into TTT HexTiles.
+    /// </summary>
     public class GeoGrid
     {
         public readonly int row_count;
@@ -85,6 +91,9 @@ namespace TurnTheTides
         }
     }
 
+    /// <summary>
+    /// Parses the map data from a loaded Json file.
+    /// </summary>
     public class JSONParser: MonoBehaviour
     {
         /// <summary>
@@ -119,7 +128,12 @@ namespace TurnTheTides
             return new GeoGrid(multiDimensionalArray);
         }
 
-        public static List<List<Geopoint>> ParseFromFile(string filePath)
+        /// <summary>
+        /// Parses a JSON file and returns a GeoGrid.
+        /// </summary>
+        /// <param name="input">The JSON formatted string.</param>
+        /// <returns>A GeoGrid.</returns>
+        public static GeoGrid ParseFromFile(string filePath)
         {
             List<List<Geopoint>> multiDimensionalArray = new();
 
@@ -149,7 +163,7 @@ namespace TurnTheTides
                 Console.WriteLine($"Error reading or parsing the file: {ex.Message}");
             }
 
-            return multiDimensionalArray;
+            return new GeoGrid(multiDimensionalArray);
         }
     }
 }

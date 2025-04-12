@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
         FloodAmountSlider.GetComponentInParent<TMP_Text>().text = $"Flood Amount: {Math.Round(newValue, 2)}";
         TTTEvents.FloodIncrementChangeEvent.Invoke(this, new FloodEventArgs
         {
-            FloodIncrement = newValue
+            CurrentWaterLevel = newValue
         });
     }
 

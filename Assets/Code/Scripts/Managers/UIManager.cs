@@ -2,6 +2,12 @@ using System;
 using TurnTheTides;
 using UnityEngine;
 
+/// <summary>
+/// Manager for handling the state of the UI in the game.
+/// <para>
+/// State of the UI is set through the <see cref="TTTEvents.ChangeBoardState"/> event.
+/// </para>
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;

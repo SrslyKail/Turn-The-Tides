@@ -2,6 +2,12 @@ using System;
 using TurnTheTides;
 using UnityEngine;
 
+/// <summary>
+/// Object to manage the state of the audio player.
+/// Listens for the <see cref="TTTEvents.ChangeBoardState"/> event to change the music.
+/// 
+///Should be a singleton, so do not instanciate it directly. Access it though MusicManager.Instance instead.
+/// </summary>
 public class MusicManager : MonoBehaviour
 {
     private static MusicManager _instance;
@@ -36,7 +42,7 @@ public class MusicManager : MonoBehaviour
     [Header("References")]
     public AudioSource AudioPlayer;
 
-    public void Start()
+    private void Start()
     {
         DontDestroyOnLoad(this);
         SingletonCheck();
@@ -94,7 +100,7 @@ public class MusicManager : MonoBehaviour
         PlayMusic();
     }
 
-    public void PlayMusic()
+    private void PlayMusic()
     {
         if (AudioPlayer.isPlaying)
         {
@@ -104,17 +110,17 @@ public class MusicManager : MonoBehaviour
         AudioPlayer.Play();
     }
 
-    public void StopMusic()
+    private void StopMusic()
     {
         AudioPlayer.Stop();
     }
 
-    public void PauseMusic()
+    private void PauseMusic()
     {
         AudioPlayer.Pause();
     }
 
-    public void UnpauseMusic()
+    private void UnpauseMusic()
     {
         AudioPlayer.UnPause();
     }

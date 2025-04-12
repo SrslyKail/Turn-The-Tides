@@ -91,13 +91,37 @@ public class GameUI : MonoBehaviour
     [Header("Tile Info Panel")]
     public bool TileInfoPanelActive = true;
 
-    public void Awake()
+    private static readonly int _startYear = System.DateTime.Today.Year;
+    private static int _turnCount = _startYear;
+
+    private void Awake()
     {
         SingletonCheck();
         TTTEvents.CreateNewMap += OnCreateNewMap;
+        TTTEvents.FloodEvent += OnFlood;
+        TTTEvents.NextTurnEvent += OnNextTurn;
+        TTTEvents.CreateNewMap += OnCreateMap;
     }
 
-    public void OnCreateNewMap(object sender, EventArgs e)
+    private void OnCreateMap(object sender, EventArgs e)
+    {
+        _turnCount = _startYear;
+    }
+
+    private void OnFlood(object sender, EventArgs e)
+    {
+        FloodEventArgs args = e as FloodEventArgs;
+        CurrentSeaLevel = args.CurrentWaterLevel;
+        UpdateTileInfoPanel();
+    }
+
+    private void OnNextTurn(object sender, EventArgs e)
+    {
+        _turnCount++;
+        turnCounterText.SetTurnText(_turnCount);
+    }
+
+    private void OnCreateNewMap(object sender, EventArgs e)
     {
         NewMapEventArgs args = e as NewMapEventArgs;
         SeaLevelIncrement = args.FloodAmount;

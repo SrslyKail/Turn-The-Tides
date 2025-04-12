@@ -101,9 +101,12 @@ namespace TurnTheTides
             return tiles[row][col];
         }
 
+        /// <summary>
+        /// Calculates the ratio of non-ocean tiles from the start of the map to the number of non-ocean tiles currently.
+        /// </summary>
+        /// <returns></returns>
         public float GetFloodedRatio()
         {
-            Debug.Log($"{floodedTiles} / {totalTiles}");
             return (float)floodedTiles / totalTiles;
         }
 
@@ -156,7 +159,9 @@ namespace TurnTheTides
             bool offset = false;
 
             //Tiles for location labels to be glued on to for the default map, add more or remove some. It's up to you, I guess...
-            Dictionary<Vector2Int, string> locationDictionary = new Dictionary<Vector2Int, string>
+            //CB: Given more time, I would love to embed this data into the map JSON so users could dynamically name or flag locations on the map.
+            //  This was just a proof-of-concept.
+            Dictionary<Vector2Int, string> locationDictionary = new()
             {
                 { new Vector2Int(19, 11), "Delta" },
                 { new Vector2Int(13, 18), "Richmond" },
@@ -176,7 +181,7 @@ namespace TurnTheTides
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
             int mapSizeOffset = mapData.mapSizeOffset;
-            for (int y = 0; y < mapData.dataRowCount; y += mapSizeOffset)
+            for (int row = 0; row < mapData.dataRowCount; row += mapSizeOffset)
             {
                 //See if we need to offset the tile
                 widthOffset = offset ? tileWidth / 2 : 0;
@@ -185,17 +190,17 @@ namespace TurnTheTides
 
                 //For each point in the row
                 //This is the x-coordinate
-                for (int x = 0; x < mapData.dataColumnCount; x += mapSizeOffset)
+                for (int col = 0; col < mapData.dataColumnCount; col += mapSizeOffset)
                 {
 
-                    //Get the data from [row][item]
-                    Geopoint pointData = mapData.GeoData.data[y][x];
+                    //Get the data from [row][col]
+                    Geopoint pointData = mapData.GeoData.data[row][col];
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            (x / mapSizeOffset * tileWidth) + widthOffset,
+                            (col / mapSizeOffset * tileWidth) + widthOffset,
                             0,
-                            y / mapSizeOffset * heightOffset),
+                            row / mapSizeOffset * heightOffset),
                         Quaternion.identity);
 
 
@@ -213,15 +218,15 @@ namespace TurnTheTides
                     hexTile.longitude = pointData.Longitude;
                     hexTile.latitude = pointData.Latitude;
                     hexTile.landUseLabel = pointData.LandUseLabel;
-                    hexTile.x_index = x / mapSizeOffset;
-                    hexTile.y_index = y / mapSizeOffset;
+                    hexTile.x_index = col / mapSizeOffset;
+                    hexTile.y_index = row / mapSizeOffset;
 
                     //Set the name and parent.
-                    newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
+                    newTile.name = $"{col / mapSizeOffset}, {row / mapSizeOffset}";
                     newTile.transform.SetParent(this.transform);
 
                     //Here's where the labels are glued on.
-                    Vector2Int tilePos = new Vector2Int(x / mapSizeOffset, y / mapSizeOffset);
+                    Vector2Int tilePos = new(col / mapSizeOffset, row / mapSizeOffset);
                     if (!isCustomMap && locationDictionary.TryGetValue(tilePos, out string label))
                     {
                         if (textLabelPrefab != null)
@@ -235,9 +240,9 @@ namespace TurnTheTides
                 offset = !offset;
             }
 
+            //Cache the data required for calculating the ratio.
             totalTiles = tiles.Sum((List<GameObject> row) => { return row.Count; });
             startingWaterTiles = transform.GetComponentsInChildren<Ocean>(true).ToList().Count;
-            Debug.Log($"Starting water tiles: {startingWaterTiles}");
         }
 
         /// <summary>
@@ -276,13 +281,17 @@ namespace TurnTheTides
 
             Queue checkQueue = new(oceanTiles);
 
+            //While we still have tiles we havent processed
             while (checkQueue.Count != 0)
             {
                 GameObject oceanTile = checkQueue.Dequeue() as GameObject;
                 HexTile details = oceanTile.GetComponent<HexTile>();
                 int start_row = details.y_index;
                 int start_col = details.x_index;
-                foreach (Point adj in odd_adjacency)
+
+                //Check each adjacent tile by adjusting the root position by the amount in the adjacenty list.
+                Point[] adjacency = start_row % 2 == 0 ? even_adjacency : odd_adjacency;
+                foreach (Point adj in adjacency)
                 {
                     int check_row = adj.Y + start_row;
                     int check_col = adj.X + start_col;
@@ -301,8 +310,9 @@ namespace TurnTheTides
                             if (!toCheck.TryGetComponent<Ocean>(out _) &&
                                 checkDetails.Elevation < details.Elevation)
                             {
-                                // TODO CB: Make the tile release its stored pollution.
-                                freedPollution += 0;
+                                //Add any stored pollution to the total released.
+                                freedPollution += checkDetails.StoredPollution;
+                                //Create an Ocean Tile.
                                 GameObject newTile = Instantiate(oceanTile);
 
                                 newTile.transform.parent = gameObject.transform;
@@ -341,7 +351,7 @@ namespace TurnTheTides
         /// <summary>
         /// Calculates how much pollution the current map will create each turn.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The amount of pollution created.</returns>
         public float CalculatePollutionPerTurn()
         {
             return transform.GetComponentsInChildren<HexTile>()
@@ -358,7 +368,7 @@ namespace TurnTheTides
         /// This enables us us, in the future, use a single mesh deformation or 
         /// texture for the water.
         /// </summary>
-        public void MergeWaterTiles()
+        private void MergeWaterTiles()
         {
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.

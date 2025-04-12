@@ -3,9 +3,18 @@ using System.Collections;
 using TurnTheTides;
 using UnityEngine;
 
+/// <summary>
+/// Manages the over-all state of the game, and acts as a connective tissue between various game systems.
+/// <para>
+/// Should be a singleton, so do not instanciate directly. Instead, please use WorldManager.Instance to get a reference to the instance.
+/// </para>
+/// </summary>
 public class WorldManager : MonoBehaviour
 {
     private static WorldManager _instance;
+    /// <summary>
+    /// Accessor for the singleton of this class.
+    /// </summary>
     public static WorldManager Instance
     {
         get
@@ -107,13 +116,11 @@ public class WorldManager : MonoBehaviour
     private double _pollutionLevel;
     private bool flooding = false;
     IEnumerator floodCoroutine;
-    public static readonly int start_year = System.DateTime.Today.Year;
     public double PollutionTotal
     {
         get => _pollutionLevel; set => _pollutionLevel = value;
     }
     public readonly double PollutionMax = double.MaxValue;
-    public static int turn_count = start_year;
     private static float waterElevation = 0;
     private BoardState boardState = BoardState.None;
     private int mapSizeOffset = 2;
@@ -129,7 +136,7 @@ public class WorldManager : MonoBehaviour
     private void OnFloodIncrementChange(object sender, EventArgs e)
     {
         FloodEventArgs args = e as FloodEventArgs;
-        floodIncrement = args.FloodIncrement;
+        floodIncrement = args.CurrentWaterLevel;
     }
 
     private void Start()
@@ -140,7 +147,7 @@ public class WorldManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        ConnectGameUIEvents();
+        ConnectEvents();
 
         if(MapData == null)
         {
@@ -153,9 +160,9 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    private void ConnectGameUIEvents()
+    private void ConnectEvents()
     {
-        TTTEvents.NextTurnRequestedEvent += OnNextTurn;
+        TTTEvents.NextTurnEvent += OnNextTurn;
         TTTEvents.FloodEvent += OnFlood;
         TTTEvents.ToggleFloodEvent += OnToggleFlood;
         TTTEvents.FloodIncrementChangeEvent += OnFloodIncrementChange;
@@ -216,8 +223,6 @@ public class WorldManager : MonoBehaviour
  
         GridManager.BuildMap(MapData, isCustomMap);
         PollutionTotal = 0;
-        turn_count = start_year;
-        UpdateGUI();
         UpdateWorldState(BoardState.NewBoard);
     }
 
@@ -245,7 +250,7 @@ public class WorldManager : MonoBehaviour
         TTTEvents.FinishCreatingMap.Invoke(this, EventArgs.Empty);
     }
 
-    public void UpdateWorldState(BoardState newState)
+    private void UpdateWorldState(BoardState newState)
     {
         if(boardState != newState)
         {
@@ -257,15 +262,7 @@ public class WorldManager : MonoBehaviour
             {
                 NewBoardState = newState
             });
-        }
-
-        
-    }
-
-    [ContextMenu("Next Turn")]
-    public void NextTurn()
-    {
-        TTTEvents.NextTurnRequestedEvent.Invoke(this, EventArgs.Empty);
+        }        
     }
 
     /// <summary>
@@ -274,36 +271,38 @@ public class WorldManager : MonoBehaviour
     /// track new pollution freed by any potential tile destruction, and 
     /// then add new pollution from the existing tiles.
     /// </summary>
+    [ContextMenu("Next Turn")]
+    public void NextTurn()
+    {
+        TTTEvents.NextTurnEvent.Invoke(this, EventArgs.Empty);
+    }
+
     private void OnNextTurn(object sender, EventArgs e)
     {
-        Flood();
-        
+        StartFlood();
+
         float ratio = GridManager.GetFloodedRatio();
-        Debug.Log($"Current ratio: {ratio}");
         if (ratio > 0.2)
         {
             UpdateWorldState(BoardState.HighPollution);
         }
-        else if(ratio > 0.1)
+        else if (ratio > 0.1)
         {
             UpdateWorldState(BoardState.ModeratePollution);
         }
-        else if(ratio > 0.04)
+        else if (ratio > 0.04)
         {
             UpdateWorldState(BoardState.LowPollution);
         }
-
-        turn_count++;
-        UpdateGUI();
     }
 
-    public void Flood()
+    private void StartFlood()
     {
         waterElevation += MapData.floodIncrement;
 
         TTTEvents.FloodEvent.Invoke(this, new FloodEventArgs
         {
-            FloodIncrement = waterElevation
+            CurrentWaterLevel = waterElevation
         });
     }
 
@@ -331,22 +330,16 @@ public class WorldManager : MonoBehaviour
         UpdatePollutionState();
     }
 
-    public void UpdatePollutionState()
+    private void UpdatePollutionState()
     {
         //Logic to check the pollution levels vs the 
         //PollutionTotal and set the board state accordingly
-    }
-
-    // TODO: Turn this into an event for the GUI.
-    private void UpdateGUI()
-    {
-        GameUI.turnCounterText.SetTurnText(turn_count);
-        GameUI.CurrentSeaLevel = waterElevation;
-        GameUI.UpdateTileInfoPanel();
+        // We ran out of time to implement this feature, but this
+        // would be where the logic would go.
     }
 
     [ContextMenu("Toggle Flooding")]
-    public void ToggleFlood()
+    private void ToggleFlood()
     {
         TTTEvents.ToggleFloodEvent.Invoke(this, EventArgs.Empty);
     }

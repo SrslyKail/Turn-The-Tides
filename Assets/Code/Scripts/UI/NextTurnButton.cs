@@ -48,6 +48,6 @@ public class NextTurnButton : MonoBehaviour
 
     void Start()
     {
-        OnButtonClicked.AddListener(() => { TTTEvents.NextTurnRequestedEvent.Invoke(this, EventArgs.Empty); });
+        OnButtonClicked.AddListener(() => { TTTEvents.NextTurnEvent.Invoke(this, EventArgs.Empty); });
     }
 }

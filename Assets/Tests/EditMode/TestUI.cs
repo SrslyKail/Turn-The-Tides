@@ -120,10 +120,10 @@ public class TestUI
         Button button = uiContainer.AddComponent<Button>();
         nextTurnButton.button = button;
         gameUI.nextTurnButton = nextTurnButton;
-        TTTEvents.NextTurnRequestedEvent += (object sender, EventArgs e) => { Assert.Pass(); };
+        TTTEvents.NextTurnEvent += (object sender, EventArgs e) => { Assert.Pass(); };
 
         nextTurnButton.OnButtonClicked = new UnityEvent();
-        nextTurnButton.OnButtonClicked.AddListener(() => { TTTEvents.NextTurnRequestedEvent.Invoke(this, EventArgs.Empty); });
+        nextTurnButton.OnButtonClicked.AddListener(() => { TTTEvents.NextTurnEvent.Invoke(this, EventArgs.Empty); });
         nextTurnButton.OnClick();
 
         yield return null;
