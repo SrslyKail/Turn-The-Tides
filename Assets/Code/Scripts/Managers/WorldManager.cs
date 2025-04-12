@@ -37,76 +37,15 @@ public class WorldManager : MonoBehaviour
     
     [Header("References")]
     [SerializeField]
-    private MapData data;
-    [SerializeField]
-    private GridManager gridManager;
-    [SerializeField]
-    private GameUI _gameUI;
-    [SerializeField]
-    private MusicManager _musicManager;
-    [SerializeField]
     private TextAsset defaultMap;
 
-    public MapData MapData
-    {
-        get => data; set => data = value;
-    }
+    public MapData MapData {get; set;}
     
     public GridManager GridManager
     {
         get
         {
-            if (gridManager == null)
-            {
-                gridManager = GridManager.Instance;
-            }
-
-            return gridManager;
-        }
-        private set
-        {
-            gridManager = value;
-        }
-    }
-
-    public GameUI GameUI
-    {
-        get
-        {
-            if (_gameUI == null)
-            {
-                GameUI found = Helper.FindOrCreateSingleton<GameUI>("Prefabs/Managers/GameUI");
-
-                if (found.enabled == false)
-                {
-                    found.enabled = true;
-                }
-
-                _gameUI = found;
-            }
-
-            return _gameUI;
-        }
-        private set
-        {
-            _gameUI = value;
-        }
-    }
-
-    public MusicManager MusicManager
-    {
-        get
-        {
-            if (_musicManager == null)
-            {
-                _musicManager = MusicManager.Instance;
-            }
-
-            return _musicManager;
-        }
-        private set
-        {
-            _musicManager = value;
+            return GridManager.Instance;
         }
     }
 
@@ -143,7 +82,7 @@ public class WorldManager : MonoBehaviour
     {
         SingletonCheck();
         floodCoroutine = FloodCoroutine();
-        MusicManager = MusicManager.Instance;
+        MusicManager music = MusicManager.Instance;
 
         DontDestroyOnLoad(gameObject);
 
