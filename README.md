@@ -85,7 +85,7 @@ Once you have a valid custom map JSON,
 <li> Click "Select File".
 <li> Navigate to and open your custom JSON.
 <li> Adjust Map Scale (1 will use every defined tile, 2 will use every second, etc.)
-<li> Adjust Flood Amount (How many centimetes sea levels will rise per turn.)
+<li> Adjust Flood Amount (How many centimeters sea levels will rise per turn.)
 <li> Click "Create Map" and wait for confirmation that the map is loaded.
 <li> Click "Back".
 <li> Click "Start" to load your custom map!
