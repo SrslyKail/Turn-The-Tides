@@ -21,10 +21,13 @@ public class MainMenu : MonoBehaviour
     Button BackButton;
 
     TextAsset loadedFile;
+    public void Awake()
+    {
+        TTTEvents.FinishCreatingMap += OnFinishCreateMap;
+    }
 
     public void Start()
     {
-        TTTEvents.FinishCreatingMap += OnFinishCreateMap;
         ToOptions();
         MapScaleSlider.GetComponentInParent<TMP_Text>().text = $"Map Scale:{(int)MapScaleSlider.value}";
         FloodAmountSlider.GetComponentInParent<TMP_Text>().text = $"Flood Amount: {Math.Round(FloodAmountSlider.value, 2)}";
