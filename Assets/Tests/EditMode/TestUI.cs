@@ -176,6 +176,6 @@ public class TestUI
         waterLevelIndicator.SetSeaLevelIncrease(0.5f);
 
         Assert.AreEqual(0.5f, waterLevelIndicator.GetSeaLevelIncrease());
-        Assert.AreEqual("+0.5m", waterLevelIncreaseLabel.text);
+        Assert.AreEqual("+0.50m", waterLevelIncreaseLabel.text);
     }
 }

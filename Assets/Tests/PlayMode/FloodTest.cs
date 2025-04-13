@@ -31,7 +31,7 @@ public class FloodTest
         worldManager.NextTurn();
         worldManager.NextTurn();
 
-        Assert.IsTrue(testHexTile == null);
-        Assert.IsFalse(testHexTile2 == null);
+        Assert.IsTrue(testHexTile != worldManager.GetTile(0, 0));
+        Assert.IsFalse(testHexTile2 == worldManager.GetTile(1, 0));
     }
 }

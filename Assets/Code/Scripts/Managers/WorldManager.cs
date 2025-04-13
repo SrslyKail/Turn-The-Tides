@@ -78,11 +78,18 @@ public class WorldManager : MonoBehaviour
         floodIncrement = args.CurrentWaterLevel;
     }
 
+    private void Awake()
+    {
+        MusicManager music = MusicManager.Instance;
+        UIManager ui = UIManager.Instance;
+        GridManager gridManager = GridManager.Instance;
+
+    }
+
     private void Start()
     {
         SingletonCheck();
         floodCoroutine = FloodCoroutine();
-        MusicManager music = MusicManager.Instance;
 
         DontDestroyOnLoad(gameObject);
 

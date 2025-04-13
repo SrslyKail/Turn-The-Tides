@@ -26,7 +26,7 @@ public class PollutionTest
         Assert.AreEqual(testPollutionValue, 192000f);
 
         TextAsset json2 = Resources.Load("Maps/test_map_2") as TextAsset;
-
+        
         worldManager.CreateNewLevel(json2, 1, 1);
 
         float testPollutionValue2 = gridManager.CalculatePollutionPerTurn();
