@@ -6,61 +6,119 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Controls everything related to the camera, including movement, rotation, and tracking.
 /// 
-/// Written by Gurjeet Bhangoo.
+/// Written primarily by Gurjeet Bhangoo, with some tweaks from Corey Buchan.
 /// </summary>
 public class CameraController : MonoBehaviour
 {
+    /// <summary>
+    /// The speed at which the camera moves, in metres per second.
+    /// </summary>
     [Header("Movement")]
     public float MovementSpeed = 10.0f;
 
+    /// <summary>
+    /// The speed at which the camera turns, in degrees per second.
+    /// </summary>
     [Header("Rotation")]
     public float RotationSpeed = 60.0f;
+    /// <summary>
+    /// The vertical bounds of the camera rotation, in degrees.
+    /// X is the minimum angle, Y is the maximum angle.
+    /// </summary>
     public Vector2 RotationVerticalBounds;
+    /// <summary>
+    /// Whether to use horizontal bounds for the camera rotation.
+    /// </summary>
     public bool RotationUseHorizontalBounds = false;
+    /// <summary>
+    /// The horizontal bounds of the camera rotation, in degrees.
+    /// X is the minimum angle, Y is the maximum angle.
+    /// </summary>
     public Vector2 RotationHorizontalBounds;
 
+    /// <summary>
+    /// The camera's distance from its target position.
+    /// </summary>
     [Header("Tracking")]
     public float DistanceFromMarker = 10.0f;
+    /// <summary>
+    /// The height offset to start raycasting from when tracking the surface.
+    /// </summary>
     public float VerticalTrackingStartingHeightOffset = 128.0f;
+    /// <summary>
+    /// The maximum distance to scan for the surface when tracking.
+    /// </summary>
     public float VerticalTrackingMaxScanDistance = 256.0f;
+    /// <summary>
+    /// The speed at which the camera adjusts vertically to match the current surface, in metres per second.
+    /// </summary>
     public float VerticalTrackingUpdateSpeed = 10.0f;
 
+    /// <summary>
+    /// The reference to the game's UI object..
+    /// </summary>
     [Header("Object Selection")]
     public GameUI GameUi;
+    /// <summary>
+    /// The distance the mouse must be dragged before the object selection is ignored. (In case you couldn't tell.)
+    /// </summary>
     public float DistanceToDragMouseBeforeIgnoringObjectSelection = 1.0f;
 
+    /// <summary>
+    /// The camera's default zoom level, in degrees.
+    /// </summary>
     [Header("Zoom")]
     public float DefaultZoomLevel = 60.0f;
+    /// <summary>
+    /// The speed at which the camera changes its zoom level, in degrees per second.
+    /// </summary>
     public float ZoomSpeed = 10.0f;
+    /// <summary>
+    /// The amount by which the zoom level changes whenever the zoom input is pressed, in degrees.
+    /// </summary>
     public float ZoomScrollInterval = 5.0f;
+    /// <summary>
+    /// The speed at which the camera adapts to the new zoom level, in degrees per second.
+    /// </summary>
     public float ZoomUpdateSpeed = 10.0f;
+    /// <summary>
+    /// The minimum and maximum zoom levels, in degrees.
+    /// </summary>
     public Vector2 ZoomBounds;
 
     private PlayerInput playerInput;
 
-    private float zoomLevel;
+    private float zoomLevel;    // the camera's current zoom level, in degrees
 
-    private Vector2 mouseMovement;
-    private float distanceMouseDragged;
+    private Vector2 mouseMovement;  // the current mouse movement, in pixels
+    private float distanceMouseDragged; // the distance the mouse has been dragged, in pixels
 
-    private Vector3 cameraRotation;
+    private Vector3 cameraRotation; // the camera's current rotation, in degrees
 
-    private Vector3 markerPosition;
+    private Vector3 markerPosition; // the camera's target position, in world space
 
-    private float currentHeight;
+    private float currentHeight;    // the camera's current height, in world space
 
-    private Vector3 initialPosition;
-    private Quaternion initialRotation;
+    private Vector3 initialPosition;    // the camera's initial position, in world space
+    private Quaternion initialRotation; // the camera's initial rotation, in world space
 
-    private GameObject selectedObject;
-    private Color selectedMeshColor;
+    private GameObject selectedObject;  // the most recently selected hex tile's game object
+    private Color selectedMeshColor;    // the color of the selected hex tile's mesh
 
-    private bool canMove = false;
+    private bool canMove = false;   // whether the camera can move or not
+    /// <summary>
+    /// Called when the script instance is being loaded. This is called only once during the lifetime of the script instance.
+    /// </summary>
     private void Awake()
     {
         TTTEvents.ChangeBoardState += OnBoardStateChange;
     }
 
+    /// <summary>
+    /// Called when the board state changes. Used to determine whether the camera can move or not.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnBoardStateChange(object sender, EventArgs e)
     {
         BoardStateEventArgs args = e as BoardStateEventArgs;
@@ -69,18 +127,22 @@ public class CameraController : MonoBehaviour
             case BoardState.None:
             case BoardState.Loading:
             case BoardState.MainMenu:
-            {
-                canMove = false;
-                break;
-            }
+                {
+                    canMove = false;
+                    break;
+                }
             default:
-            {
-                canMove = true;
-                break;
-            }
+                {
+                    canMove = true;
+                    break;
+                }
         }
     }
 
+    /// <summary>
+    /// Called when the button for selecting the current tile is pressed. Used to select the object at the marker using keyboard and gamepad controls.
+    /// </summary>
+    /// <param name="context"></param>
     public void OnSelectButtonPressed(InputAction.CallbackContext context)
     {
         // if button is pressed (not released), select object at marker
@@ -90,6 +152,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deselects the currently selected object, if any.
+    /// </summary>
     public void DeselectCurrentObject()
     {
         if (selectedObject != null)
@@ -101,9 +166,13 @@ public class CameraController : MonoBehaviour
             GameUi.ClearTileInfoPanel();
         }
     }
+    /// <summary>
+    /// Helper method to move the camera marker. The marker is used to determine the camera's current position, because RTS cameras orbit around a given point.
+    /// </summary>
+    /// <param name="delta"></param>
     private void MoveMarker(Vector3 delta)
     {
-        if(canMove)
+        if (canMove)
         {
             // get transform as if x-rotation was 0
             Vector3 forward = transform.forward;
@@ -115,12 +184,16 @@ public class CameraController : MonoBehaviour
 
             markerPosition += MovementSpeed * Time.fixedDeltaTime * ((delta.x * right) + (delta.y * forward));
         }
-        
+
     }
 
+    /// <summary>
+    /// Helper method to rotate the camera. The camera rotates around the marker.
+    /// </summary>
+    /// <param name="delta"></param>
     private void RotateCamera(Vector2 delta)
     {
-        if(canMove)
+        if (canMove)
         {
             cameraRotation.x -= delta.y * (RotationSpeed * Time.fixedDeltaTime);
             cameraRotation.y += delta.x * (RotationSpeed * Time.fixedDeltaTime);
@@ -136,19 +209,27 @@ public class CameraController : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
         }
-        
+
     }
 
+    /// <summary>
+    /// Helper method to zoom the camera. The camera zooms in and out by changing its field of view.
+    /// </summary>
+    /// <param name="delta"></param>
     private void ZoomCamera(float delta)
     {
-        if(canMove)
+        if (canMove)
         {
             zoomLevel += delta;
             zoomLevel = Mathf.Clamp(zoomLevel, ZoomBounds.x, ZoomBounds.y);
         }
-        
+
     }
 
+    /// <summary>
+    /// Helper method to select an object. The object is selected by changing its color to red.
+    /// </summary>
+    /// <param name="target"></param>
     private void SelectObject(GameObject target)
     {
         // If the target is the same as the selected object, deselect it and return
@@ -176,6 +257,9 @@ public class CameraController : MonoBehaviour
         GameUi.UpdateTileInfoPanel(selectedObject.GetComponent<HexTile>());
     }
 
+    /// <summary>
+    /// Selects the object at the mouse position. This is used for selecting objects with the mouse.
+    /// </summary>
     private void SelectObjectAtMousePosition()
     {
         // Get the ray from the camera to the mouse
@@ -194,6 +278,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Selects the object at the marker position. This is used for selecting objects with keyboard and gamepad controls.
+    /// </summary>
     private void SelectObjectAtMarker()
     {
         // raycast downwards from immediately above the marker
@@ -208,6 +295,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the marker's y position to the surface of the playing field. Done by raycasting downwards from the marker's position.
+    /// </summary>
     private void MoveMarkerPositionToSurface()
     {
         // raycast from the sky downwards
@@ -224,6 +314,9 @@ public class CameraController : MonoBehaviour
         markerPosition.y = Mathf.Lerp(markerPosition.y, currentHeight, Time.fixedDeltaTime * VerticalTrackingUpdateSpeed);
     }
 
+    /// <summary>
+    /// Syncs the camera's position and rotation to the marker's position and rotation.
+    /// </summary>
     private void SyncCameraToMarker()
     {
         transform.SetPositionAndRotation(
@@ -233,15 +326,20 @@ public class CameraController : MonoBehaviour
             0));
     }
 
+    /// <summary>
+    /// Interpolates the camera's field of view to the current zoom level. Done by lerping the camera's field of view to the zoom level.
+    /// </summary>
     private void InterpolateCameraFovToZoomLevel()
     {
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, zoomLevel, Time.fixedDeltaTime * ZoomUpdateSpeed);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    /// <summary>
+    /// Called when the script instance is being loaded. This is called only once during the lifetime of the script instance.
+    /// </summary>
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 
         playerInput = GetComponent<PlayerInput>();
         initialRotation = transform.rotation;
@@ -258,7 +356,9 @@ public class CameraController : MonoBehaviour
         GameUi = GameUI.Instance;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Called once per physics frame. Runs at a fixed pace, separate from frame rate.
+    /// </summary>
     void FixedUpdate()
     {
         Vector2 movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
@@ -286,6 +386,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called once per frame. Runs at the same pace as the frame rate.
+    /// </summary>
     void Update()
     {
         // if UI is selected, do not move camera with mouse
@@ -333,6 +436,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called once per frame, after all other updates have been called.
+    /// </summary>
     void LateUpdate()
     {
         MoveMarkerPositionToSurface();

@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Represents the current water level in the in-game UI. The water level is represented as a slider that smoothly interpolates to its target value.
+/// 
+/// Written by Gurjeet Bhangoo.
 /// </summary>
 public class WaterLevelIndicator : MonoBehaviour
 {
@@ -85,6 +87,10 @@ public class WaterLevelIndicator : MonoBehaviour
         return _seaLevelIncrease;
     }
 
+    /// <summary>
+    /// Called once per frame.
+    /// Animates the water level slider to match the current water level.
+    /// </summary>
     private void Update()
     {
         _displayedSeaLevel = Mathf.Lerp(_displayedSeaLevel, _currentSeaLevel, MeterUpdateSpeed * Time.deltaTime);

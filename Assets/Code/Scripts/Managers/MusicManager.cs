@@ -6,12 +6,20 @@ using UnityEngine;
 /// Object to manage the state of the audio player.
 /// Listens for the <see cref="TTTEvents.ChangeBoardState"/> event to change the music.
 /// 
-///Should be a singleton, so do not instanciate it directly. Access it though MusicManager.Instance instead.
+/// Should be a singleton, so do not instanciate it directly. Access it though MusicManager.Instance instead.
+/// <para>
+/// Written by Gurjeet Bhangoo, ported to a singleton by Corey Buchan.
 /// </summary>
 public class MusicManager : MonoBehaviour
 {
+    /// <summary>
+    /// The instance of the MusicManager. This is a singleton, so it should only be accessed through the Instance property.
+    /// </summary>
     private static MusicManager _instance;
 
+    /// <summary>
+    /// Gets the instance of the MusicManager. If it doesn't exist, it will create one.
+    /// </summary>
     public static MusicManager Instance
     {
         get
@@ -31,6 +39,8 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    // Audio sources for different board states.
+    // I'm just gonna hope these names are self-explanatory.
     [Header("Audio Sources")]
     public AudioClip MainMenuMusic;
     public AudioClip NewBoardMusic;
@@ -39,9 +49,15 @@ public class MusicManager : MonoBehaviour
     public AudioClip HighPollutionMusic;
     public AudioClip GameOverMusic;
 
+    /// <summary>
+    /// The reference to the audio player component.
+    /// </summary>
     [Header("References")]
     public AudioSource AudioPlayer;
 
+    /// <summary>
+    /// Called when the object is created.
+    /// </summary>
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -51,6 +67,7 @@ public class MusicManager : MonoBehaviour
 
         PlayMusic();
     }
+
     private void SingletonCheck()
     {
         if (_instance == null)
@@ -64,6 +81,11 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the current state of the dynamic audio player.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void UpdateAudioPlayer(object sender, EventArgs e)
     {
         BoardStateEventArgs args = (BoardStateEventArgs)e;
@@ -100,6 +122,9 @@ public class MusicManager : MonoBehaviour
         PlayMusic();
     }
 
+    /// <summary>
+    /// Plays the current music clip.
+    /// </summary>
     private void PlayMusic()
     {
         if (AudioPlayer.isPlaying)
@@ -110,16 +135,25 @@ public class MusicManager : MonoBehaviour
         AudioPlayer.Play();
     }
 
+    /// <summary>
+    /// Stops the current music clip.
+    /// </summary>
     private void StopMusic()
     {
         AudioPlayer.Stop();
     }
 
+    /// <summary>
+    /// Pauses the current music clip.
+    /// </summary>
     private void PauseMusic()
     {
         AudioPlayer.Pause();
     }
 
+    /// <summary>
+    /// Unpauses the current music clip.
+    /// </summary>
     private void UnpauseMusic()
     {
         AudioPlayer.UnPause();

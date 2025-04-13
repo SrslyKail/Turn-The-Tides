@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Represents the pollution meter in the in-game UI.
+/// 
+/// Written by Gurjeet Bhangoo.
 /// </summary>
 public class PollutionMeter : MonoBehaviour
 {
