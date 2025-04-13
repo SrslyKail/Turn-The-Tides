@@ -32,9 +32,13 @@ namespace TurnTheTides
             {
                 DestroyImmediate(otherObject);
             }
-            else
+            else if(Application.isPlaying)
             {
                 Destroy(otherObject);
+            }
+            else
+            {
+                throw new UnityException("Smart Destroy does not contain logic for the current play mode.");
             }
         }
 
@@ -44,10 +48,10 @@ namespace TurnTheTides
         /// A prefab is required for this function to work, as all singletons should have a prefab assigned to them.
         /// </para>
         /// </summary>
-        /// <typeparam name="T">A class reference to the singleton type.</typeparam>
+        /// <typeparam name="T">A class reference to the singleton type. Must be a class that extends MonoBehavior.</typeparam>
         /// <param name="prefabPath">A path to the prefab we may need to instanciate.</param>
         /// <returns>A reference to the object of type T; either pre-existing or newly created.</returns>
-        public static T FindOrCreateSingleton<T>(string prefabPath) where T: class
+        public static T FindOrCreateSingleton<T>(string prefabPath) where T: MonoBehaviour
         {
             if (FindFirstObjectByType(typeof(T), FindObjectsInactive.Include) is not T found)
             {

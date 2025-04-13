@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acdde20ad667f24ea99fe90c915d186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pollutionLevel: 22175970
-  gridManager: {fileID: 0}
   data: {fileID: 0}
+  gridManager: {fileID: 0}
+  _gameUI: {fileID: 0}
+  _musicManager: {fileID: 0}
+  defaultMap: {fileID: 4900000, guid: b85a120844ed2a9489197a89673d300b, type: 3}
+  _pollutionLevel: 22175970

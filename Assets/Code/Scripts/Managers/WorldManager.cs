@@ -1,13 +1,20 @@
 using System;
+using System.Collections;
 using TurnTheTides;
-using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class WorldManager: MonoBehaviour
+/// <summary>
+/// Manages the over-all state of the game, and acts as a connective tissue between various game systems.
+/// <para>
+/// Should be a singleton, so do not instanciate directly. Instead, please use WorldManager.Instance to get a reference to the instance.
+/// </para>
+/// </summary>
+public class WorldManager : MonoBehaviour
 {
     private static WorldManager _instance;
+    /// <summary>
+    /// Accessor for the singleton of this class.
+    /// </summary>
     public static WorldManager Instance
     {
         get
@@ -27,51 +34,88 @@ public class WorldManager: MonoBehaviour
             return _instance;
         }
     }
-
+    
+    [Header("References")]
     [SerializeField]
-    private double _pollutionLevel;
-    public double PollutionLevel
-    {
-        get => _pollutionLevel; set => _pollutionLevel = value;
-    }
-    public readonly double PollutionMax = double.MaxValue;
+    private TextAsset defaultMap;
 
-    [SerializeField]
-    private MapData data;
-    public MapData MapData
-    {
-        get => data; set => data = value;
-    }
-
-    [SerializeField]
-    private GridManager gridManager;
+    public MapData MapData {get; set;}
+    
     public GridManager GridManager
     {
         get
         {
-            if (gridManager == null)
-            {
-                gridManager = GridManager.Instance;
-            }
+            return GridManager.Instance;
+        }
+    }
 
-            return gridManager;
-        }
-        private set
-        {
-            gridManager = value;
-        }
+
+    [Header("Gameplay Variables")]
+    [SerializeField]
+    private double _pollutionLevel;
+    private bool flooding = false;
+    IEnumerator floodCoroutine;
+    public double PollutionTotal
+    {
+        get => _pollutionLevel; set => _pollutionLevel = value;
+    }
+    public readonly double PollutionMax = double.MaxValue;
+    private static float waterElevation = 0;
+    private BoardState boardState = BoardState.None;
+    private int mapSizeOffset = 2;
+    private float floodIncrement = 0.08f;
+    private bool isCustomMap = false;
+
+    private void OnMapScaleChange(object sender, EventArgs e)
+    {
+        MapScaleEventArgs args = e as MapScaleEventArgs;
+        mapSizeOffset = args.MapScale;
+    }
+
+    private void OnFloodIncrementChange(object sender, EventArgs e)
+    {
+        FloodEventArgs args = e as FloodEventArgs;
+        floodIncrement = args.CurrentWaterLevel;
+    }
+
+    private void Awake()
+    {
+        MusicManager music = MusicManager.Instance;
+        UIManager ui = UIManager.Instance;
+        GridManager gridManager = GridManager.Instance;
+
     }
 
     private void Start()
     {
         SingletonCheck();
+        floodCoroutine = FloodCoroutine();
 
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
-        if (MapData != null)
+        ConnectEvents();
+
+        if(MapData == null)
         {
-            GridManager.BuildMap(MapData);
+            TTTEvents.CreateNewMap(this, new NewMapEventArgs()
+            {
+                DataFile = Resources.Load<TextAsset>("Maps/lowerMainland"),
+                MapScale = mapSizeOffset,
+                FloodAmount = floodIncrement
+            });
         }
+    }
+
+    private void ConnectEvents()
+    {
+        TTTEvents.NextTurnEvent += OnNextTurn;
+        TTTEvents.FloodEvent += OnFlood;
+        TTTEvents.ToggleFloodEvent += OnToggleFlood;
+        TTTEvents.FloodIncrementChangeEvent += OnFloodIncrementChange;
+        TTTEvents.MapScaleChangeEvent += OnMapScaleChange;
+        TTTEvents.CreateNewMap += OnCreateNewMap;
+        TTTEvents.ChangeBoardState += OnChangeBoardState;
+        TTTEvents.LoadCustomMap += OnLoadCustomMap;
     }
 
     /// <summary>
@@ -102,7 +146,38 @@ public class WorldManager: MonoBehaviour
             Helper.SmartDestroy(gameObject);
         }
     }
-    
+
+    /// <summary>
+    /// Resets the runtime variables for the currently loaded level and resets the map to its default state.
+    /// </summary>
+    [ContextMenu("Refresh Game")]
+    public void SetupWorld()
+    {
+        while (MapData == null)
+        {
+            LoadExternalJson externalLoader = new();
+            if(externalLoader.TryGetDataJson(out TextAsset textAsset))
+            {
+                TTTEvents.CreateNewMap(this, new NewMapEventArgs()
+                {
+                    DataFile = textAsset,
+                    MapScale = mapSizeOffset,
+                    FloodAmount = floodIncrement
+                });
+            }
+        }
+ 
+        GridManager.BuildMap(MapData, isCustomMap);
+        PollutionTotal = 0;
+        UpdateWorldState(BoardState.NewBoard);
+    }
+
+    private void OnCreateNewMap(object sender, EventArgs e)
+    {
+        NewMapEventArgs args = e as NewMapEventArgs;
+        CreateNewLevel(args.DataFile, args.MapScale, args.FloodAmount);
+    }
+
     /// <summary>
     /// Create a new level to play on.
     /// </summary>
@@ -117,28 +192,23 @@ public class WorldManager: MonoBehaviour
     {
         MapData = ScriptableObject.CreateInstance<MapData>();
         MapData.LoadData(levelData, mapSizeOffset, flood_increment);
-        SetupWorld();
+        isCustomMap = !levelData.Equals(defaultMap);
+        TTTEvents.FinishCreatingMap.Invoke(this, EventArgs.Empty);
     }
 
-    /// <summary>
-    /// Resets the runtime variables for the currently loaded level and resets the map to its default state.
-    /// </summary>
-    [ContextMenu("Refresh Game")]
-    public void SetupWorld()
+    private void UpdateWorldState(BoardState newState)
     {
-        if (MapData == null)
+        if(boardState != newState)
         {
-            EditorUtility.DisplayDialog(
-                "No map data",
-                "No map data has been given to the World Manager.",
-                "Close"
-                );
-        }
-        else
-        {
-            GridManager.BuildMap(MapData);
-            PollutionLevel = 0;
-        }
+            this.boardState = newState;
+
+            TTTEvents.ChangeBoardState.Invoke(
+            this,
+            new BoardStateEventArgs()
+            {
+                NewBoardState = newState
+            });
+        }        
     }
 
     /// <summary>
@@ -150,9 +220,121 @@ public class WorldManager: MonoBehaviour
     [ContextMenu("Next Turn")]
     public void NextTurn()
     {
+        TTTEvents.NextTurnEvent.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnNextTurn(object sender, EventArgs e)
+    {
+        StartFlood();
+
+        float ratio = GridManager.GetFloodedRatio();
+        if (ratio > 0.2)
+        {
+            UpdateWorldState(BoardState.HighPollution);
+        }
+        else if (ratio > 0.1)
+        {
+            UpdateWorldState(BoardState.ModeratePollution);
+        }
+        else if (ratio > 0.04)
+        {
+            UpdateWorldState(BoardState.LowPollution);
+        }
+    }
+
+    private void StartFlood()
+    {
+        waterElevation += MapData.floodIncrement;
+
+        TTTEvents.FloodEvent.Invoke(this, new FloodEventArgs
+        {
+            CurrentWaterLevel = waterElevation
+        });
+    }
+
+    private void OnChangeBoardState(object send, EventArgs e)
+    {
+        BoardStateEventArgs args = e as BoardStateEventArgs;
+        if(args.NewBoardState == BoardState.Loading)
+        {
+            SetupWorld();
+            UpdateWorldState(BoardState.NewBoard);
+        }        
+    }
+
+    private void OnLoadCustomMap(object sender, EventArgs e)
+    {
+        isCustomMap = true;
+    }
+
+
+    private void OnFlood(object sender, EventArgs e)
+    {
         double newPollution = GridManager.Flood();
         newPollution += GridManager.CalculatePollutionPerTurn();
-        PollutionLevel += newPollution;
-        //Debug.Log($"New pollution: {PollutionLevel}");
+        PollutionTotal += newPollution;
+        UpdatePollutionState();
+    }
+
+    private void UpdatePollutionState()
+    {
+        //Logic to check the pollution levels vs the 
+        //PollutionTotal and set the board state accordingly
+        // We ran out of time to implement this feature, but this
+        // would be where the logic would go.
+    }
+
+    [ContextMenu("Toggle Flooding")]
+    private void ToggleFlood()
+    {
+        TTTEvents.ToggleFloodEvent.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnToggleFlood(object sender, EventArgs e)
+    {
+        flooding = !flooding;
+        if (flooding)
+        {
+            StartFlooding();
+        }
+        else
+        {
+            StopFlooding();
+        }
+    }
+
+    /// <summary>
+    /// Coroutine for cycling next turn for simulation purposes.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator FloodCoroutine()
+    {
+
+        while (flooding)
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+
+            NextTurn();
+        }
+    }
+
+    /// <summary>
+    /// Function to start the flooding coroutine.
+    /// </summary>
+    [ContextMenu("Start Flooding")]
+    private void StartFlooding()
+    {
+        flooding = true;
+        StartCoroutine(floodCoroutine);
+    }
+
+    /// <summary>
+    /// Function to stop the flooding coroutine.
+    /// </summary>
+    [ContextMenu("Stop Flooding")]
+    private void StopFlooding()
+    {
+        flooding = false;
+        StopCoroutine(floodCoroutine);
     }
 }

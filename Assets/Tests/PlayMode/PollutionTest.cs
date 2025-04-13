@@ -4,7 +4,9 @@ using TurnTheTides;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
-
+/// <summary>
+/// Ben made these
+/// </summary>
 public class PollutionTest
 {
     /// <summary>
@@ -24,7 +26,7 @@ public class PollutionTest
         Assert.AreEqual(testPollutionValue, 192000f);
 
         TextAsset json2 = Resources.Load("Maps/test_map_2") as TextAsset;
-
+        
         worldManager.CreateNewLevel(json2, 1, 1);
 
         float testPollutionValue2 = gridManager.CalculatePollutionPerTurn();
@@ -45,9 +47,9 @@ public class PollutionTest
 
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
-        double oldPollution = worldManager.PollutionLevel;
+        double oldPollution = worldManager.PollutionTotal;
         worldManager.NextTurn();
-        double newPollution = worldManager.PollutionLevel;
+        double newPollution = worldManager.PollutionTotal;
 
         Assert.True(newPollution > oldPollution);
 
@@ -64,9 +66,9 @@ public class PollutionTest
 
         worldManager.CreateNewLevel(json, 1, 1);
         worldManager.SetupWorld();
-        double oldPollution = worldManager.PollutionLevel;
+        double oldPollution = worldManager.PollutionTotal;
         worldManager.NextTurn();
-        double newPollution = worldManager.PollutionLevel;
+        double newPollution = worldManager.PollutionTotal;
 
         Assert.True(newPollution < oldPollution);
 

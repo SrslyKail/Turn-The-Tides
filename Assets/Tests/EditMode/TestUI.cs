@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using System;
 
 public class TestUI
 {
@@ -119,11 +120,10 @@ public class TestUI
         Button button = uiContainer.AddComponent<Button>();
         nextTurnButton.button = button;
         gameUI.nextTurnButton = nextTurnButton;
-        gameUI.NextTurnRequestedEvent = new UnityEvent();
-        gameUI.NextTurnRequestedEvent.AddListener(() => { Assert.Pass(); });
+        TTTEvents.NextTurnEvent += (object sender, EventArgs e) => { Assert.Pass(); };
 
         nextTurnButton.OnButtonClicked = new UnityEvent();
-        nextTurnButton.OnButtonClicked.AddListener(() => { gameUI.OnNextTurnRequested(); });
+        nextTurnButton.OnButtonClicked.AddListener(() => { TTTEvents.NextTurnEvent.Invoke(this, EventArgs.Empty); });
         nextTurnButton.OnClick();
 
         yield return null;
@@ -176,6 +176,6 @@ public class TestUI
         waterLevelIndicator.SetSeaLevelIncrease(0.5f);
 
         Assert.AreEqual(0.5f, waterLevelIndicator.GetSeaLevelIncrease());
-        Assert.AreEqual("+0.5m", waterLevelIncreaseLabel.text);
+        Assert.AreEqual("+0.50m", waterLevelIncreaseLabel.text);
     }
 }

@@ -9,6 +9,7 @@ public class FloodTest
 {
     /// <summary>
     /// Tests that a low elevation is consumed when the flood consumes it, and that a higher elevation tile is not.
+    /// Ben made this
     /// </summary>
     [Test]
     public void FloodingTest()
@@ -30,7 +31,7 @@ public class FloodTest
         worldManager.NextTurn();
         worldManager.NextTurn();
 
-        Assert.IsTrue(testHexTile == null);
-        Assert.IsFalse(testHexTile2 == null);
+        Assert.IsTrue(testHexTile != worldManager.GetTile(0, 0));
+        Assert.IsFalse(testHexTile2 == worldManager.GetTile(1, 0));
     }
 }

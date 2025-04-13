@@ -54,3 +54,7 @@ MonoBehaviour:
   - {fileID: 2094564878288483685, guid: 82a24af3cbfa0e54ebb613640d9d7e22, type: 3}
   - {fileID: 8768293871270447, guid: 5ec0db4491f0aeb4990dec37dcbebaae, type: 3}
   - {fileID: 823496107083678787, guid: d13f540eadb38804a984a603f3ee0017, type: 3}
+  textLabelPrefab: {fileID: 5015395215032157947, guid: 1f76bfd397cd697409a7184255a76765, type: 3}
+  startingWaterTiles: 0
+  floodedTiles: 0
+  totalTiles: 0

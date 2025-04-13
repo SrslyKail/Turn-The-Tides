@@ -1,10 +1,9 @@
-using Codice.CM.Client.Differences;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using UnityEditor;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -20,13 +19,13 @@ namespace TurnTheTides
     /// 
     /// Made by Corey Buchan
     /// </summary>
-    [ExecuteAlways]
-    public class GridManager: MonoBehaviour
+    public class GridManager : MonoBehaviour
     {
         [SerializeField]
         private List<GameObject> prefabs;
-        private List<List<GameObject>> tiles;
+        private readonly List<List<GameObject>> tiles = new();
         private static GridManager _instance;
+        [SerializeField] private GameObject textLabelPrefab;
         /// <summary>
         /// Get the current instance of the GridManager. 
         /// Will create one if one does not exist.
@@ -34,7 +33,7 @@ namespace TurnTheTides
         public static GridManager Instance
         {
             get
-            {  
+            {
                 if (_instance == null)
                 {
                     _instance = Helper.FindOrCreateSingleton<GridManager>("Prefabs/Managers/GridManager");
@@ -43,11 +42,30 @@ namespace TurnTheTides
                 return _instance;
             }
         }
-        
+
         // CB: TODO Remove this. The WorldManager should be telling the GridManager how much to flood by so we
         //      can use pollution calculations in the future.
         private float floodIncrement;
-        private static readonly int[] adjacency = new int[3] { -1, 0, 1 };
+        private static readonly Point[] odd_adjacency = new Point[6]{
+            new(0, 1),
+            new(-1, 0),
+            new(0, -1),
+            new(1, 1),
+            new(1, 0),
+            new(1, -1)
+        };
+        private static readonly Point[] even_adjacency = new Point[6]
+        {
+            new(-1, 1),
+            new(-1, 0),
+            new(-1, -1),
+            new(0, 1),
+            new(1, 0),
+            new(0, -1)
+        };
+        public int startingWaterTiles = 0;
+        public int floodedTiles;
+        public int totalTiles;
 
         /// <summary>
         /// Think of "Awake" and "Start" as creating a new object.
@@ -57,6 +75,7 @@ namespace TurnTheTides
         {
             if (Instance != null && Instance != this)
             {
+                DestroyAllChildTiles();
                 Helper.SmartDestroy(gameObject);
             }
         }
@@ -83,34 +102,48 @@ namespace TurnTheTides
         }
 
         /// <summary>
+        /// Calculates the ratio of non-ocean tiles from the start of the map to the number of non-ocean tiles currently.
+        /// </summary>
+        /// <returns></returns>
+        public float GetFloodedRatio()
+        {
+            return (float)floodedTiles / totalTiles;
+        }
+
+        /// <summary>
         /// Builds the map using the given mapData.
         /// Also resets any specific runtime variables,
         /// destroys all existing tiles, and creates new water meshes.
         /// </summary>
         /// <param name="mapData">The data to build the map from.</param>
-        public void BuildMap(MapData mapData)
+        public void BuildMap(MapData mapData, bool isCustomMap)
         {
-            //Delete all the current children
-            for (int i = transform.childCount; i > 0; --i)
-            {
-                Helper.SmartDestroy(transform.GetChild(0).gameObject);
-                //Debug.Log("Clearing existing child");
-            }
+            DestroyAllChildTiles();
 
             floodIncrement = mapData.floodIncrement;
-            tiles = new();
+
             //Make the map
-            CreateHexTileGrid(mapData);
+            CreateHexTileGrid(mapData, isCustomMap);
             MergeWaterTiles();
+        }
+
+        private void DestroyAllChildTiles()
+        {
+            tiles.Clear();
+            IEnumerable<Transform> children = transform.Cast<Transform>().ToList();
+            //Delete all the current children
+            foreach (Transform child in children)
+            {
+                Helper.SmartDestroy(child.gameObject);
+            }
         }
 
         /// <summary>
         /// Creates the map to play the game on using the passed in map data.
         /// </summary>
         /// <param name="mapData">A MapData object that stores the data required to make the grid.</param>
-        private void CreateHexTileGrid(MapData mapData)
+        private void CreateHexTileGrid(MapData mapData, bool isCustomMap)
         {
-            //Debug.Log("Creating Hex Tile Grid");
             //All tiles should be the same size, so we can use 1 to set the defaults.
             Bounds tileBounds = prefabs[0]
                 .GetComponentInChildren<MeshRenderer>()
@@ -125,10 +158,30 @@ namespace TurnTheTides
             float heightOffset = 3f / 4f * tileHeight;
             bool offset = false;
 
+            //Tiles for location labels to be glued on to for the default map, add more or remove some. It's up to you, I guess...
+            //CB: Given more time, I would love to embed this data into the map JSON so users could dynamically name or flag locations on the map.
+            //  This was just a proof-of-concept.
+            Dictionary<Vector2Int, string> locationDictionary = new()
+            {
+                { new Vector2Int(19, 11), "Delta" },
+                { new Vector2Int(13, 18), "Richmond" },
+                { new Vector2Int(14, 28), "Vancouver" },
+                { new Vector2Int(25, 25), "Burnaby" },
+                { new Vector2Int(36, 17), "Surrey" },
+                { new Vector2Int(38, 28), "Coquitlam" },
+                { new Vector2Int(49, 23), "Maple Ridge" },
+                { new Vector2Int(47, 12), "Langley" },
+                { new Vector2Int(37, 3),  "White Rock" },
+                { new Vector2Int(71, 5),  "Abbotsford" },
+                { new Vector2Int(99, 18), "Chilliwack" },
+                { new Vector2Int(137, 42),"Hope" }
+            };
+
+           
             //Start by figuring out what row we're in
             //This changes the z-coordinate of the tile
             int mapSizeOffset = mapData.mapSizeOffset;
-            for (int y = 0; y < mapData.dataRowCount; y += mapSizeOffset)
+            for (int row = 0; row < mapData.dataRowCount; row += mapSizeOffset)
             {
                 //See if we need to offset the tile
                 widthOffset = offset ? tileWidth / 2 : 0;
@@ -137,20 +190,20 @@ namespace TurnTheTides
 
                 //For each point in the row
                 //This is the x-coordinate
-                for (int x = 0; x < mapData.dataColumnCount; x += mapSizeOffset)
+                for (int col = 0; col < mapData.dataColumnCount; col += mapSizeOffset)
                 {
 
-                    //Get the data from [row][item]
-                    Geopoint pointData = mapData.GeoData.data[y][x];
+                    //Get the data from [row][col]
+                    Geopoint pointData = mapData.GeoData.data[row][col];
                     GameObject newTile = Instantiate(
                         GetPrefabOfType(pointData.TerrainType),
                         new Vector3(
-                            (x / mapSizeOffset * tileWidth) + widthOffset,
+                            (col / mapSizeOffset * tileWidth) + widthOffset,
                             0,
-                            y / mapSizeOffset * heightOffset),
+                            row / mapSizeOffset * heightOffset),
                         Quaternion.identity);
 
-                    
+
 
                     //Cleanup for terrain type. Ocean elevation should be 0 to start.
                     double dataElevation = pointData
@@ -165,23 +218,31 @@ namespace TurnTheTides
                     hexTile.longitude = pointData.Longitude;
                     hexTile.latitude = pointData.Latitude;
                     hexTile.landUseLabel = pointData.LandUseLabel;
-                    hexTile.x_index = x;
-                    hexTile.y_index = y;
+                    hexTile.x_index = col / mapSizeOffset;
+                    hexTile.y_index = row / mapSizeOffset;
 
                     //Set the name and parent.
-                    newTile.name = $"{x / mapSizeOffset}, {y / mapSizeOffset}";
-                    //Debug.Log("Tranform.setParent is angy");
-                    //Debug.Log("newTile: " + newTile);
-                    //Debug.Log("newTile parent before: " + newTile.transform.parent);
-                    //Debug.Log("newTile.transform before: " + newTile.transform);
-                    //Debug.Log("gameobject.transform: " + gameObject.transform);
-                    //GridManager gridManager = GridManager.Instance;
+                    newTile.name = $"{col / mapSizeOffset}, {row / mapSizeOffset}";
                     newTile.transform.SetParent(this.transform);
+
+                    //Here's where the labels are glued on.
+                    Vector2Int tilePos = new(col / mapSizeOffset, row / mapSizeOffset);
+                    if (!isCustomMap && locationDictionary.TryGetValue(tilePos, out string label))
+                    {
+                        if (textLabelPrefab != null)
+                        {
+                            TextFlagManager.AttachTextFlag(newTile, label, textLabelPrefab);
+                        }
+                    }
                     rowList.Add(newTile);
                 }
 
                 offset = !offset;
             }
+
+            //Cache the data required for calculating the ratio.
+            totalTiles = tiles.Sum((List<GameObject> row) => { return row.Count; });
+            startingWaterTiles = transform.GetComponentsInChildren<Ocean>(true).ToList().Count;
         }
 
         /// <summary>
@@ -210,9 +271,6 @@ namespace TurnTheTides
         public float Flood()
         {
             float freedPollution = 0f;
-
-            // Get all the ocean tiles.
-            // Use a set to ensure it doesnt contain duplicates.
             List<GameObject> oceanTiles = transform
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; })
@@ -220,8 +278,10 @@ namespace TurnTheTides
 
             //Increment the elevation for each of the ocean tiles.
             oceanTiles.ForEach(tile => tile.GetComponent<Ocean>().Elevation += floodIncrement);
-            
+
             Queue checkQueue = new(oceanTiles);
+
+            //While we still have tiles we havent processed
             while (checkQueue.Count != 0)
             {
                 GameObject oceanTile = checkQueue.Dequeue() as GameObject;
@@ -229,57 +289,56 @@ namespace TurnTheTides
                 int start_row = details.y_index;
                 int start_col = details.x_index;
 
-                foreach (int adj_row in adjacency)
+                //Check each adjacent tile by adjusting the root position by the amount in the adjacenty list.
+                Point[] adjacency = start_row % 2 == 0 ? even_adjacency : odd_adjacency;
+                foreach (Point adj in adjacency)
                 {
-                    int check_row = adj_row + start_row;
-                    foreach (int adj_col in adjacency)
+                    int check_row = adj.Y + start_row;
+                    int check_col = adj.X + start_col;
+
+                    //make sure we dont check off array
+                    if (check_row >= 0
+                        && check_col >= 0
+                        && check_row < tiles.Count
+                        && check_col < tiles[0].Count)
                     {
-                        int check_col = adj_col + start_col;
-
-                        //make sure we dont check off array
-                        if (check_row >= 0
-                            && check_col >= 0
-                            && check_row < tiles.Count
-                            && check_col < tiles[0].Count)
+                        try
                         {
-                            try
+                            GameObject toCheck = tiles[check_row][check_col];
+                            HexTile checkDetails = toCheck.GetComponent<HexTile>();
+                            // If it IS an ocean tile, we ignore it.
+                            if (!toCheck.TryGetComponent<Ocean>(out _) &&
+                                checkDetails.Elevation < details.Elevation)
                             {
-                                GameObject toCheck = tiles[check_row][check_col];
-                                HexTile checkDetails = toCheck.GetComponent<HexTile>();
-                                // If it IS an ocean tile, we ignore it.
-                                if (!checkDetails.TryGetComponent<Ocean>(out _) &&
-                                    checkDetails.Elevation < details.Elevation)
-                                {
-                                    // TODO CB: Make the tile release its stored pollution.
-                                    freedPollution += 0;
-                                    GameObject newTile = Instantiate(oceanTile);
+                                //Add any stored pollution to the total released.
+                                freedPollution += checkDetails.StoredPollution;
+                                //Create an Ocean Tile.
+                                GameObject newTile = Instantiate(oceanTile);
 
-                                    newTile.transform.parent = gameObject.transform;
-                                    newTile.transform.position = new Vector3(
-                                        toCheck.transform.position.x,
-                                        oceanTile.transform.position.y,
-                                        toCheck.transform.position.z
-                                    );
+                                newTile.transform.parent = gameObject.transform;
+                                newTile.transform.position = new Vector3(
+                                    toCheck.transform.position.x,
+                                    oceanTile.transform.position.y,
+                                    toCheck.transform.position.z
+                                );
 
-                                    HexTile newDetails = newTile.GetComponent<HexTile>();
-                                    newDetails.x_index = checkDetails.x_index;
-                                    newDetails.y_index = checkDetails.y_index;
-                                    newDetails.Elevation = details.Elevation;
+                                HexTile newDetails = newTile.GetComponent<HexTile>();
+                                newDetails.x_index = checkDetails.x_index;
+                                newDetails.y_index = checkDetails.y_index;
+                                newDetails.Elevation = details.Elevation;
 
-                                    newTile.transform.localScale = oceanTile.transform.localScale;
-                                    newTile.name = $"Flooded {checkDetails.landUseLabel}";
-                                    Helper.SmartDestroy(toCheck);
-                                    //DestroyImmediate(toCheck);
-                                    newTile.SetActive(true);
+                                newTile.transform.localScale = oceanTile.transform.localScale;
+                                newTile.name = $"Flooded {checkDetails.landUseLabel}";
+                                Helper.SmartDestroy(toCheck);
+                                newTile.SetActive(true);
 
-                                    tiles[check_row][check_col] = newTile;
-                                    checkQueue.Enqueue(newTile);
-                                }
+                                tiles[check_row][check_col] = newTile;
+                                checkQueue.Enqueue(newTile);
                             }
-                            catch (NullReferenceException)
-                            {
-                                Debug.LogError($"Could not find tile at {check_row}, {check_col}");
-                            }
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Debug.LogError($"Could not find tile at {check_row}, {check_col}");
                         }
                     }
                 }
@@ -292,7 +351,7 @@ namespace TurnTheTides
         /// <summary>
         /// Calculates how much pollution the current map will create each turn.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The amount of pollution created.</returns>
         public float CalculatePollutionPerTurn()
         {
             return transform.GetComponentsInChildren<HexTile>()
@@ -309,7 +368,7 @@ namespace TurnTheTides
         /// This enables us us, in the future, use a single mesh deformation or 
         /// texture for the water.
         /// </summary>
-        public void MergeWaterTiles()
+        private void MergeWaterTiles()
         {
             // Get all the ocean tiles.
             // Use a set to ensure it doesnt contain duplicates.
@@ -317,7 +376,7 @@ namespace TurnTheTides
                 .GetComponentsInChildren<Ocean>(true) // Make sure we get the inactive ocean tiles as well :)
                 .Select(ocean => { return ocean.gameObject; })
                 .ToHashSet();
-
+            floodedTiles = oceanTiles.Count - startingWaterTiles;
             List<List<GameObject>> oceanTrees = BFS_OceanTiles(oceanTiles);
             foreach (List<GameObject> tree in oceanTrees)
             {
@@ -390,33 +449,31 @@ namespace TurnTheTides
                 int start_row = data.Value.X;
                 int start_col = data.Value.Y;
 
-                foreach (int adj_row in adjacency)
+                Point[] adjacency = start_row % 2 == 0 ? even_adjacency : odd_adjacency;
+                foreach (Point adj in adjacency)
                 {
-                    int check_row = adj_row + start_row;
-                    foreach (int adj_col in adjacency)
-                    {
-                        int check_col = adj_col + start_col;
+                    int check_row = adj.Y + start_row;
+                    int check_col = adj.X + start_col;
 
-                        //make sure we dont check off array
-                        if (check_row >= 0 && check_col >= 0
-                            && check_row < tiles.Count && check_col < tiles[0].Count)
+                    //make sure we dont check off array
+                    if (check_row >= 0 && check_col >= 0
+                        && check_row < tiles.Count && check_col < tiles[0].Count)
+                    {
+                        try
                         {
-                            try
+                            GameObject toCheck = tiles[check_row][check_col];
+                            if (!oldVisited.Contains(toCheck) && toCheck.GetComponent<Ocean>())
                             {
-                                GameObject toCheck = tiles[check_row][check_col];
-                                if (!oldVisited.Contains(toCheck) && toCheck.GetComponent<Ocean>())
-                                {
-                                    oldVisited.Add(toCheck);
-                                    currVisited.Add(toCheck);
-                                    queue.Enqueue(
-                                        new(toCheck, new(check_row, check_col))
-                                    );
-                                }
+                                oldVisited.Add(toCheck);
+                                currVisited.Add(toCheck);
+                                queue.Enqueue(
+                                    new(toCheck, new(check_row, check_col))
+                                );
                             }
-                            catch (NullReferenceException)
-                            {
-                                Debug.LogError($"Could not find tile at {check_row}, {check_col}");
-                            }
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Debug.LogError($"Could not find tile at {check_row}, {check_col}");
                         }
                     }
                 }
@@ -431,12 +488,17 @@ namespace TurnTheTides
         /// <param name="toCombine">A list of ocean tiles to combine.</param>
         private void CombineOceanMeshes(List<GameObject> toCombine)
         {
+            if (toCombine.Count <= 1)
+            {
+                return;
+            }
+
+            toCombine = toCombine.Where(tile => { return tile.activeInHierarchy; }).ToList();
             //Convert the has to an array so we can index
             MeshFilter[] meshFilters = toCombine
                 .Where(tile => { return tile.activeInHierarchy; })
                 .Select(tile => { return tile.GetComponent<MeshFilter>(); })
                 .ToArray();
-
 
             // Create a combine instance array
             // This has the added benefit of creating the objects at the same time.
@@ -445,6 +507,7 @@ namespace TurnTheTides
             // This is the object that will hold the combine mesh
             // We also need it for relative positioning of the mesh.
             GameObject oceanParent = toCombine.First();
+            Mesh parentMesh = oceanParent.GetComponent<MeshFilter>().sharedMesh;
             for (int i = 0; i < meshFilters.Length; i++)
             {
                 combine[i].mesh = meshFilters[i].sharedMesh;
@@ -453,12 +516,16 @@ namespace TurnTheTides
                 meshFilters[i].gameObject.SetActive(false);
             }
 
-            Mesh mesh = new();
+
+            Mesh mesh = new()
+            {
+                indexFormat = UnityEngine.Rendering.IndexFormat.UInt32
+            };
+
             mesh.CombineMeshes(combine);
             mesh.name = "Ocean";
             mesh.RecalculateNormals();
             mesh.RecalculateTangents();
-
             //Reactivate the parent.
             oceanParent.SetActive(true);
             //re-deactivate the scaler.
@@ -471,7 +538,7 @@ namespace TurnTheTides
 
             //CB: Loading the resource every time we run this function is probably a massive waste, but it works for now.
             oceanParent.GetComponent<MeshRenderer>().material = Resources.Load("WaterMaterial") as Material;
-            
+
         }
     }
 }

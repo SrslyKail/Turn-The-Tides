@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
 /// Button that advances the game to the next turn.
+/// 
+/// Written by Gurjeet Bhangoo.
 /// </summary>
 public class NextTurnButton : MonoBehaviour
 {
@@ -41,13 +44,15 @@ public class NextTurnButton : MonoBehaviour
     {
         if (ButtonEnabled)
         {
-            //Debug.Log("Next turn button clicked");
             OnButtonClicked?.Invoke();
         }
     }
 
+    /// <summary>
+    /// Called when the object is created.
+    /// </summary>
     void Start()
     {
-        OnButtonClicked ??= new UnityEvent();
+        OnButtonClicked.AddListener(() => { TTTEvents.NextTurnEvent.Invoke(this, EventArgs.Empty); });
     }
 }
